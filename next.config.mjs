@@ -9,6 +9,9 @@
 /** @type {import("next").NextConfig} */
 const config = {
   reactStrictMode: true,
+  experimental: {
+    appDir: true,
+  },
 
   /**
    * If you have the "experimental: { appDir: true }" setting enabled, then you
@@ -16,9 +19,9 @@ const config = {
    *
    * @see https://github.com/vercel/next.js/issues/41980
    */
-  i18n: {
-    locales: ["en"],
-    defaultLocale: "en",
-  },
+  // i18n: {
+  //   locales: ["en"],
+  //   defaultLocale: "en",
+  // },
 };
 export default config;
