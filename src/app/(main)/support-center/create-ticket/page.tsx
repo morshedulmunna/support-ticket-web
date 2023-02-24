@@ -18,7 +18,6 @@ const page = () => {
           />
           <textarea
             className="rounded-md border px-2 py-2 text-sm"
-            type="text"
             name=""
             cols="30"
             rows="10"

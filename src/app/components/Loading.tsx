@@ -1,6 +1,6 @@
 import React from "react";
 
-const loading = () => {
+const Loading = () => {
   return (
     <div className="flex h-[100vh] items-center justify-center">
       <span>loading.....</span>
@@ -8,4 +8,4 @@ const loading = () => {
   );
 };
 
-export default loading;
+export default Loading;

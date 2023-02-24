@@ -1,6 +1,8 @@
 import Loading from "@/app/components/Loading";
 import React from "react";
-const loading = () => {
+type Props = {};
+
+const loading = (props: Props) => {
   return <Loading />;
 };
 
