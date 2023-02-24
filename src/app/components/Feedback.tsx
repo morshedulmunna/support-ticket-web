@@ -7,12 +7,12 @@ const Feedback = () => {
     <>
       <div className="mt-6 flex   items-center justify-between space-x-12 border-b-[1px]  border-gray-100 pb-1 text-sm">
         <div className="flex items-center space-x-1   ">
-          <FaUsers size={16} className="text-gray-4s00" />
+          <FaUsers size={16} className="text-gray-500" />
           <span>Abdul Mamun</span>
         </div>
         <div className="flex items-center space-x-1 text-[12px] text-gray-500">
           <AiOutlineFieldTime size={16} />
-          <span>52 mis ago</span>
+          <span>52 mins ago</span>
         </div>
       </div>
 

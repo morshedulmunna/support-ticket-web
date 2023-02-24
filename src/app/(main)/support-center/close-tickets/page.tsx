@@ -1,5 +1,5 @@
+import AllTickets from "@/app/components/AllTickets";
 import React from "react";
-import AllTickets from "~/app/components/AllTickets";
 
 const CloseTickets = () => {
   return (

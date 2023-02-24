@@ -1,6 +1,6 @@
+import Feedback from "@/app/components/Feedback";
+import SubmitFeedback from "@/app/components/SubmitFeedback";
 import React from "react";
-import Feedback from "~/app/components/Feedback";
-import SubmitFeedback from "~/app/components/SubmitFeedback";
 
 const Tickets = () => {
   return (
