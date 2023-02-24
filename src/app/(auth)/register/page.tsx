@@ -1,11 +1,21 @@
 import Link from "next/link";
 import React from "react";
 import { FcGoogle } from "react-icons/fc";
+import { TbArrowLeftBar } from "react-icons/tb";
 
 const Register = () => {
   return (
-    <>
-      <div className="mx-auto flex h-[100vh] max-w-[400px] items-center justify-center ">
+    <div className="containers">
+      <Link href="/">
+        <div className="group mt-12 flex cursor-pointer items-center space-x-4  hover:text-blue-500 hover:underline">
+          <div className=" duration-700 group-hover:scale-x-150 ">
+            <TbArrowLeftBar size={25} />
+          </div>
+          <p>Home</p>
+        </div>
+      </Link>
+
+      <div className="mx-auto flex h-[80vh] max-w-[400px] items-center justify-center ">
         <div className="space-y-6 text-center">
           <p>Logo Here</p>
 
@@ -60,7 +70,7 @@ const Register = () => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

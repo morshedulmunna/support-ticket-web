@@ -10,3 +10,9 @@
     @apply md:containers mt-6 md:mt-12;
   }
 }
+
+@layer base {
+  body {
+    @apply overflow-auto lg:overflow-hidden;
+  }
+}
