@@ -11,8 +11,8 @@ const SubmitFeedback = (props: Props) => {
           className="mt-4 w-full rounded-md border"
           name=""
           id=""
-          cols="30"
-          rows="6"
+          cols={30}
+          rows={6}
         ></textarea>
         <input
           type="submit"
