@@ -45,7 +45,7 @@ const Login: React.FC = () => {
                 type="text"
                 placeholder="Email"
               />
-              {errors.password && (
+              {errors.email && (
                 <span className="text-xs text-red-500">Required*</span>
               )}
             </label>
