@@ -1,8 +1,14 @@
+"use client";
+
+import getSingleUser from "@/utils/getSingleUser";
+import { jwtToken } from "@/utils/jwtToken";
 import Link from "next/link";
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { BiSupport } from "react-icons/bi";
 
 const Header = () => {
+  const token = jwtToken();
+
   return (
     <nav className=" containers sticky top-0  mt-4 bg-blue-50 duration-300 ease-in-out">
       <div className="flex items-center justify-between">
@@ -19,12 +25,21 @@ const Header = () => {
           </Link>
         </ul>
 
-        <Link
-          className="rounded bg-blue-500 px-6 py-2 font-medium text-white  duration-300 hover:bg-blue-400  "
-          href={"/login"}
-        >
-          Login
-        </Link>
+        {token ? (
+          <Link
+            className="rounded bg-orange-500 px-6 py-2 font-medium text-white  duration-300 hover:bg-orange-400  "
+            href={"/login"}
+          >
+            Logout
+          </Link>
+        ) : (
+          <Link
+            className="rounded bg-blue-500 px-6 py-2 font-medium text-white  duration-300 hover:bg-blue-400  "
+            href={"/login"}
+          >
+            Login
+          </Link>
+        )}
       </div>
     </nav>
   );

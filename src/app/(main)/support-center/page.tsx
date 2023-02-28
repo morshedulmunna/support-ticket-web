@@ -3,6 +3,7 @@
 import AllTickets from "@/app/components/AllTickets";
 import DataCard from "@/app/components/DataCard";
 import { Url } from "@/utils/basic";
+import { ProtectedAuth } from "@/utils/ProtectedAuth";
 import React, { useEffect, useState } from "react";
 
 const Dashboard = () => {
@@ -33,4 +34,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default ProtectedAuth(Dashboard);

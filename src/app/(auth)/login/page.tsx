@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { type SubmitHandler, useForm } from "react-hook-form";
 import { TbArrowLeftBar } from "react-icons/tb";
@@ -31,13 +31,14 @@ const Login: React.FC = () => {
       password: data.password,
     };
 
+    // Post Req for login
     axios
       .post(`${Url}/auth/signin`, validData)
       .then(function (response) {
-        console.log(response);
-
         if (response) {
-          localStorage.setItem("token", response.data.token);
+          console.log(response);
+
+          localStorage.setItem("accessToken", response.data);
           toast.success("Login Successful");
           router.push("/support-center");
         }

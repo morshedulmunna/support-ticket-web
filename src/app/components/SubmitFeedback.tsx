@@ -5,7 +5,6 @@ type Props = {};
 const SubmitFeedback = (props: Props) => {
   return (
     <div>
-      {" "}
       <form action="">
         <textarea
           className="mt-4 w-full rounded-md border"

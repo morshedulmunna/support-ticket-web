@@ -31,7 +31,7 @@ const page = () => {
     console.log(data);
 
     axios
-      .post(`${Url}/tickets`, validData)
+      .post(`${Url}/tickets/63fe0b5553d9094276b4f748`, validData)
       .then(function (response) {
         if (response) {
           toast.success("Ticket Cerate Successfully");
