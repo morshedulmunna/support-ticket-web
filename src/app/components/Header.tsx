@@ -1,13 +1,16 @@
 "use client";
 
-import getSingleUser from "@/utils/getSingleUser";
 import { jwtToken } from "@/utils/jwtToken";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React, { useContext, useEffect, useState } from "react";
 import { BiSupport } from "react-icons/bi";
+import { toast } from "react-toastify";
 
 const Header = () => {
   const token = jwtToken();
+
+  const router = useRouter();
 
   return (
     <nav className=" containers sticky top-0  mt-4 bg-blue-50 duration-300 ease-in-out">
@@ -29,6 +32,11 @@ const Header = () => {
           <Link
             className="rounded bg-orange-500 px-6 py-2 font-medium text-white  duration-300 hover:bg-orange-400  "
             href={"/login"}
+            onClick={() => {
+              localStorage.removeItem("accessToken");
+              toast.info("See you soon");
+              router.push("/login");
+            }}
           >
             Logout
           </Link>
