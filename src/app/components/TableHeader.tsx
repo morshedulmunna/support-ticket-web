@@ -1,12 +1,9 @@
-"use client";
 import { usePathname } from "next/navigation";
 import React from "react";
 import TableBody from "./TableBody";
 
-const TableHeader = () => {
+const TableHeader = ({ ticket }: any) => {
   const pathname = usePathname();
-
-  console.log(pathname);
 
   return (
     <>
@@ -27,24 +24,9 @@ const TableHeader = () => {
             </tr>
           </thead>
           <tbody>
-            <TableBody />
-            <TableBody />
-            <TableBody />
-            <TableBody />
-            <TableBody />
-            <TableBody />
-            <TableBody />
-            <TableBody />
-            <TableBody />
-            <TableBody />
-            <TableBody />
-            <TableBody />
-            <TableBody />
-            <TableBody />
-            <TableBody />
-            <TableBody />
-            <TableBody />
-            <TableBody />
+            {ticket?.map((item: any) => (
+              <TableBody item={item} key={item.tiket_id} />
+            ))}
           </tbody>
         </table>
       </div>

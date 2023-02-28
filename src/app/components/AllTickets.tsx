@@ -1,10 +1,11 @@
-import React from "react";
+"use client";
+
 import TableHeader from "./TableHeader";
 
-const AllTickets = () => {
+const AllTickets = ({ ticket }: any) => {
   return (
     <>
-      <TableHeader />
+      <TableHeader ticket={ticket} />
     </>
   );
 };

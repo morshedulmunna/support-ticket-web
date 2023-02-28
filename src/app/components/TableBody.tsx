@@ -1,22 +1,31 @@
+import { formattedDate } from "@/utils/formatedDate";
 import Link from "next/link";
 import React from "react";
 
-const TableBody = () => {
+type Props = {
+  item: any;
+};
+
+const TableBody = ({ item }: Props) => {
+  const { tiket_id, title, status, subject, updatedDate } = item;
+
+  const date = formattedDate(updatedDate);
+
   return (
-    <tr>
-      <td>Cy Ganderton</td>
-      <td>Need helps for payment system</td>
-      <td>21-03-2023</td>
-      <td>Support/Internet</td>
-      <td className="text-indigo-400">Open</td>
-      <td className="">
-        <Link href={"/support-center/ticket/2"}>
+    <>
+      <tr>
+        <td>{tiket_id}</td>
+        <td>{title}</td>
+        <td>{date}</td>
+        <td>{subject}</td>
+        <td className="text-indigo-400"> {status} </td>
+        <td className="">
           <button className="btn-xs btn rounded-sm border-none bg-blue-300 bg-opacity-50 font-normal capitalize text-black hover:bg-blue-400">
-            view
+            <Link href={`/support-center/ticket/${tiket_id}`}>view</Link>
           </button>
-        </Link>
-      </td>
-    </tr>
+        </td>
+      </tr>
+    </>
   );
 };
 

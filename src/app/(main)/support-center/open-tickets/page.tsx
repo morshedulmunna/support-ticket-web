@@ -1,10 +1,18 @@
+"use client";
 import AllTickets from "@/app/components/AllTickets";
-import React from "react";
+import Loading from "@/app/components/Loading";
+import getOpenTicket from "@/utils/getOpenTickets";
 
 const OpenTickets = () => {
+  const ticket = getOpenTicket();
+
+  if (!ticket) {
+    return <Loading />;
+  }
+
   return (
     <div className="view">
-      <AllTickets />
+      <AllTickets ticket={ticket} />
     </div>
   );
 };

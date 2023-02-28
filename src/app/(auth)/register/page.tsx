@@ -28,32 +28,44 @@ const Register = () => {
   } = useForm<Inputs>();
 
   // const FormSchema = z.object({
-  //   email: z.string().email(),
+  //   email: z.string(),
   //   password: z.string().min(3).max(20),
   // });
 
   const router = useRouter();
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
+    let password;
+
+    if (data.password === data.confirm_password) {
+      password = data.password;
+    } else {
+      return toast.error("Password not Match");
+    }
+
     const getData = {
       email: data.email,
-      password: data.password,
+      password: password,
     };
 
     // const validData = FormSchema.safeParse(getData);
-
     axios
       .post(`${Url}/auth/signup`, getData)
       .then(function (response) {
         if (response) {
           toast.success("Register Successful, Please Login First");
+          setTimeout(() => {
+            router.push("/login");
+          }, 2000);
         }
       })
       .catch(function (error) {
-        console.log(error);
+        if (error.response.status === 500) {
+          toast.error("Email Already Register");
+        }
       });
 
-    reset();
+    // reset();
   };
 
   return (
@@ -104,10 +116,21 @@ const Register = () => {
                 />
               </label>
 
+              <label htmlFor="confirm_password">
+                <input
+                  {...register("confirm_password", { required: true })}
+                  className={` w-full rounded-t-sm border px-2 outline-none mb-6 py-2 text-sm ${
+                    errors.password && "border border-red-500"
+                  } `}
+                  type="password"
+                  placeholder=" Confirm Password"
+                />
+              </label>
+
               <input
                 type="submit"
                 value="Login"
-                className="w-full rounded-sm bg-blue-400 py-2 text-white "
+                className="w-full cursor-pointer hover:bg-blue-400 duration-300 ease-in-out rounded-sm bg-blue-500 py-2 text-white "
               />
             </form>
             <div className="flex w-full cursor-pointer items-center justify-center space-x-2 bg-orange-200 py-2">

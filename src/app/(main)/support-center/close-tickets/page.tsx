@@ -1,10 +1,24 @@
+"use client";
+
 import AllTickets from "@/app/components/AllTickets";
-import React from "react";
+import { Url } from "@/utils/basic";
+import React, { useEffect, useState } from "react";
 
 const CloseTickets = () => {
+  const [ticket, setTicket] = useState<any>([]);
+
+  useEffect(() => {
+    const fetchIssue = async () => {
+      fetch(`${Url}/tickets/close`)
+        .then((response) => response.json())
+        .then((data) => setTicket(data));
+    };
+    fetchIssue();
+  }, []);
+
   return (
     <div className="view">
-      <AllTickets />
+      <AllTickets ticket={ticket} />
     </div>
   );
 };
