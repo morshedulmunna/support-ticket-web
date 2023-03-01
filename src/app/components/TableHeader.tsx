@@ -27,6 +27,9 @@ const TableHeader = ({ ticket }: any) => {
             {ticket?.map((item: any) => (
               <TableBody item={item} key={item.tiket_id} />
             ))}
+            {ticket?.length === 0 && (
+              <p className="mt-6">No Ticket Available........</p>
+            )}
           </tbody>
         </table>
       </div>

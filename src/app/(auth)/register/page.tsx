@@ -61,9 +61,10 @@ const Register = () => {
         }
       })
       .catch(function (error) {
-        if (error.response.status === 500) {
-          toast.error("Email Already Register");
-        }
+        console.log(error);
+
+        toast.error(error.response.data.message);
+        toast.error(error.response.data.message[0]);
       });
 
     // reset();

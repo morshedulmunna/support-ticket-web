@@ -1,5 +1,7 @@
 "use client";
 
+import { SingleUser } from "@/types";
+import { getSingleUser } from "@/utils/getUsers";
 import { jwtToken } from "@/utils/jwtToken";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -11,6 +13,12 @@ const Header = () => {
   const token = jwtToken();
 
   const router = useRouter();
+
+  const [user, setUser] = useState<any>({});
+
+  useEffect(() => {
+    getSingleUser(setUser);
+  }, []);
 
   return (
     <nav className=" containers sticky top-0  mt-4 bg-blue-50 duration-300 ease-in-out">
@@ -29,17 +37,22 @@ const Header = () => {
         </ul>
 
         {token ? (
-          <Link
-            className="rounded bg-orange-500 px-6 py-2 font-medium text-white  duration-300 hover:bg-orange-400  "
-            href={"/login"}
-            onClick={() => {
-              localStorage.removeItem("accessToken");
-              toast.info("See you soon");
-              router.push("/login");
-            }}
-          >
-            Logout
-          </Link>
+          <>
+            <p className=" whitespace-nowrap pr-6 font-semibold text-orange-500 ">
+              {user?.foundUser?.name}
+            </p>
+            <Link
+              className="rounded bg-orange-500 px-6 py-2 font-medium text-white  duration-300 hover:bg-orange-400  "
+              href={"/login"}
+              onClick={() => {
+                localStorage.removeItem("accessToken");
+                toast.info("See you soon");
+                router.push("/login");
+              }}
+            >
+              Logout
+            </Link>
+          </>
         ) : (
           <Link
             className="rounded bg-blue-500 px-6 py-2 font-medium text-white  duration-300 hover:bg-blue-400  "
