@@ -2,28 +2,21 @@
 
 import AllTickets from "@/app/components/AllTickets";
 import DataCard from "@/app/components/DataCard";
-import { Url } from "@/utils/basic";
 import { getSingleUser } from "@/utils/getUsers";
 import { ProtectedAuth } from "@/utils/ProtectedAuth";
 import React, { useEffect, useState } from "react";
 
 const Dashboard = () => {
   const [ticket, setTicket] = useState<any>([]);
-
-  useEffect(() => {
-    const fetchIssue = async () => {
-      fetch(`${Url}/tickets`)
-        .then((response) => response.json())
-        .then((data) => setTicket(data));
-    };
-    fetchIssue();
-  }, []);
-
   const [user, setUser] = useState<any>({});
 
   useEffect(() => {
     getSingleUser(setUser);
   }, []);
+
+  useEffect(() => {
+    setTicket(user?.foundUser?.ticket);
+  }, [user?.foundUser?.ticket]);
 
   return (
     <>

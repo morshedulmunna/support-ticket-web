@@ -1,24 +1,28 @@
 "use client";
 
 import AllTickets from "@/app/components/AllTickets";
-import { Url } from "@/utils/basic";
+import Loading from "@/app/components/Loading";
+import { getSingleUser } from "@/utils/getUsers";
 import React, { useEffect, useState } from "react";
 
 const CloseTickets = () => {
+  const [closeTickets, setCloseTickets] = useState<any>([]);
   const [ticket, setTicket] = useState<any>([]);
+  const [user, setUser] = useState<any>({});
+
+  const openItems = ticket?.filter(
+    (item: { status: string }) => item.status === "close"
+  );
 
   useEffect(() => {
-    const fetchIssue = async () => {
-      fetch(`${Url}/tickets/close`)
-        .then((response) => response.json())
-        .then((data) => setTicket(data));
-    };
-    fetchIssue();
-  }, []);
+    getSingleUser(setUser);
+    setTicket(user?.foundUser?.ticket);
+    setCloseTickets(openItems);
+  }, [user?.foundUser?.ticket]);
 
   return (
     <div className="view">
-      <AllTickets ticket={ticket} />
+      <AllTickets ticket={closeTickets} />
     </div>
   );
 };

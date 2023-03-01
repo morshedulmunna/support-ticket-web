@@ -44,9 +44,7 @@ const Login: React.FC = () => {
         }
       })
       .catch(function (error) {
-        if (error.response.status === 500) {
-          toast.error("Email Not Register");
-        }
+        toast.error(error.response.data.message);
       });
   };
 

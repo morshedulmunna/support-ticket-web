@@ -7,24 +7,23 @@ import { jwtToken } from "./jwtToken";
 type Props = {};
 
 export const ProtectedAuth = <P extends Props>(
-  WrappedComponent: React.ComponentType<P>,
-  roll: string
+  WrappedComponent: React.ComponentType<P>
 ) => {
   const Wrapper = (props: P) => {
     const router = useRouter();
 
-    const [user, setUser] = useState<SingleUser>({});
-    console.log(user);
+    // const [user, setUser] = useState<SingleUser>({});
+    // console.log(user);
 
-    useEffect(() => {
-      getSingleUser(setUser);
-    }, []);
+    // useEffect(() => {
+    //   getSingleUser(setUser);
+    // }, []);
 
     const token = jwtToken();
     // Check if user is authenticated
 
     let isAuthenticated: unknown;
-    if (token && user.roll === roll) {
+    if (token) {
       isAuthenticated = true;
     }
 

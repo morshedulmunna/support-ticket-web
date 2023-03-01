@@ -24,9 +24,9 @@ const TableHeader = ({ ticket }: any) => {
             </tr>
           </thead>
           <tbody>
-            {/* {ticket?.map((item: any) => (
+            {ticket?.map((item: any) => (
               <TableBody item={item} key={item.tiket_id} />
-            ))} */}
+            ))}
           </tbody>
         </table>
       </div>
