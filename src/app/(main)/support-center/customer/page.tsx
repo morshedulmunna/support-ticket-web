@@ -34,7 +34,7 @@ const Customer = (props: Props) => {
   );
 };
 
-export default ProtectedAuth(Customer, "admin");
+export default ProtectedAuth(Customer);
 
 const TBody = ({ singleUser }: any) => {
   const { id, name, email, roll } = singleUser;

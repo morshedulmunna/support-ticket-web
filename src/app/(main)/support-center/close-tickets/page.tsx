@@ -15,19 +15,27 @@ const CloseTickets = () => {
     getSingleUser(setUser);
   }, []);
 
-  useState(async () => {
-    const data = await getUserTicket();
-    const OpenTicket = data?.filter((tk: any) => tk.status === "close");
-    setTicket(OpenTicket);
-  });
+  useEffect(() => {
+    const getData = async () => {
+      const data = await getUserTicket();
+      const OpenTicket = data?.filter((tk: any) => tk.status === "close");
+      setTicket(OpenTicket);
+    };
+    getData();
+  }, []);
 
   const [allCloseTicket, setAllCloseTicket] = useState<any>([]);
 
-  useState(async () => {
-    const allTickets = await getAllTicket();
-    const closeTicket = allTickets?.filter((tk: any) => tk.status === "close");
-    setAllCloseTicket(closeTicket);
-  });
+  useEffect(() => {
+    const getData = async () => {
+      const allTickets = await getAllTicket();
+      const closeTicket = allTickets?.filter(
+        (tk: any) => tk.status === "close"
+      );
+      setAllCloseTicket(closeTicket);
+    };
+    getData();
+  }, []);
 
   return (
     <div className="view">

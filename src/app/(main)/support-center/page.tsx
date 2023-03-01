@@ -15,17 +15,15 @@ const Dashboard = () => {
     getSingleUser(setUser);
   }, []);
 
-  useState(async () => {
-    const data = await getUserTicket();
-    setTicket(data);
-  });
-
   const [allTicket, setAllTicket] = useState<any>([]);
 
-  useState(async () => {
-    const allTickets = await getAllTicket();
-    setAllTicket(allTickets);
-  });
+  useEffect(() => {
+    const getData = async () => {
+      const allTickets = await getAllTicket();
+      setAllTicket(allTickets);
+    };
+    getData();
+  }, []);
 
   return (
     <>

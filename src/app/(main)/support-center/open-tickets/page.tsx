@@ -14,21 +14,25 @@ const OpenTickets = () => {
     getSingleUser(setUser);
   }, []);
 
-  useState(async () => {
-    const data = await getUserTicket();
-
-    const OpenTicket = data?.filter((tk: any) => tk.status === "open");
-
-    setTicket(OpenTicket);
-  });
+  useEffect(() => {
+    const getData = async () => {
+      const data = await getUserTicket();
+      const OpenTicket = data?.filter((tk: any) => tk.status === "open");
+      setTicket(OpenTicket);
+    };
+    getData();
+  }, []);
 
   const [allTicket, setAllTicket] = useState<any>([]);
 
-  useState(async () => {
-    const allTickets = await getAllTicket();
-    const OpenTicket = allTickets?.filter((tk: any) => tk.status === "open");
-    setAllTicket(OpenTicket);
-  });
+  useEffect(() => {
+    const getData = async () => {
+      const allTickets = await getAllTicket();
+      const OpenTicket = allTickets?.filter((tk: any) => tk.status === "open");
+      setAllTicket(OpenTicket);
+    };
+    getData();
+  }, []);
 
   if (!ticket) {
     return <Loading />;
