@@ -1,8 +1,10 @@
+import React from "react";
 import Feedback from "@/app/components/Feedback";
 import SubmitFeedback from "@/app/components/SubmitFeedback";
 import { Url } from "@/utils/basic";
 import { formattedDate } from "@/utils/formatedDate";
-import React from "react";
+import { CgCloseR } from "react-icons/cg";
+import TicketUpdate from "@/app/components/TicketUpdate";
 
 type PageProps = {
   params: {
@@ -26,9 +28,40 @@ const Tickets = async ({ params: { ticketId } }: PageProps) => {
     <div className="view">
       <div className="flex flex-col-reverse gap-x-10 lg:flex-row ">
         <div className=" h-[85vh]  w-full overflow-y-auto pr-4 lg:w-[70%]">
-          <div className="mb-6">
-            <h2 className=" text-[25px] text-blue-500 ">Ticket Details</h2>
-            <p className="text-xm text-gray-400">Ticket Id: : #{ticketId}</p>
+          <div className="mb-6 flex justify-between">
+            <div>
+              <h2 className=" text-[25px] text-blue-500 ">Ticket Details</h2>
+              <p className="text-xm text-gray-400">Ticket Id: : #{ticketId}</p>
+            </div>
+
+            {/* Modal Part */}
+            <div>
+              {/* Modal Button */}
+              <label
+                htmlFor="my-modal-3"
+                className="btn btn-sm bg-white text-blue-500 border-blue-500 hover:bg-blue-50"
+              >
+                Updated Ticket
+              </label>
+
+              {/* Modal body */}
+              <input type="checkbox" id="my-modal-3" className="modal-toggle" />
+              <div className="modal">
+                <div className="modal-box relative">
+                  <label
+                    htmlFor="my-modal-3"
+                    className="bg-blue-500 cursor-pointer hover:bg-blue-400 duration-300 text-white absolute right-2 top-2 bg-b"
+                  >
+                    <CgCloseR size={25} />
+                  </label>
+
+                  {/* Modal Form */}
+                  <div className="mt-4 p-6">
+                    <TicketUpdate />
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
           <h4 className="mb-4 text-[20px] "> {ticket.title}</h4>
           <p className="text-sm">{ticket.description}</p>
