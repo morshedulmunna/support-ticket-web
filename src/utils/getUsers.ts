@@ -1,3 +1,5 @@
+"use client";
+
 import { Url } from "./basic";
 import { jwtToken } from "./jwtToken";
 

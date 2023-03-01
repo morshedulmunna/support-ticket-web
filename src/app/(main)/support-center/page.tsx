@@ -4,38 +4,43 @@ import AllTickets from "@/app/components/AllTickets";
 import DataCard from "@/app/components/DataCard";
 import { getSingleUser } from "@/utils/getUsers";
 import { ProtectedAuth } from "@/utils/ProtectedAuth";
-import { getAllTicket } from "@/utils/ticket";
+import { getAllTicket, getUserTicket } from "@/utils/ticket";
 import React, { useEffect, useState } from "react";
 
 const Dashboard = () => {
   const [ticket, setTicket] = useState<any>([]);
-  const [allTicket, setAllTicket] = useState<any>([]);
   const [user, setUser] = useState<any>({});
 
   useEffect(() => {
     getSingleUser(setUser);
-    getAllTicket(setAllTicket);
   }, []);
 
-  useEffect(() => {
-    setTicket(user?.foundUser?.ticket);
-  }, [user?.foundUser?.ticket]);
+  useState(async () => {
+    const data = await getUserTicket();
+    setTicket(data);
+  });
+
+  const [allTicket, setAllTicket] = useState<any>([]);
+
+  useState(async () => {
+    const allTickets = await getAllTicket();
+    setAllTicket(allTickets);
+  });
 
   return (
     <>
-      <div className="view h-[30vh] ">
+      <div className="view ">
         {user?.foundUser?.roll === "admin" && (
           <>
             <p className="mb-4 text-lg font-medium">Dashboard</p>
             <div className="mb-4 flex flex-row flex-wrap items-center gap-x-6 lg:flex-nowrap">
-              <DataCard count={ticket?.length} label={"Number of Tickets"} />
-              <DataCard count={ticket?.length} label={"Open Tickets"} />
-              <DataCard count={ticket?.length} label={"Resolve Tickets"} />
+              <DataCard count={allTicket?.length} label={"Number of Tickets"} />
             </div>
           </>
         )}
 
         <p className="mb-4 font-medium">All Tickets History_______</p>
+
         {user?.foundUser?.roll === "admin" ? (
           <AllTickets ticket={allTicket} />
         ) : (
