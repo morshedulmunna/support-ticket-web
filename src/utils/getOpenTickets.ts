@@ -1,15 +1,19 @@
 import { useState } from "react";
 import { Url } from "./basic";
 
-const getOpenTicket = () => {
+const getOpenTicket = ({ setTicket }: any) => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  const [ticket, setTicket] = useState<any>([]);
+  async function fetchData() {
+    try {
+      const response = await fetch(`${Url}/tickets/open`);
+      const data = await response.json();
+      setTicket(data);
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
-  fetch(`${Url}/tickets/open`)
-    .then((response) => response.json())
-    .then((data) => setTicket(data));
-
-  return ticket;
+  fetchData();
 };
 
 export default getOpenTicket;

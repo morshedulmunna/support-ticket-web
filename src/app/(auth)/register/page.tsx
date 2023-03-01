@@ -44,6 +44,7 @@ const Register = () => {
     }
 
     const getData = {
+      name: data.name,
       email: data.email,
       password: password,
     };

@@ -1,7 +1,7 @@
 "use client";
 
 import { Url } from "@/utils/basic";
-import getSingleUser from "@/utils/getSingleUser";
+import { getSingleUser } from "@/utils/getUsers";
 import Tostify from "@/utils/Tostify";
 import axios from "axios";
 import Link from "next/link";

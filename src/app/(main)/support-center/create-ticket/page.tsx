@@ -1,6 +1,8 @@
 "use client";
 
 import { Url } from "@/utils/basic";
+import { jwtToken } from "@/utils/jwtToken";
+import { createTicket } from "@/utils/sentPost";
 import axios from "axios";
 import React from "react";
 import { type SubmitHandler, useForm } from "react-hook-form";
@@ -21,25 +23,18 @@ const page = () => {
     // eslint-disable-next-line react-hooks/rules-of-hooks
   } = useForm<Inputs>();
 
-  const onSubmit: SubmitHandler<Inputs> = (data) => {
+  const onSubmit: SubmitHandler<Inputs> = async (data) => {
     const validData = {
       title: data.title,
       subject: data.subject,
       description: data.details,
     };
 
-    console.log(data);
+    const token = jwtToken();
 
-    axios
-      .post(`${Url}/tickets/63fe0b5553d9094276b4f748`, validData)
-      .then(function (response) {
-        if (response) {
-          toast.success("Ticket Cerate Successfully");
-        }
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    const response = await createTicket(`${Url}/tickets/`, validData, token);
+
+    console.log(response);
 
     reset();
   };
