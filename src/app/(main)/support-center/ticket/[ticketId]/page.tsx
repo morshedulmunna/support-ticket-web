@@ -1,7 +1,8 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import Feedback from "@/app/components/Feedback";
 import SubmitFeedback from "@/app/components/SubmitFeedback";
-import { Url } from "@/utils/basic";
 import { formattedDate } from "@/utils/formatedDate";
 import { CgCloseR } from "react-icons/cg";
 import TicketUpdate from "@/app/components/TicketUpdate";
@@ -13,16 +14,9 @@ type PageProps = {
 };
 
 // Get Single Ticket Data
-const getSingleTicket = async (id: string) => {
-  const res = await fetch(`${Url}/tickets/${id}`);
-  const ticket = await res.json();
-  return ticket;
-};
 
-const Tickets = async ({ params: { ticketId } }: PageProps) => {
-  const ticket = await getSingleTicket(ticketId);
-
-  console.log(ticket);
+const Tickets = ({ params: { ticketId } }: PageProps) => {
+  const [ticket, setTicket] = useState([]);
 
   return (
     <div className="view">
@@ -63,8 +57,8 @@ const Tickets = async ({ params: { ticketId } }: PageProps) => {
               </div>
             </div>
           </div>
-          <h4 className="mb-4 text-[20px] "> {ticket.title}</h4>
-          <p className="text-sm">{ticket.description}</p>
+          {/* <h4 className="mb-4 text-[20px] "> {ticket.title}</h4>
+          <p className="text-sm">{ticket.description}</p> */}
 
           {/* Feedback */}
           <div className="mt-12 ">

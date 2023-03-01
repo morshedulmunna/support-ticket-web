@@ -14,6 +14,9 @@ const OpenTickets = () => {
     getSingleUser(setUser);
   }, []);
 
+  /**
+   * Get Users Open Tickets
+   */
   useEffect(() => {
     const getData = async () => {
       const data = await getUserTicket();
@@ -23,8 +26,10 @@ const OpenTickets = () => {
     getData();
   }, []);
 
+  /**
+   * Get ALl Open Tickets Admin can See All
+   */
   const [allTicket, setAllTicket] = useState<any>([]);
-
   useEffect(() => {
     const getData = async () => {
       const allTickets = await getAllTicket();
@@ -34,6 +39,7 @@ const OpenTickets = () => {
     getData();
   }, []);
 
+  // If not get ticket show login state
   if (!ticket) {
     return <Loading />;
   }

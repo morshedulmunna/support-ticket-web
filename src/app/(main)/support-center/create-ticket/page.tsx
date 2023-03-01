@@ -24,6 +24,9 @@ const page = () => {
     // eslint-disable-next-line react-hooks/rules-of-hooks
   } = useForm<Inputs>();
 
+  /**
+   * Create tickets any customer
+   */
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     const validData = {
       title: data.title,

@@ -8,24 +8,28 @@ import React, { useEffect, useState } from "react";
 
 const CloseTickets = () => {
   const [ticket, setTicket] = useState<any>([]);
-
   const [user, setUser] = useState<any>({});
 
   useEffect(() => {
     getSingleUser(setUser);
   }, []);
 
+  /**
+   * Get USer Close Tickets
+   */
   useEffect(() => {
     const getData = async () => {
       const data = await getUserTicket();
-      const OpenTicket = data?.filter((tk: any) => tk.status === "close");
-      setTicket(OpenTicket);
+      const closeTicket = data?.filter((tk: any) => tk.status === "close");
+      setTicket(closeTicket);
     };
     getData();
   }, []);
 
+  /**
+   * Get All USer Close Tickets
+   */
   const [allCloseTicket, setAllCloseTicket] = useState<any>([]);
-
   useEffect(() => {
     const getData = async () => {
       const allTickets = await getAllTicket();

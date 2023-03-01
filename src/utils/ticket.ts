@@ -1,9 +1,9 @@
 import { Url } from "./basic";
 import { jwtToken } from "./jwtToken";
 
-export const getAllTicket = async () => {
-  const token = localStorage.getItem("accessToken");
+const token = jwtToken();
 
+export const getAllTicket = async () => {
   try {
     const response = await fetch(`${Url}/tickets`, {
       headers: {
@@ -24,8 +24,6 @@ export const getAllTicket = async () => {
 };
 
 export const getUserTicket = async () => {
-  const token = localStorage.getItem("accessToken");
-
   try {
     const response = await fetch(`${Url}/tickets/single_user_ticket`, {
       headers: {

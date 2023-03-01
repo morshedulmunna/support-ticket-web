@@ -8,15 +8,30 @@ import { getAllTicket, getUserTicket } from "@/utils/ticket";
 import React, { useEffect, useState } from "react";
 
 const Dashboard = () => {
-  const [ticket, setTicket] = useState<any>([]);
+  /**
+   * Get Get USer Who Now Login
+   */
   const [user, setUser] = useState<any>({});
-
   useEffect(() => {
     getSingleUser(setUser);
   }, []);
 
-  const [allTicket, setAllTicket] = useState<any>([]);
+  /**
+   * Get SIngle User Tickets
+   */
+  const [ticket, setTicket] = useState<any>([]);
+  useEffect(() => {
+    const getData = async () => {
+      const allTickets = await getUserTicket();
+      setTicket(allTickets);
+    };
+    getData();
+  }, []);
 
+  /**
+   * Get All Tickets For Admin
+   */
+  const [allTicket, setAllTicket] = useState<any>([]);
   useEffect(() => {
     const getData = async () => {
       const allTickets = await getAllTicket();

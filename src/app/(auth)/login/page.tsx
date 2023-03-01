@@ -36,8 +36,6 @@ const Login: React.FC = () => {
       .post(`${Url}/auth/signin`, validData)
       .then(function (response) {
         if (response) {
-          console.log(response);
-
           localStorage.setItem("accessToken", response.data);
           toast.success("Login Successful");
           router.push("/support-center");
