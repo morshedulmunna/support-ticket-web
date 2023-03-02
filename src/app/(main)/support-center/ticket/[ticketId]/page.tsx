@@ -37,20 +37,18 @@ const Tickets = ({ params: { ticketId } }: PageProps) => {
   //Get User Feedback by ticket ID
   const token = jwtToken();
 
-  const { isLoading, error, data } = useQuery(
-    ["ticketId"],
-    () =>
-      axios
-        .get(`${Url}/feedback/${ticketId}`, {
-          headers: {
-            authorization: `Bearer ${token}`,
-          },
-        })
-        .then((res) => res.data),
-    {}
+  const {
+    data: feedback,
+    isLoading,
+    error,
+  } = useQuery(["feedback", ticketId], () =>
+    fetch(`${Url}/feedback/${ticketId}`, {
+      method: "GET",
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    }).then((res) => res.json())
   );
-
-  console.log(data);
 
   if (isLoading) {
     return <Loading />;
@@ -112,7 +110,7 @@ const Tickets = ({ params: { ticketId } }: PageProps) => {
           <div className="mt-12 ">
             <p className="text-[20px] text-blue-500">Feedback</p>
 
-            {data.map(
+            {feedback.map(
               (feedback: { feedback_Id: React.Key | null | undefined }) => (
                 <Feedback
                   key={feedback.feedback_Id}
