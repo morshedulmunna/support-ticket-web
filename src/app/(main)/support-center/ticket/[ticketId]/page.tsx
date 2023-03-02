@@ -1,11 +1,12 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Feedback from "@/app/components/Feedback";
 import SubmitFeedback from "@/app/components/SubmitFeedback";
 import { formattedDate } from "@/utils/formatedDate";
 import { CgCloseR } from "react-icons/cg";
 import TicketUpdate from "@/app/components/TicketUpdate";
+import { getSingleTicket } from "@/utils/ticket";
 
 type PageProps = {
   params: {
@@ -16,7 +17,15 @@ type PageProps = {
 // Get Single Ticket Data
 
 const Tickets = ({ params: { ticketId } }: PageProps) => {
-  const [ticket, setTicket] = useState([]);
+  const [ticket, setTicket] = useState<any>([]);
+
+  useEffect(() => {
+    const getData = async () => {
+      const tickets = await getSingleTicket(ticketId);
+      setTicket(tickets);
+    };
+    getData();
+  }, [ticketId]);
 
   return (
     <div className="view">
@@ -51,14 +60,14 @@ const Tickets = ({ params: { ticketId } }: PageProps) => {
 
                   {/* Modal Form */}
                   <div className="mt-4 p-6">
-                    <TicketUpdate />
+                    <TicketUpdate ticket={ticket} />
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          {/* <h4 className="mb-4 text-[20px] "> {ticket.title}</h4>
-          <p className="text-sm">{ticket.description}</p> */}
+          <h4 className="mb-4 text-[20px] "> {ticket?.title}</h4>
+          <p className="text-sm">{ticket?.description}</p>
 
           {/* Feedback */}
           <div className="mt-12 ">
@@ -81,9 +90,9 @@ export default Tickets;
 const TicketInfo = ({ ticket }: any) => {
   console.log(ticket);
 
-  const { tiket_id, creaateDate, subject, status } = ticket;
+  const { tiket_id, createDate, subject, status } = ticket;
 
-  const Date = formattedDate(creaateDate);
+  const Date = formattedDate(createDate);
 
   return (
     <>
@@ -107,10 +116,6 @@ const TicketInfo = ({ ticket }: any) => {
         <div className="mt-12 ">
           <p className="text-md mb-1 font-medium text-blue-500">Subject</p>
           <p className="text-sm text-gray-500"> {subject} </p>
-        </div>
-        <div className="mt-12 ">
-          <p className="text-md mb-1 font-medium text-blue-500">Raised by</p>
-          <p className="text-sm text-gray-500"> Morshedul Munna</p>
         </div>
       </div>
     </>

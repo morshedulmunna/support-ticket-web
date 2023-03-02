@@ -42,3 +42,23 @@ export const getUserTicket = async () => {
     }
   }
 };
+
+export const getSingleTicket = async (id: string) => {
+  try {
+    const response = await fetch(`${Url}/tickets/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+
+    const data = await response.json();
+    return data;
+  } catch (error: unknown) {
+    if (error instanceof SyntaxError && error.message.includes("JSON")) {
+      console.log("Error: Invalid JSON data");
+    } else {
+      console.log("Error:", error);
+    }
+  }
+};

@@ -9,9 +9,13 @@ type Inputs = {
   details: string;
 };
 
-type Props = {};
+type Props = {
+  ticket: any;
+};
 
-const TicketUpdate = (props: Props) => {
+const TicketUpdate = ({ ticket }: Props) => {
+  console.log(ticket);
+
   const {
     register,
     handleSubmit,
@@ -41,32 +45,35 @@ const TicketUpdate = (props: Props) => {
         action=""
       >
         <input
-          {...register("title", { required: true })}
+          {...register("title")}
           className="rounded-md border px-2 py-2 text-sm"
           type="text"
           placeholder="Title of the tickets"
+          defaultValue={ticket?.title}
         />
         {errors.title && (
           <span className="text-xs text-red-500">Required*</span>
         )}
 
         <input
-          {...register("subject", { required: true })}
+          {...register("subject")}
           className="rounded-md border px-2 py-2 text-sm"
           type="text"
           placeholder="Subject"
+          defaultValue={ticket?.subject}
         />
         {errors.subject && (
           <span className="text-xs text-red-500">Required*</span>
         )}
 
         <textarea
-          {...register("details", { required: true })}
+          {...register("details")}
           className="rounded-md border px-2 py-2 text-sm"
           name="details"
           cols={30}
           rows={10}
           placeholder="Problem details"
+          defaultValue={ticket?.description}
         ></textarea>
         {errors.details && (
           <span className="text-xs text-red-500">Required*</span>
