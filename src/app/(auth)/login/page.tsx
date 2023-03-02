@@ -35,8 +35,6 @@ const Login: React.FC = () => {
     axios
       .post(`${Url}/auth/signin`, validData)
       .then(function (response) {
-        console.log(response);
-
         if (response) {
           localStorage.setItem("accessToken", response.data);
           toast.success("Login Successful");

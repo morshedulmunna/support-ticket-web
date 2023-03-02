@@ -13,12 +13,9 @@ type Props = {
 };
 
 const Feedback = ({ singleFeedback }: any) => {
-  console.log(singleFeedback);
-
   const { feedback } = singleFeedback;
 
   const [user, setUser] = useState<any>({});
-  console.log(user);
 
   useEffect(() => {
     getSingleUser(setUser);
