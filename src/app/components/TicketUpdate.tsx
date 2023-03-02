@@ -14,9 +14,10 @@ type Inputs = {
 
 type Props = {
   ticket: any;
+  updateTicketHandler: any;
 };
 
-const TicketUpdate = ({ ticket }: Props) => {
+const TicketUpdate = ({ ticket, updateTicketHandler }: Props) => {
   const { tiket_id, status } = ticket;
 
   const {
@@ -34,8 +35,8 @@ const TicketUpdate = ({ ticket }: Props) => {
       description: data.details,
     };
 
-    UpdateSingleTicket(tiket_id, validData).then((res) => res);
-    toast.success("Ticket Update Done !!");
+    updateTicketHandler(tiket_id, validData);
+
     reset();
   };
 
@@ -82,6 +83,7 @@ const TicketUpdate = ({ ticket }: Props) => {
           <input
             className="cursor-pointer rounded-md bg-blue-500 px-2 py-2 font-bold text-white duration-300 hover:bg-blue-400"
             type="Submit"
+            id="my-modal-3"
             defaultValue={"Update Tickets"}
           />
         </form>

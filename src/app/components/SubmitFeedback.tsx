@@ -14,7 +14,7 @@ type Inputs = {
 
 const token = jwtToken();
 
-const SubmitFeedback = ({ ticket }: any) => {
+const SubmitFeedback = ({ ticket, sentFeedbackHandler }: any) => {
   const { tiket_id, createDate, subject, status } = ticket;
 
   const {
@@ -28,15 +28,8 @@ const SubmitFeedback = ({ ticket }: any) => {
     const validData = {
       feedback: data.feedback,
     };
+    sentFeedbackHandler(tiket_id, validData);
     reset();
-    const res = await createFeedback(
-      `${Url}/feedback/${tiket_id}`,
-      validData,
-      token
-    );
-    if (res) {
-      toast.success("Feedback Submit Successfully");
-    }
   };
 
   return (

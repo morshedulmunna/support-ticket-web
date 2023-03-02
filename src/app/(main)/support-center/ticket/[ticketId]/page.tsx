@@ -3,18 +3,20 @@
 import React, { useEffect, useState } from "react";
 import Feedback from "@/app/components/Feedback";
 import SubmitFeedback from "@/app/components/SubmitFeedback";
-import { formattedDate } from "@/utils/formatedDate";
 import { CgCloseR } from "react-icons/cg";
 import TicketUpdate from "@/app/components/TicketUpdate";
-import { getSingleTicket, UpdateSingleTicket } from "@/utils/ticket";
-import Tostify from "@/utils/Tostify";
+import {
+  getFeedback,
+  getSingleTicket,
+  UpdateSingleTicket,
+} from "@/utils/ticket";
 import { toast } from "react-toastify";
 import { useQuery } from "react-query";
 import { Url } from "@/utils/basic";
-import axios from "axios";
 import { jwtToken } from "@/utils/jwtToken";
 import Loading from "@/app/components/Loading";
 import TicketInfo from "@/app/components/TicketInfo";
+import { createFeedback } from "@/utils/sentPost";
 
 type PageProps = {
   params: {
@@ -23,11 +25,25 @@ type PageProps = {
 };
 
 // Get Single Ticket Data
-
 const Tickets = ({ params: { ticketId } }: PageProps) => {
   const [ticket, setTicket] = useState<any>([]);
+  const [feedback, setFeedback] = useState<any>([]);
   const [response, setResponse] = useState<any>();
+  const [updateResponse, setUpdateResponse] = useState<any>();
+  const [sentFeedbackResponse, setSentFeedbackResponse] = useState<any>();
 
+  const token = jwtToken();
+
+  // Update Ticket  Handler
+  const updateTicketHandler = (tiket_id: string, validData: object) => {
+    const res = UpdateSingleTicket(tiket_id, validData);
+    console.log(res);
+
+    setUpdateResponse(res);
+    toast.success("Ticket Update Done !!" + { tiket_id });
+  };
+
+  // Mark to Resolve Handler
   const markToResolveHandler = () => {
     const validObject = {
       status: "close",
@@ -37,36 +53,36 @@ const Tickets = ({ params: { ticketId } }: PageProps) => {
     toast.success("Tickets Resolved");
   };
 
+  // Get Ticket Details
   useEffect(() => {
     const getData = async () => {
       const tickets = await getSingleTicket(ticketId);
       setTicket(tickets);
     };
     getData();
-  }, [ticketId, response]);
+  }, [ticketId, response, updateResponse]);
 
   //Get User Feedback by ticket ID
-  const token = jwtToken();
+  useEffect(() => {
+    const getFeedbackData = async () => {
+      const feedback = await getFeedback(ticketId);
+      setFeedback(feedback);
+    };
+    getFeedbackData();
+  }, [ticketId, sentFeedbackResponse]);
 
-  const {
-    data: feedback,
-    isLoading,
-    error,
-  } = useQuery(["feedback", ticketId], () =>
-    fetch(`${Url}/feedback/${ticketId}`, {
-      method: "GET",
-      headers: {
-        authorization: `Bearer ${token}`,
-      },
-    }).then((res) => res.json())
-  );
-
-  if (isLoading) {
-    return <Loading />;
-  }
-  if (error) {
-    console.log(error);
-  }
+  // Send Feedback Handler
+  const sentFeedbackHandler = async (tiket_id: string, validData: object) => {
+    const res = await createFeedback(
+      `${Url}/feedback/${tiket_id}`,
+      validData,
+      token
+    );
+    if (res) {
+      setSentFeedbackResponse(res);
+      toast.success("Feedback Submit Successfully");
+    }
+  };
 
   return (
     <div className="view">
@@ -108,7 +124,10 @@ const Tickets = ({ params: { ticketId } }: PageProps) => {
 
                   {/* Modal Form */}
                   <div className="mt-4 p-6">
-                    <TicketUpdate ticket={ticket} />
+                    <TicketUpdate
+                      ticket={ticket}
+                      updateTicketHandler={updateTicketHandler}
+                    />
                   </div>
                 </div>
               </div>
@@ -131,7 +150,10 @@ const Tickets = ({ params: { ticketId } }: PageProps) => {
             )}
           </div>
           {/* Submit feedback form */}
-          <SubmitFeedback ticket={ticket} />
+          <SubmitFeedback
+            ticket={ticket}
+            sentFeedbackHandler={sentFeedbackHandler}
+          />
         </div>
 
         <TicketInfo

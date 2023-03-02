@@ -63,6 +63,25 @@ export const getSingleTicket = async (id: string) => {
     }
   }
 };
+export const getFeedback = async (ticketId: string) => {
+  try {
+    const response = await fetch(`${Url}/feedback/${ticketId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+
+    const data = await response.json();
+    return data;
+  } catch (error: unknown) {
+    if (error instanceof SyntaxError && error.message.includes("JSON")) {
+      console.log("Error: Invalid JSON data");
+    } else {
+      console.log("Error:", error);
+    }
+  }
+};
 export const UpdateSingleTicket = async (id: string, validObject: any) => {
   axios
     .patch(`${Url}/tickets/${id}`, validObject, {
