@@ -2,9 +2,12 @@
 
 import { formattedDate } from "@/utils/formatedDate";
 import { getSingleUser } from "@/utils/getUsers";
+import { deleteTicket } from "@/utils/ticket";
+import axios from "axios";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { CgCloseR } from "react-icons/cg";
+import { toast } from "react-toastify";
 
 type Props = {
   item: any;
@@ -36,7 +39,13 @@ const TableBody = ({ item }: Props) => {
 
       {user?.foundUser?.roll === "admin" && (
         <td>
-          <button className=" cursor-pointer  text-red-500">
+          <button
+            onClick={async () => {
+              deleteTicket(tiket_id);
+              toast.warning(`This Ticket Delete ${tiket_id}`);
+            }}
+            className=" cursor-pointer  text-red-500"
+          >
             <CgCloseR size={20} />
           </button>
         </td>

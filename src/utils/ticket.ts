@@ -77,3 +77,18 @@ export const UpdateSingleTicket = async (id: string, validObject: any) => {
       return err;
     });
 };
+
+export const deleteTicket = async (id: string) => {
+  await axios
+    .delete(`${Url}/tickets/${id}`, {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    })
+    .then((result) => {
+      return result;
+    })
+    .catch(async (err) => {
+      return err;
+    });
+};
