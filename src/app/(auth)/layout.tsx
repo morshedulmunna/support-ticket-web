@@ -1,5 +1,14 @@
 import "../globals.css";
 
 export default function layout({ children }: { children: React.ReactNode }) {
-  return <main>{children}</main>;
+  return (
+    <html lang="en">
+      {/*
+        <head /> will contain the components returned by the nearest parent
+        head.tsx. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
+      */}
+
+      <body>{children}</body>
+    </html>
+  );
 }

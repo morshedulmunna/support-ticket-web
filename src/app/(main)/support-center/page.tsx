@@ -44,12 +44,12 @@ const Dashboard = () => {
     <>
       <div className="view ">
         {user?.foundUser?.roll === "admin" && (
-          <>
+          <div>
             <p className="mb-4 text-lg font-medium">Dashboard</p>
             <div className="mb-4 flex flex-row flex-wrap items-center gap-x-6 lg:flex-nowrap">
               <DataCard count={allTicket?.length} label={"Number of Tickets"} />
             </div>
-          </>
+          </div>
         )}
 
         <p className="mb-4 font-medium">All Tickets History_______</p>

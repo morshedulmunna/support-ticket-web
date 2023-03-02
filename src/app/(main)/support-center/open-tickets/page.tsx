@@ -46,6 +46,7 @@ const OpenTickets = () => {
 
   return (
     <div className="view">
+      <p className="mb-4 font-medium">All Open Tickets _______</p>
       {user?.foundUser?.roll === "admin" ? (
         <AllTickets ticket={allTicket} />
       ) : (

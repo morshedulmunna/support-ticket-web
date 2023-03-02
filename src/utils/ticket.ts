@@ -1,3 +1,4 @@
+import axios from "axios";
 import { Url } from "./basic";
 import { jwtToken } from "./jwtToken";
 
@@ -61,4 +62,18 @@ export const getSingleTicket = async (id: string) => {
       console.log("Error:", error);
     }
   }
+};
+export const UpdateSingleTicket = async (id: string, validObject: any) => {
+  axios
+    .patch(`${Url}/tickets/${id}`, validObject, {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    })
+    .then((result) => {
+      return result;
+    })
+    .catch(async (err) => {
+      return err;
+    });
 };

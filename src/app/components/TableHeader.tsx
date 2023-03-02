@@ -20,7 +20,8 @@ const TableHeader = ({ ticket }: any) => {
               <th className=" text-sm font-medium capitalize">Date</th>
               <th className=" text-sm font-medium capitalize">Subject</th>
               <th className=" text-sm font-medium capitalize">Status</th>
-              <th className=" text-sm font-medium capitalize"></th>
+              <th className=" text-sm font-medium capitalize">Details</th>
+              <th className=" text-sm font-medium capitalize">Close</th>
             </tr>
           </thead>
           <tbody>
@@ -29,6 +30,10 @@ const TableHeader = ({ ticket }: any) => {
             ))}
           </tbody>
         </table>
+
+        {ticket.length === 0 && (
+          <p className="mt-4 text-red-500">No Tickets Found.......</p>
+        )}
       </div>
     </>
   );

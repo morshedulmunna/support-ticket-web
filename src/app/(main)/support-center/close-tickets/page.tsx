@@ -43,6 +43,8 @@ const CloseTickets = () => {
 
   return (
     <div className="view">
+      <p className="mb-4 font-medium">All Resolved Tickets _______</p>
+
       {user?.foundUser?.roll === "admin" ? (
         <AllTickets ticket={allCloseTicket} />
       ) : (

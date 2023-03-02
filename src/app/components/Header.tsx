@@ -38,24 +38,22 @@ const Header = () => {
       </ul>
 
       {token ? (
-        <>
-          <div className="flex items-center">
-            <p className=" whitespace-nowrap pr-6 font-semibold text-orange-500 ">
-              {user?.foundUser?.name}
-            </p>
-            <Link
-              className="rounded bg-orange-500 px-6 py-2 font-medium text-white  duration-300 hover:bg-orange-400  "
-              href={"/login"}
-              onClick={() => {
-                localStorage.removeItem("accessToken");
-                toast.info("See you soon");
-                router.push("/login");
-              }}
-            >
-              Logout
-            </Link>
-          </div>
-        </>
+        <div className="flex items-center">
+          <p className=" whitespace-nowrap pr-6 font-semibold text-orange-500 ">
+            {user?.foundUser?.name}
+          </p>
+          <Link
+            className="rounded bg-orange-500 px-6 py-2 font-medium text-white  duration-300 hover:bg-orange-400  "
+            href={"/login"}
+            onClick={() => {
+              localStorage.removeItem("accessToken");
+              toast.info("See you soon");
+              router.push("/login");
+            }}
+          >
+            Logout
+          </Link>
+        </div>
       ) : (
         <Link
           className="rounded bg-blue-500 px-6 py-2 font-medium text-white  duration-300 hover:bg-blue-400  "
