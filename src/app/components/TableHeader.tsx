@@ -2,7 +2,7 @@ import { usePathname } from "next/navigation";
 import React from "react";
 import TableBody from "./TableBody";
 
-const TableHeader = ({ ticket }: any) => {
+const TableHeader = ({ ticket, deleteTicketHandler }: any) => {
   const pathname = usePathname();
 
   return (
@@ -26,7 +26,11 @@ const TableHeader = ({ ticket }: any) => {
           </thead>
           <tbody>
             {ticket?.map((item: any) => (
-              <TableBody item={item} key={item.tiket_id} />
+              <TableBody
+                item={item}
+                key={item.tiket_id}
+                deleteTicketHandler={deleteTicketHandler}
+              />
             ))}
           </tbody>
         </table>

@@ -2,10 +2,10 @@
 
 import TableHeader from "./TableHeader";
 
-const AllTickets = ({ ticket }: any) => {
+const AllTickets = ({ ticket, deleteTicketHandler }: any) => {
   return (
     <>
-      <TableHeader ticket={ticket} />
+      <TableHeader ticket={ticket} deleteTicketHandler={deleteTicketHandler} />
     </>
   );
 };

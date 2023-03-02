@@ -4,10 +4,21 @@ import AllTickets from "@/app/components/AllTickets";
 import DataCard from "@/app/components/DataCard";
 import { getSingleUser } from "@/utils/getUsers";
 import { ProtectedAuth } from "@/utils/ProtectedAuth";
-import { getAllTicket, getUserTicket } from "@/utils/ticket";
+import { deleteTicket, getAllTicket, getUserTicket } from "@/utils/ticket";
 import React, { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 const Dashboard = () => {
+  const [deleteResponse, setDeleteResponse] = useState<any>();
+
+  const deleteTicketHandler = (tiket_id: string) => {
+    const res = deleteTicket(tiket_id);
+    console.log(res);
+
+    setDeleteResponse(res);
+    toast.warning(`This Ticket Delete ${tiket_id}`);
+  };
+
   /**
    * Get Get USer Who Now Login
    */
@@ -38,7 +49,7 @@ const Dashboard = () => {
       setAllTicket(allTickets);
     };
     getData();
-  }, []);
+  }, [deleteResponse]);
 
   return (
     <>
@@ -55,9 +66,15 @@ const Dashboard = () => {
         <p className="mb-4 font-medium">All Tickets History_______</p>
 
         {user?.foundUser?.roll === "admin" ? (
-          <AllTickets ticket={allTicket} />
+          <AllTickets
+            ticket={allTicket}
+            deleteTicketHandler={deleteTicketHandler}
+          />
         ) : (
-          <AllTickets ticket={ticket} />
+          <AllTickets
+            ticket={ticket}
+            deleteTicketHandler={deleteTicketHandler}
+          />
         )}
       </div>
     </>

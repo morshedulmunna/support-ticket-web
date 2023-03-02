@@ -11,9 +11,10 @@ import { toast } from "react-toastify";
 
 type Props = {
   item: any;
+  deleteTicketHandler: any;
 };
 
-const TableBody = ({ item }: Props) => {
+const TableBody = ({ item, deleteTicketHandler }: Props) => {
   const { tiket_id, title, status, subject, updatedDate } = item;
   const date = formattedDate(updatedDate);
 
@@ -40,10 +41,7 @@ const TableBody = ({ item }: Props) => {
       {user?.foundUser?.roll === "admin" && (
         <td>
           <button
-            onClick={async () => {
-              deleteTicket(tiket_id);
-              toast.warning(`This Ticket Delete ${tiket_id}`);
-            }}
+            onClick={() => deleteTicketHandler(tiket_id)}
             className=" cursor-pointer  text-red-500"
           >
             <CgCloseR size={20} />

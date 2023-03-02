@@ -2,13 +2,21 @@
 import AllTickets from "@/app/components/AllTickets";
 import Loading from "@/app/components/Loading";
 import { getSingleUser } from "@/utils/getUsers";
-import { getAllTicket, getUserTicket } from "@/utils/ticket";
+import { deleteTicket, getAllTicket, getUserTicket } from "@/utils/ticket";
 import ticketFilter from "@/utils/ticketFilter";
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 const OpenTickets = () => {
   const [ticket, setTicket] = useState<any>([]);
   const [user, setUser] = useState<any>({});
+  const [deleteResponse, setDeleteResponse] = useState<any>();
+
+  const deleteTicketHandler = (tiket_id: string) => {
+    const res = deleteTicket(tiket_id);
+    setDeleteResponse(res);
+    toast.warning(`This Ticket Delete ${tiket_id}`);
+  };
 
   useEffect(() => {
     getSingleUser(setUser);
@@ -24,7 +32,7 @@ const OpenTickets = () => {
       setTicket(OpenTicket);
     };
     getData();
-  }, []);
+  }, [deleteResponse]);
 
   /**
    * Get ALl Open Tickets Admin can See All
@@ -37,7 +45,7 @@ const OpenTickets = () => {
       setAllTicket(OpenTicket);
     };
     getData();
-  }, []);
+  }, [deleteResponse]);
 
   // If not get ticket show login state
   if (!ticket) {
@@ -48,7 +56,10 @@ const OpenTickets = () => {
     <div className="view">
       <p className="mb-4 font-medium">All Open Tickets _______</p>
       {user?.foundUser?.roll === "admin" ? (
-        <AllTickets ticket={allTicket} />
+        <AllTickets
+          ticket={allTicket}
+          deleteTicketHandler={deleteTicketHandler}
+        />
       ) : (
         <AllTickets ticket={ticket} />
       )}
