@@ -1,3 +1,7 @@
+"use client";
+
+import { QueryClient, QueryClientProvider, useQuery } from "react-query";
+const queryClient = new QueryClient();
 import Header from "../components/Header";
 import "../globals.css";
 
@@ -20,7 +24,9 @@ export default function RootLayout({
 
       <body>
         <Header />
-        <main>{children}</main>
+        <QueryClientProvider client={queryClient}>
+          <main>{children}</main>
+        </QueryClientProvider>
       </body>
     </html>
   );

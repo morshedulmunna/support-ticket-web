@@ -2,7 +2,18 @@ import React from "react";
 import { FaUsers } from "react-icons/fa";
 import { AiOutlineFieldTime } from "react-icons/ai";
 
-const Feedback = () => {
+type Props = {
+  singleFeedback: {
+    feedback_Id: React.Key | null | undefined;
+    feedback: string;
+  };
+};
+
+const Feedback = ({ singleFeedback }: any) => {
+  console.log(singleFeedback);
+
+  const { feedback } = singleFeedback;
+
   return (
     <>
       <div className="mt-6 flex   items-center justify-between space-x-12 border-b-[1px]  border-gray-100 pb-1 text-sm">
@@ -16,10 +27,7 @@ const Feedback = () => {
         </div>
       </div>
 
-      <p className="mt-2 mb-8 text-sm">
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Veritatis
-        eaque, culpa iste sunt beatae sit vel vitae deserunt quaerat eligendi?
-      </p>
+      <p className="mt-2 mb-8 text-sm">{feedback}</p>
 
       {/* ==================== */}
     </>

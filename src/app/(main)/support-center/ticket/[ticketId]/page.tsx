@@ -9,6 +9,11 @@ import TicketUpdate from "@/app/components/TicketUpdate";
 import { getSingleTicket, UpdateSingleTicket } from "@/utils/ticket";
 import Tostify from "@/utils/Tostify";
 import { toast } from "react-toastify";
+import { useQuery } from "react-query";
+import { Url } from "@/utils/basic";
+import axios from "axios";
+import { jwtToken } from "@/utils/jwtToken";
+import Loading from "@/app/components/Loading";
 
 type PageProps = {
   params: {
@@ -28,6 +33,31 @@ const Tickets = ({ params: { ticketId } }: PageProps) => {
     };
     getData();
   }, [ticketId]);
+
+  //Get User Feedback by ticket ID
+  const token = jwtToken();
+
+  const { isLoading, error, data } = useQuery(
+    ["ticketId"],
+    () =>
+      axios
+        .get(`${Url}/feedback/${ticketId}`, {
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
+        })
+        .then((res) => res.data),
+    {}
+  );
+
+  console.log(data);
+
+  if (isLoading) {
+    return <Loading />;
+  }
+  if (error) {
+    console.log(error);
+  }
 
   return (
     <div className="view">
@@ -81,8 +111,15 @@ const Tickets = ({ params: { ticketId } }: PageProps) => {
           {/* Feedback */}
           <div className="mt-12 ">
             <p className="text-[20px] text-blue-500">Feedback</p>
-            <Feedback />
-            <Feedback />
+
+            {data.map(
+              (feedback: { feedback_Id: React.Key | null | undefined }) => (
+                <Feedback
+                  key={feedback.feedback_Id}
+                  singleFeedback={feedback}
+                />
+              )
+            )}
           </div>
           {/* Submit feedback form */}
           <SubmitFeedback ticket={ticket} />
