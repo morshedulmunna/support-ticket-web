@@ -2,7 +2,9 @@ import React from "react";
 
 type Props = {};
 
-const SubmitFeedback = (props: Props) => {
+const SubmitFeedback = ({ ticket }: any) => {
+  const { tiket_id, createDate, subject, status } = ticket;
+
   return (
     <div>
       <form action="">
@@ -13,11 +15,16 @@ const SubmitFeedback = (props: Props) => {
           cols={30}
           rows={6}
         ></textarea>
-        <input
-          type="submit"
-          value="Submit Feedback"
-          className="mt-2 mb-6 w-full cursor-pointer rounded bg-blue-500 py-2 font-medium text-white duration-300 hover:bg-blue-400"
-        />
+
+        {status === "open" ? (
+          <button className="mt-2 mb-6 w-full cursor-pointer rounded bg-blue-500 py-2 font-medium text-white duration-300 hover:bg-blue-400">
+            Send Feedback
+          </button>
+        ) : (
+          <button className="btn btn-sm w-full" disabled>
+            Send Feedback
+          </button>
+        )}
       </form>
     </div>
   );

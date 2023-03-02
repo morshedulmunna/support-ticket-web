@@ -4,7 +4,7 @@
 
 @layer components {
   .containers {
-    @apply container mx-auto max-w-[1280px] px-12;
+    @apply container mx-auto max-w-[1480px] px-12;
   }
   .view {
     @apply md:containers mt-6 md:mt-12;

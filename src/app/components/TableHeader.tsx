@@ -21,7 +21,7 @@ const TableHeader = ({ ticket }: any) => {
               <th className=" text-sm font-medium capitalize">Subject</th>
               <th className=" text-sm font-medium capitalize">Status</th>
               <th className=" text-sm font-medium capitalize">Details</th>
-              <th className=" text-sm font-medium capitalize">Close</th>
+              <th className=" text-sm font-medium capitalize"></th>
             </tr>
           </thead>
           <tbody>

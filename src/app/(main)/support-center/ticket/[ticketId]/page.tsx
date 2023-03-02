@@ -6,7 +6,9 @@ import SubmitFeedback from "@/app/components/SubmitFeedback";
 import { formattedDate } from "@/utils/formatedDate";
 import { CgCloseR } from "react-icons/cg";
 import TicketUpdate from "@/app/components/TicketUpdate";
-import { getSingleTicket } from "@/utils/ticket";
+import { getSingleTicket, UpdateSingleTicket } from "@/utils/ticket";
+import Tostify from "@/utils/Tostify";
+import { toast } from "react-toastify";
 
 type PageProps = {
   params: {
@@ -40,12 +42,19 @@ const Tickets = ({ params: { ticketId } }: PageProps) => {
             {/* Modal Part */}
             <div>
               {/* Modal Button */}
-              <label
-                htmlFor="my-modal-3"
-                className="btn btn-sm bg-white text-blue-500 border-blue-500 hover:bg-blue-50"
-              >
-                Updated Ticket
-              </label>
+
+              {ticket.status === "open" ? (
+                <label
+                  htmlFor="my-modal-3"
+                  className="btn btn-sm bg-white text-blue-500 border-blue-500 hover:bg-blue-50"
+                >
+                  Updated Ticket
+                </label>
+              ) : (
+                <button className="btn btn-sm" disabled>
+                  Update Ticket
+                </button>
+              )}
 
               {/* Modal body */}
               <input type="checkbox" id="my-modal-3" className="modal-toggle" />
@@ -76,7 +85,7 @@ const Tickets = ({ params: { ticketId } }: PageProps) => {
             <Feedback />
           </div>
           {/* Submit feedback form */}
-          <SubmitFeedback />
+          <SubmitFeedback ticket={ticket} />
         </div>
 
         <TicketInfo ticket={ticket} />
@@ -88,17 +97,32 @@ const Tickets = ({ params: { ticketId } }: PageProps) => {
 export default Tickets;
 
 const TicketInfo = ({ ticket }: any) => {
-  console.log(ticket);
-
   const { tiket_id, createDate, subject, status } = ticket;
 
   const Date = formattedDate(createDate);
 
   return (
-    <>
+    <Tostify>
       <div className="mb-12 w-full  lg:w-[30%]">
-        <div className="flex cursor-pointer items-center justify-center space-x-2 rounded bg-blue-500 py-2 font-medium text-white ">
-          <button>Mark to Resolved</button>
+        <div className="flex  items-center justify-center space-x-2 ">
+          {status === "open" ? (
+            <button
+              className="btn btn-sm border-none hover:bg-blue-400 bg-blue-500 py-2 font-medium text-white cursor-pointer px-2"
+              onClick={() => {
+                const validObject = {
+                  status: "close",
+                };
+                UpdateSingleTicket(tiket_id, validObject);
+                toast.success("Tickets Resolved");
+              }}
+            >
+              Mark to Resolved
+            </button>
+          ) : (
+            <button className="btn btn-sm" disabled>
+              Mark to Resolved
+            </button>
+          )}
         </div>
 
         <div className="mt-12 ">
@@ -118,6 +142,6 @@ const TicketInfo = ({ ticket }: any) => {
           <p className="text-sm text-gray-500"> {subject} </p>
         </div>
       </div>
-    </>
+    </Tostify>
   );
 };

@@ -1,6 +1,9 @@
+"use client";
+
 import { formattedDate } from "@/utils/formatedDate";
+import { getSingleUser } from "@/utils/getUsers";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { CgCloseR } from "react-icons/cg";
 
 type Props = {
@@ -9,8 +12,12 @@ type Props = {
 
 const TableBody = ({ item }: Props) => {
   const { tiket_id, title, status, subject, updatedDate } = item;
-
   const date = formattedDate(updatedDate);
+
+  const [user, setUser] = useState<any>({});
+  useEffect(() => {
+    getSingleUser(setUser);
+  }, []);
 
   return (
     <tr>
@@ -26,11 +33,14 @@ const TableBody = ({ item }: Props) => {
           </button>
         </Link>
       </td>
-      <td>
-        <button className=" cursor-pointer  text-red-500">
-          <CgCloseR size={20} />
-        </button>
-      </td>
+
+      {user?.foundUser?.roll === "admin" && (
+        <td>
+          <button className=" cursor-pointer  text-red-500">
+            <CgCloseR size={20} />
+          </button>
+        </td>
+      )}
     </tr>
   );
 };
