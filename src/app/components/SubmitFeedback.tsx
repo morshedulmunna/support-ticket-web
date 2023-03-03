@@ -12,8 +12,6 @@ type Inputs = {
   feedback: string;
 };
 
-const token = jwtToken();
-
 const SubmitFeedback = ({ ticket, sentFeedbackHandler }: any) => {
   const { tiket_id, createDate, subject, status } = ticket;
 

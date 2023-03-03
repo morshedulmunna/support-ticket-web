@@ -37,11 +37,7 @@ const Tickets = ({ params: { ticketId } }: PageProps) => {
   // Update Ticket  Handler
   const updateTicketHandler = (tiket_id: string, validData: object) => {
     const res = UpdateSingleTicket(tiket_id, validData);
-
-    console.log(tiket_id);
-
     setUpdateResponse(res);
-    toast.success(`Ticket Update Done ${tiket_id}`);
   };
 
   // Mark to Resolve Handler
@@ -81,7 +77,6 @@ const Tickets = ({ params: { ticketId } }: PageProps) => {
     );
     if (res) {
       setSentFeedbackResponse(res);
-      toast.success("Feedback Submit Successfully");
     }
   };
 
@@ -141,7 +136,7 @@ const Tickets = ({ params: { ticketId } }: PageProps) => {
           <div className="mt-12 ">
             <p className="text-[20px] text-blue-500">Feedback</p>
 
-            {feedback.map(
+            {feedback?.map(
               (feedback: { feedback_Id: React.Key | null | undefined }) => (
                 <Feedback
                   key={feedback.feedback_Id}

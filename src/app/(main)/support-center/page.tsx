@@ -13,10 +13,7 @@ const Dashboard = () => {
 
   const deleteTicketHandler = (tiket_id: string) => {
     const res = deleteTicket(tiket_id);
-    console.log(res);
-
     setDeleteResponse(res);
-    toast.warning(`This Ticket Delete ${tiket_id}`);
   };
 
   /**

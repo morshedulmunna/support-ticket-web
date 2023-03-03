@@ -15,7 +15,6 @@ const OpenTickets = () => {
   const deleteTicketHandler = (tiket_id: string) => {
     const res = deleteTicket(tiket_id);
     setDeleteResponse(res);
-    toast.warning(`This Ticket Delete ${tiket_id}`);
   };
 
   useEffect(() => {
