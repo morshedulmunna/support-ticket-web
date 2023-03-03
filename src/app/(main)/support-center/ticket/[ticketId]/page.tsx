@@ -37,10 +37,11 @@ const Tickets = ({ params: { ticketId } }: PageProps) => {
   // Update Ticket  Handler
   const updateTicketHandler = (tiket_id: string, validData: object) => {
     const res = UpdateSingleTicket(tiket_id, validData);
-    console.log(res);
+
+    console.log(tiket_id);
 
     setUpdateResponse(res);
-    toast.success("Ticket Update Done !!" + { tiket_id });
+    toast.success(`Ticket Update Done ${tiket_id}`);
   };
 
   // Mark to Resolve Handler
@@ -98,7 +99,7 @@ const Tickets = ({ params: { ticketId } }: PageProps) => {
             <div>
               {/* Modal Button */}
 
-              {ticket.status === "open" ? (
+              {ticket?.status === "open" ? (
                 <label
                   htmlFor="my-modal-3"
                   className="btn btn-sm bg-white text-blue-500 border-blue-500 hover:bg-blue-50"
