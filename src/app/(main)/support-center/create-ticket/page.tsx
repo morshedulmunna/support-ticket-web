@@ -3,9 +3,10 @@
 import { Url } from "@/utils/basic";
 import { jwtToken } from "@/utils/jwtToken";
 import { createTicket } from "@/utils/sentPost";
+import { getAllSubject } from "@/utils/subject.service";
 import Tostify from "@/utils/Tostify";
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { type SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 
@@ -24,15 +25,35 @@ const page = () => {
     // eslint-disable-next-line react-hooks/rules-of-hooks
   } = useForm<Inputs>();
 
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const [selectedOption, setSelectedOption] = useState<any>("");
+
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const [subject, setSubject] = useState<any>([]);
+
+  const subjectKey = subject.find((sub: { types: any; id: any }) => {
+    if (sub.types === selectedOption) {
+      return sub.id;
+    }
+  });
+
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  useEffect(() => {
+    getAllSubject(setSubject);
+  }, []);
   /**
    * Create tickets any customer
    */
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     const validData = {
       title: data.title,
-      subject: data.subject,
+      subjectId: subjectKey?.id,
       description: data.details,
     };
+
+    if (validData.subjectId === undefined) {
+      return toast.error("Select Category");
+    }
 
     const token = jwtToken();
     const response = await createTicket(`${Url}/tickets/`, validData, token);
@@ -62,12 +83,16 @@ const page = () => {
               <span className="text-xs text-red-500">Required*</span>
             )}
 
-            <input
-              {...register("subject", { required: true })}
-              className="rounded-md border px-2 py-2 text-sm"
-              type="text"
-              placeholder="Subject"
-            />
+            <select
+              className=" bg-white border py-2 rounded-md focus:outline-none select-primary w-full"
+              value={selectedOption}
+              onChange={(e) => setSelectedOption(e.target.value)}
+            >
+              <option>Select Category</option>
+              {subject?.map((sub: any) => (
+                <option key={sub.id}>{sub.types}</option>
+              ))}
+            </select>
             {errors.subject && (
               <span className="text-xs text-red-500">Required*</span>
             )}

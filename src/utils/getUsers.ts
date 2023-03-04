@@ -46,7 +46,7 @@ export const getAllUsers = (setAllUser: any) => {
 };
 
 // Make Customer to Admin
-export const UpdateSingleTicket = async (id: string, validObject: any) => {
+export const createNewAdmin = (id: string, validObject: object) => {
   axios
     .patch(`${Url}/users/${id}`, validObject, {
       headers: {

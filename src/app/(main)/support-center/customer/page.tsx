@@ -1,17 +1,32 @@
 "use client";
 
-import { getAllUsers } from "@/utils/getUsers";
+import { createNewAdmin, getAllUsers } from "@/utils/getUsers";
 import { ProtectedAuth } from "@/utils/ProtectedAuth";
+import { getAllSubject } from "@/utils/subject.service";
 import React, { useEffect, useState } from "react";
 
 type Props = {};
 
 const Customer = (props: Props) => {
-  const [user, setUser] = useState<any>([]);
+  const [adminMakeResponse, setAdminMakeResponse] = useState<any>();
 
+  // Fetching All User. Admin can only fetch the user data
+  const [user, setUser] = useState<any>([]);
   useEffect(() => {
     getAllUsers(setUser);
-  }, []);
+  }, [adminMakeResponse]);
+
+  // Create Admin
+
+  const makeAdminHandler = (id: string, type: string) => {
+    const validObject = {
+      roll: "admin",
+      type: type,
+    };
+    const response = createNewAdmin(id, validObject);
+    console.log(response);
+    setAdminMakeResponse(response);
+  };
 
   return (
     <div className="view">
@@ -26,7 +41,11 @@ const Customer = (props: Props) => {
         </thead>
         <tbody>
           {user.map((singleUser: { id: any }) => (
-            <TBody key={singleUser.id} singleUser={singleUser} />
+            <TBody
+              key={singleUser.id}
+              singleUser={singleUser}
+              makeAdminHandler={makeAdminHandler}
+            />
           ))}
         </tbody>
       </table>
@@ -36,8 +55,15 @@ const Customer = (props: Props) => {
 
 export default ProtectedAuth(Customer);
 
-const TBody = ({ singleUser }: any) => {
+const TBody = ({ singleUser, makeAdminHandler }: any) => {
   const { id, name, email, roll } = singleUser;
+
+  const [selectedOption, setSelectedOption] = useState<any>("");
+  const [subject, setSubject] = useState<any>([]);
+  useEffect(() => {
+    getAllSubject(setSubject);
+  }, []);
+
   return (
     <>
       <tr>
@@ -60,16 +86,20 @@ const TBody = ({ singleUser }: any) => {
               <div className="modal" id="my-modal-2">
                 <div className="modal-box">
                   <div className="modal-action flex justify-center items-center">
-                    <select className=" bg-white border py-2 rounded-md focus:outline-none select-primary w-full max-w-xs">
-                      <option disabled selected>
-                        Select Admin Department
-                      </option>
-                      <option>Game of Thrones</option>
-                      <option>Lost</option>
-                      <option>Breaking Bad</option>
-                      <option>Walking Dead</option>
+                    <select
+                      className=" bg-white border py-2 rounded-md focus:outline-none select-primary w-full max-w-xs"
+                      value={selectedOption}
+                      onChange={(e) => setSelectedOption(e.target.value)}
+                    >
+                      {subject?.map((sub: any) => (
+                        <option key={sub.id}>{sub.types}</option>
+                      ))}
                     </select>
-                    <a href="#" className="btn btn-sm text-white capitalize">
+                    <a
+                      href="#"
+                      onClick={() => makeAdminHandler(id, selectedOption)}
+                      className="btn btn-sm text-white capitalize"
+                    >
                       Make Admin
                     </a>
                   </div>
