@@ -18,13 +18,12 @@ const Customer = (props: Props) => {
 
   // Create Admin
 
-  const makeAdminHandler = (id: string, type: string) => {
+  const makeAdminHandler = async (id: string, type: string) => {
     const validObject = {
       roll: "admin",
-      type: type,
+      subject: type,
     };
-    const response = createNewAdmin(id, validObject);
-    console.log(response);
+    const response = await createNewAdmin(id, validObject);
     setAdminMakeResponse(response);
   };
 
@@ -59,10 +58,6 @@ const TBody = ({ singleUser, makeAdminHandler }: any) => {
   const { id, name, email, roll } = singleUser;
 
   const [selectedOption, setSelectedOption] = useState<any>("");
-  const [subject, setSubject] = useState<any>([]);
-  useEffect(() => {
-    getAllSubject(setSubject);
-  }, []);
 
   return (
     <>
@@ -91,8 +86,8 @@ const TBody = ({ singleUser, makeAdminHandler }: any) => {
                       value={selectedOption}
                       onChange={(e) => setSelectedOption(e.target.value)}
                     >
-                      {subject?.map((sub: any) => (
-                        <option key={sub.id}>{sub.types}</option>
+                      {subjects?.map((sub: any) => (
+                        <option key={sub.id}>{sub.type}</option>
                       ))}
                     </select>
                     <a
@@ -112,3 +107,18 @@ const TBody = ({ singleUser, makeAdminHandler }: any) => {
     </>
   );
 };
+
+const subjects = [
+  {
+    id: 0,
+    type: "tech",
+  },
+  {
+    id: 1,
+    type: "code",
+  },
+  {
+    id: 2,
+    type: "dev",
+  },
+];

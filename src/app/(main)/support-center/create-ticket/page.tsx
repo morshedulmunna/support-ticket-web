@@ -3,9 +3,7 @@
 import { Url } from "@/utils/basic";
 import { jwtToken } from "@/utils/jwtToken";
 import { createTicket } from "@/utils/sentPost";
-import { getAllSubject } from "@/utils/subject.service";
 import Tostify from "@/utils/Tostify";
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { type SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
@@ -28,31 +26,18 @@ const page = () => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const [selectedOption, setSelectedOption] = useState<any>("");
 
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const [subject, setSubject] = useState<any>([]);
-
-  const subjectKey = subject.find((sub: { types: any; id: any }) => {
-    if (sub.types === selectedOption) {
-      return sub.id;
-    }
-  });
-
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  useEffect(() => {
-    getAllSubject(setSubject);
-  }, []);
   /**
    * Create tickets any customer
    */
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     const validData = {
       title: data.title,
-      subjectId: subjectKey?.id,
+      subject: selectedOption,
       description: data.details,
     };
 
-    if (validData.subjectId === undefined) {
-      return toast.error("Select Category");
+    if (validData.subject === "" || validData.subject === "Select Category") {
+      return toast.error("Select an Category");
     }
 
     const token = jwtToken();
@@ -89,8 +74,8 @@ const page = () => {
               onChange={(e) => setSelectedOption(e.target.value)}
             >
               <option>Select Category</option>
-              {subject?.map((sub: any) => (
-                <option key={sub.id}>{sub.types}</option>
+              {subjects?.map((sub: any) => (
+                <option key={sub.id}>{sub.type}</option>
               ))}
             </select>
             {errors.subject && (
@@ -122,3 +107,18 @@ const page = () => {
 };
 
 export default page;
+
+const subjects = [
+  {
+    id: 0,
+    type: "tech",
+  },
+  {
+    id: 1,
+    type: "code",
+  },
+  {
+    id: 2,
+    type: "dev",
+  },
+];
