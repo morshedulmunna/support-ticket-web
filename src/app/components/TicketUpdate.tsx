@@ -2,7 +2,7 @@
 
 import { UpdateSingleTicket } from "@/utils/ticket";
 import Tostify from "@/utils/Tostify";
-import React from "react";
+import React, { useState } from "react";
 import { type SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 
@@ -18,7 +18,9 @@ type Props = {
 };
 
 const TicketUpdate = ({ ticket, updateTicketHandler }: Props) => {
-  const { tiket_id, status } = ticket;
+  const { tiket_id, subject } = ticket;
+
+  const [selectedOption, setSelectedOption] = useState<any>(subject);
 
   const {
     register,
@@ -31,9 +33,13 @@ const TicketUpdate = ({ ticket, updateTicketHandler }: Props) => {
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     const validData = {
       title: data.title,
-      subject: data.subject,
+      subject: selectedOption,
       description: data.details,
     };
+
+    if (validData.subject === "" || validData.subject === "Select Category") {
+      return toast.error("Select an Category");
+    }
 
     updateTicketHandler(tiket_id, validData);
 
@@ -58,12 +64,16 @@ const TicketUpdate = ({ ticket, updateTicketHandler }: Props) => {
             <span className="text-xs text-red-500">Required*</span>
           )}
 
-          <input
-            {...register("subject")}
-            className="rounded-md border px-2 py-2 text-sm"
-            type="text"
-            placeholder="Subject"
-          />
+          <select
+            className=" bg-white border py-2 rounded-md focus:outline-none select-primary w-full"
+            value={selectedOption}
+            onChange={(e) => setSelectedOption(e.target.value)}
+          >
+            <option>Select Category</option>
+            {subjects?.map((sub: any) => (
+              <option key={sub.id}>{sub.type}</option>
+            ))}
+          </select>
           {errors.subject && (
             <span className="text-xs text-red-500">Required*</span>
           )}
@@ -93,3 +103,18 @@ const TicketUpdate = ({ ticket, updateTicketHandler }: Props) => {
 };
 
 export default TicketUpdate;
+
+const subjects = [
+  {
+    id: 0,
+    type: "tech",
+  },
+  {
+    id: 1,
+    type: "code",
+  },
+  {
+    id: 2,
+    type: "dev",
+  },
+];
