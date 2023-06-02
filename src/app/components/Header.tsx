@@ -33,7 +33,9 @@ const Header = () => {
           <div className="hidden lg:block">
             <ul className="flex items-center">
               {['home', 'features', 'blog', 'support'].map((each) => (
-                <li className="text-black font-medium hover:text-orange-500  duration-200 ease-linear py-2 px-6 rounded-md capitalize">
+                <li
+                  key={each}
+                  className="text-black font-medium hover:text-orange-500  duration-200 ease-linear py-2 px-6 rounded-md capitalize">
                   <Link href={`/#${each}`} scroll={false}>
                     {each}
                   </Link>
@@ -46,7 +48,9 @@ const Header = () => {
           {toggle && (
             <ul className="absolute  rounded-md top-[73px] w-1/2 bg-white shadow text-center pb-6 pt-2">
               {['home', 'features', 'blog', 'support'].map((each) => (
-                <li className="text-black font-medium hover:text-orange-500  duration-200 ease-linear py-2 px-6 rounded-md capitalize">
+                <li
+                  key={each}
+                  className="text-black font-medium hover:text-orange-500  duration-200 ease-linear py-2 px-6 rounded-md capitalize">
                   <Link href={`/#${each}`} scroll={false}>
                     {each}
                   </Link>

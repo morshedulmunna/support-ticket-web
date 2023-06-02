@@ -12,7 +12,7 @@ const Footer: FC<FooterProps> = ({}) => {
             <p className="my-5 text-sm text-gray-400">
               osTicket is a widely used and trusted open source support
               ticketing system. Easily scale and streamline your customer
-              service and drastically improve your customer's experience.
+              service and drastically improve your customer is experience.
             </p>
           </div>
         </div>
@@ -20,7 +20,7 @@ const Footer: FC<FooterProps> = ({}) => {
       <div className="bg-black">
         <div className="containers">
           <p className="text-xs py-2">
-            Copyright © 2023 osTicket.com, an Enhancesoft product
+            Copyright © 2023 spTalk.com, an Enhancesoft product
           </p>
         </div>
       </div>

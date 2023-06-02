@@ -13,7 +13,7 @@ export default function Home() {
         {/* Hero */}
         <div className="flex flex-col my-8 justify-center items-center">
           <h1 className=" text-center font-semibold text-black text-2xl lg:text-4xl  md:w-[80%] w-full mx-auto xl:leading-[60px]">
-            Get The World’s Most Popular Customer Support Software
+            Get The World Most Popular Customer Support Software
           </h1>
           <p className="text-center md:w-[80%] w-full mx-auto py-4">
             We believe in helping you
@@ -60,7 +60,7 @@ export default function Home() {
       <div className="containers flex gap-6 items-center justify-center flex-col-reverse lg:flex-row">
         <div className="lg:w-1/2 w-full">
           <h3 className="text-2xl text-black font-semibold pb-6">
-            We're not the only ones excited about spTalk...
+            We are not the only ones excited about spTalk...
           </h3>
           <p className="pb-6">
             Thousands of customers in over 190 countries trust and use spTalk
