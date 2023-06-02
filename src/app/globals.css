@@ -4,7 +4,7 @@
 
 @layer components {
   .containers {
-    @apply container mx-auto max-w-[1480px] px-12;
+    @apply container mx-auto px-6 xl:px-52 2xl:px-72;
   }
   .view {
     @apply md:containers mt-6 md:mt-12;
@@ -13,6 +13,6 @@
 
 @layer base {
   body {
-    @apply overflow-auto lg:overflow-hidden;
+    @apply bg-white;
   }
 }
