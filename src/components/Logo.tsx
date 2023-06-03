@@ -1,6 +1,6 @@
+import { logo } from '@/assets';
 import Image from 'next/image';
 import React, { type FC } from 'react';
-import logo from '../../../public/logo.png';
 
 interface LogoProps {}
 

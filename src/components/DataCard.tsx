@@ -1,5 +1,5 @@
-import React from "react";
-import { GrDocumentDownload } from "react-icons/gr";
+import React from 'react';
+import { GrDocumentDownload } from 'react-icons/gr';
 type Props = {
   label: string;
   count: number;

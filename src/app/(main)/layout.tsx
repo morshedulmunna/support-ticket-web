@@ -1,25 +1,14 @@
-'use client';
+import React, { type FC } from 'react';
 
-import { QueryClient, QueryClientProvider, useQuery } from 'react-query';
-import Footer from '../components/Footer';
-const queryClient = new QueryClient();
-import Header from '../components/Header';
-import '../globals.css';
-
-export default function RootLayout({
-  children,
-}: {
+interface LayoutProps {
   children: React.ReactNode;
-}) {
-  return (
-    <html lang="en">
-      <body>
-        <Header />
-        <QueryClientProvider client={queryClient}>
-          <main>{children}</main>
-          <Footer />
-        </QueryClientProvider>
-      </body>
-    </html>
-  );
 }
+
+const Layout: FC<LayoutProps> = ({ children }) => {
+  return (
+    <React.Fragment>
+      <main>{children}</main>
+    </React.Fragment>
+  );
+};
+export default Layout;

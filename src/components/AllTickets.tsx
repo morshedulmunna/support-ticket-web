@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import TableHeader from "./TableHeader";
+import TableHeader from './TableHeader';
 
 const AllTickets = ({ ticket, deleteTicketHandler }: any) => {
   return (

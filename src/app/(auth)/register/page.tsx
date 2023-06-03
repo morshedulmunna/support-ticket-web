@@ -1,24 +1,24 @@
 'use client';
 
 import Link from 'next/link';
-import React from 'react';
-import { FcGoogle } from 'react-icons/fc';
-import { TbArrowLeftBar } from 'react-icons/tb';
-import { type SubmitHandler, useForm } from 'react-hook-form';
-import axios from 'axios';
-import { Url } from '@/utils/basic';
-import { z } from 'zod';
-import { toast } from 'react-toastify';
-import Tostify from '@/utils/Tostify';
+import React, { type FC } from 'react';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import Logo from '@/components/Logo';
+import { useUserRegister } from '@/api';
+import { useMutation } from 'react-query';
 import { useRouter } from 'next/navigation';
+import { toast } from 'react-toastify';
+import Loading from '@/components/Loading';
 
-const Register = () => {
+interface RegisterProps {}
+
+const Register: FC<RegisterProps> = ({}) => {
   type Inputs = {
     name: string;
     email: string;
     password: string;
   };
-
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -26,12 +26,8 @@ const Register = () => {
     formState: { errors },
   } = useForm<Inputs>();
 
-  // const FormSchema = z.object({
-  //   email: z.string(),
-  //   password: z.string().min(3).max(20),
-  // });
-
-  const router = useRouter();
+  const { mutate, isLoading, isSuccess, isError } =
+    useMutation(useUserRegister);
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     const getData = {
@@ -39,38 +35,28 @@ const Register = () => {
       email: data.email,
       password: data.password,
     };
-
-    console.log(getData);
-
-    // const validData = FormSchema.safeParse(getData);
-    axios
-      .post(`${Url}/auth/signup`, getData)
-      .then(function (response) {
-        if (response) {
-          toast.success('Register Successful, Please Login First');
-          setTimeout(() => {
-            router.push('/login');
-          }, 2000);
-        }
-      })
-      .catch(function (error) {
-        toast.error(error?.response?.data?.message);
-        toast.error(error?.response?.data?.message[0]);
-      });
-
-    // reset();
+    mutate(getData);
+    reset();
   };
+  if (isError) {
+    toast.error('Something wrong');
+  }
 
+  if (isSuccess) {
+    router.push('/login');
+    toast.success('Registration Complete');
+  }
+  if (isLoading) {
+    return <Loading />;
+  }
   return (
-    <Tostify>
-      <div className="bg-blue-50  h-screen flex justify-center items-center">
-        <div className="w-[20%]">
+    <React.Fragment>
+      <div className="bg-blue-50 -mt-20  h-screen flex justify-center items-center">
+        <div className=" w-full px-12 md:w-1/2 xl:w-[30%] 2xl:w-[25%]">
           <div className="sm:mx-auto sm:w-full sm:max-w-sm mb-6">
-            <img
-              className="mx-auto h-10 w-auto"
-              src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-              alt="Your Company"
-            />
+            <div className="w-full mx-auto  flex justify-center items-center">
+              <Logo />
+            </div>
             <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-black">
               Register Your account
             </h2>
@@ -209,7 +195,7 @@ const Register = () => {
 
           {/*  */}
           <p className="mt-10 text-center text-sm text-gray-500">
-            Not a member?{' '}
+            Not a member?
             <a
               href="#"
               className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
@@ -226,8 +212,7 @@ const Register = () => {
           </div>
         </div>
       </div>
-    </Tostify>
+    </React.Fragment>
   );
 };
-
 export default Register;

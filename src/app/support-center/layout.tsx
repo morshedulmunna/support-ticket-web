@@ -1,7 +1,7 @@
-import Sidebar from "@/app/components/Sidebar";
-import React from "react";
+import Sidebar from '@/components/Sidebar';
+import React from 'react';
 
-const layout = ({ children }: { children: React.ReactNode }) => {
+const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
       <section className="containers grid grid-cols-12">
@@ -14,4 +14,4 @@ const layout = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-export default layout;
+export default Layout;

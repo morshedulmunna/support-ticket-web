@@ -11,8 +11,9 @@
   }
 }
 
-@layer base {
-  body {
-    @apply bg-white;
-  }
+body {
+  scroll-behavior: smooth;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  background-color: white;
 }

@@ -11,7 +11,9 @@ export default function Home() {
     <main className="">
       <div className="containers">
         {/* Hero */}
-        <div className="flex flex-col my-8 justify-center items-center">
+        <div
+          id="home"
+          className="flex  flex-col my-8 justify-center items-center">
           <h1 className=" text-center font-semibold text-black text-2xl lg:text-4xl  md:w-[80%] w-full mx-auto xl:leading-[60px]">
             Get The World Most Popular Customer Support Software
           </h1>
@@ -56,8 +58,7 @@ export default function Home() {
         </div>
       </div>
       {/* How to use it End */}
-
-      <div className="containers flex gap-6 items-center justify-center flex-col-reverse lg:flex-row">
+      <div className="containers mb-12 flex gap-6 items-center justify-center flex-col-reverse lg:flex-row">
         <div className="lg:w-1/2 w-full">
           <h3 className="text-2xl text-black font-semibold pb-6">
             We are not the only ones excited about spTalk...
@@ -71,10 +72,10 @@ export default function Home() {
             {[
               '5+ million spTalk users worldwide',
               '15,000+ businesses use spTalk worldwide',
-              ' osTicket seamlessly routes inquiries created via email, web-forms and API.',
+              ' spTalk seamlessly routes inquiries created via email, web-forms and API.',
               'Simple and easy-to-use web-based customer support platform.',
-              ' osTicket comes packed with more features and tools than most of the expensive (and complex) support ticket systems on the market.',
-              'The best part is that osTicket is completely free.',
+              ' spTalk comes packed with more features and tools than most of the expensive (and complex) support ticket systems on the market.',
+              'The best part is that spTalk is completely free.',
             ].map((each, index) => (
               <li className="py-1" key={index}>
                 {each}

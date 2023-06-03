@@ -1,34 +1,27 @@
 'use client';
 
-import { getSingleUser } from '@/utils/getUsers';
-import { jwtToken } from '@/utils/jwtToken';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import React, { useEffect, useState } from 'react';
+import router from 'next/router';
+import React, { useState } from 'react';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 import Logo from './Logo';
 
-const Header = () => {
-  const token = jwtToken();
-  const router = useRouter();
-  const [user, setUser] = useState<any>({});
+const Navbar = () => {
+  const [user, setUser] = useState<any>(false);
   const [toggle, setToggle] = useState<Boolean>(false);
-
-  useEffect(() => {
-    getSingleUser(setUser);
-  }, []);
 
   return (
     <div className="bg-white shadow-sm   sticky top-0 ">
       <div className=" containers mx-auto relative  duration-300 ease-in-out flex items-center justify-between">
-        <ul className=" flex  items-center  justify-start space-x-6   py-4">
-          <li className="duration-300 mr-2 hover:text-orange-500">
+        <div className=" flex  items-center  justify-start space-x-6   py-4">
+          <div className="duration-300 mr-2 hover:text-orange-500">
             <Link href={'/'}>
               <Logo />
             </Link>
-          </li>
-        </ul>
+          </div>
+        </div>
         <div className="flex  justify-end items-center ">
           <div className="hidden lg:block">
             <ul className="flex items-center">
@@ -59,7 +52,7 @@ const Header = () => {
             </ul>
           )}
 
-          {token ? (
+          {user ? (
             <>
               <Link
                 href={'/support-center'}
@@ -74,30 +67,25 @@ const Header = () => {
                 <div className="  h-20 absolute top-0 w-full hidden group-hover:block">
                   <div className="top-12 bg-white  mt-12 ">
                     <span>Profile</span>
+                    <Link
+                      className="rounded bg-orange-500 px-6 py-2 font-medium text-white  duration-300 hover:bg-orange-400  "
+                      href={'/login'}
+                      onClick={() => {
+                        localStorage.removeItem('accessToken');
+                        toast.info('See you soon');
+                        router.push('/login');
+                      }}>
+                      Logout
+                    </Link>
                   </div>
                 </div>
               </div>
-              {/* <div className="flex items-center">
-                <p className=" whitespace-nowrap pr-6 font-semibold text-orange-500 ">
-                  {user?.foundUser?.name}
-                </p>
-                <Link
-                  className="rounded bg-orange-500 px-6 py-2 font-medium text-white  duration-300 hover:bg-orange-400  "
-                  href={'/login'}
-                  onClick={() => {
-                    localStorage.removeItem('accessToken');
-                    toast.info('See you soon');
-                    router.push('/login');
-                  }}>
-                  Logout
-                </Link>
-              </div> */}
             </>
           ) : (
             <Link
-              className="rounded bg-orange-500 px-6 py-2 font-medium text-white whitespace-nowrap text-xs duration-300 hover:bg-orange-400  "
+              className="rounded bg-orange-500 px-6 py-2 font-medium text-white whitespace-nowrap text-sm duration-300 hover:bg-orange-400  "
               href={'/login'}>
-              Get Stated
+              Sign in
             </Link>
           )}
 
@@ -110,4 +98,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default Navbar;

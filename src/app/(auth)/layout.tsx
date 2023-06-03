@@ -1,5 +1,14 @@
-import '../globals.css';
+import React, { type FC } from 'react';
 
-export default function layout({ children }: { children: React.ReactNode }) {
-  return <div>{children}</div>;
+interface LayoutProps {
+  children: React.ReactNode;
 }
+
+const Layout: FC<LayoutProps> = ({ children }) => {
+  return (
+    <React.Fragment>
+      <main>{children}</main>
+    </React.Fragment>
+  );
+};
+export default Layout;
