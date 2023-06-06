@@ -7,7 +7,7 @@ interface LogoProps {}
 const Logo: FC<LogoProps> = ({}) => {
   return (
     <React.Fragment>
-      <Image width={150} src={logo} alt="logo" />
+      <Image width={150} src={logo} alt="logo" priority={true} />
     </React.Fragment>
   );
 };

@@ -4,11 +4,8 @@ import Link from 'next/link';
 import React, { type FC } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import Logo from '@/components/Logo';
-import { useUserRegister } from '@/api';
-import { useMutation } from 'react-query';
-import { useRouter } from 'next/navigation';
-import { toast } from 'react-toastify';
-import Loading from '@/components/Loading';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '@/redux/store';
 
 interface RegisterProps {}
 
@@ -18,7 +15,6 @@ const Register: FC<RegisterProps> = ({}) => {
     email: string;
     password: string;
   };
-  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -26,8 +22,7 @@ const Register: FC<RegisterProps> = ({}) => {
     formState: { errors },
   } = useForm<Inputs>();
 
-  const { mutate, isLoading, isSuccess, isError } =
-    useMutation(useUserRegister);
+  const dispatch = useDispatch<AppDispatch>();
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     const getData = {
@@ -35,23 +30,13 @@ const Register: FC<RegisterProps> = ({}) => {
       email: data.email,
       password: data.password,
     };
-    mutate(getData);
+
     reset();
   };
-  if (isError) {
-    toast.error('Something wrong');
-  }
 
-  if (isSuccess) {
-    router.push('/login');
-    toast.success('Registration Complete');
-  }
-  if (isLoading) {
-    return <Loading />;
-  }
   return (
     <React.Fragment>
-      <div className="bg-blue-50 -mt-20  h-screen flex justify-center items-center">
+      <div className="bg-white -mt-20 min-h-screen flex justify-center items-center">
         <div className=" w-full px-12 md:w-1/2 xl:w-[30%] 2xl:w-[25%]">
           <div className="sm:mx-auto sm:w-full sm:max-w-sm mb-6">
             <div className="w-full mx-auto  flex justify-center items-center">

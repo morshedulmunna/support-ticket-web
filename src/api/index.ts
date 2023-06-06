@@ -1,11 +1,11 @@
 import axios, { AxiosRequestConfig } from 'axios';
 import { useMutation, useQuery } from '@tanstack/react-query';
-import { User } from '@/types/prisma';
 import { RegisterUser } from '@/types/custome-type';
 
 const API = axios.create({
   baseURL: process.env.NEXT_PUBLIC_SERVER_ADDRESS,
   withCredentials: false,
+  timeout: 1000,
   headers: { 'Access-Control-Allow-Origin': '*' },
 });
 
@@ -23,11 +23,11 @@ export const useGetPost = () => {
 };
 
 // ============Register==============>
-export const useUserRegister = (body: RegisterUser) => {
+export const userRegister = (body: RegisterUser) => {
   return API.post('/auth/signup', body);
 };
 
 // ============Login==============>
-export const useUserLogin = (dp: any) => {
-  return useMutation((data: any) => API.post('/auth/signin', dp));
+export const userLogin = (body: any) => {
+  return API.post('/auth/signin', body);
 };

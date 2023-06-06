@@ -4,6 +4,7 @@ import Link from 'next/link';
 import React from 'react';
 import { type SubmitHandler, useForm } from 'react-hook-form';
 import Logo from '@/components/Logo';
+import { LoginUser } from '@/types/custome-type';
 
 type Inputs = {
   email: string;
@@ -17,11 +18,11 @@ const Login: React.FC = () => {
     formState: { errors },
   } = useForm<Inputs>();
 
-  const onSubmit: SubmitHandler<Inputs> = (data: any) => {};
+  const onSubmit: SubmitHandler<Inputs> = (data: LoginUser) => {};
 
   return (
     <React.Fragment>
-      <div className="bg-blue-50 px-6 md:px-2 h-screen -mt-20 flex justify-center items-center">
+      <div className="bg-white px-6 md:px-2 h-screen -mt-20 flex justify-center items-center">
         <div className="w-96">
           <div className="sm:mx-auto sm:w-full sm:max-w-sm mb-6">
             <div className="w-full mx-auto  flex justify-center items-center">

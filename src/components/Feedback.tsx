@@ -3,7 +3,6 @@
 import React, { useEffect, useState } from 'react';
 import { FaUsers } from 'react-icons/fa';
 import { AiOutlineFieldTime } from 'react-icons/ai';
-import { getSingleUser } from '@/utils/getUsers';
 
 type Props = {
   singleFeedback: {
@@ -16,10 +15,6 @@ const Feedback = ({ singleFeedback }: any) => {
   const { feedback } = singleFeedback;
 
   const [user, setUser] = useState<any>({});
-
-  useEffect(() => {
-    getSingleUser(setUser);
-  }, []);
 
   return (
     <>

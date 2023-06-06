@@ -9,11 +9,10 @@ import { toast } from 'react-toastify';
 import Logo from './Logo';
 
 const Navbar = () => {
-  const [user, setUser] = useState<any>(false);
   const [toggle, setToggle] = useState<Boolean>(false);
-
+  let user = false;
   return (
-    <div className="bg-white shadow-sm   sticky top-0 ">
+    <div className="bg-white shadow-sm z-30  sticky top-0 ">
       <div className=" containers mx-auto relative  duration-300 ease-in-out flex items-center justify-between">
         <div className=" flex  items-center  justify-start space-x-6   py-4">
           <div className="duration-300 mr-2 hover:text-orange-500">
@@ -65,16 +64,9 @@ const Navbar = () => {
                 </p>
 
                 <div className="  h-20 absolute top-0 w-full hidden group-hover:block">
-                  <div className="top-12 bg-white  mt-12 ">
+                  <div className="top-12 bg-white  mt-12 flex flex-col shadow p-2 py-4 ">
                     <span>Profile</span>
-                    <Link
-                      className="rounded bg-orange-500 px-6 py-2 font-medium text-white  duration-300 hover:bg-orange-400  "
-                      href={'/login'}
-                      onClick={() => {
-                        localStorage.removeItem('accessToken');
-                        toast.info('See you soon');
-                        router.push('/login');
-                      }}>
+                    <Link className="" href={'/login'}>
                       Logout
                     </Link>
                   </div>
