@@ -1,7 +1,19 @@
+'use client';
+
+import Loading from '@/components/Loading';
 import Sidebar from '@/components/Sidebar';
-import React from 'react';
+import { useCheckAuth } from '@/hooks/useAuthCheck';
+import { login } from '@/redux/features/authSlice';
+import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
+  const authCheck = useCheckAuth();
+
+  if (!authCheck) {
+    return <Loading />;
+  }
+
   return (
     <>
       <section className="containers  grid grid-cols-12">

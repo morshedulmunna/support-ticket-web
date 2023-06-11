@@ -1,0 +1,32 @@
+import { createSlice } from '@reduxjs/toolkit';
+import { useUserLoginMutation } from '../api/apiSlice';
+
+export type authStateType = {
+  accessToken: undefined | string;
+  user: undefined | object;
+};
+
+const initialState = {
+  accessToken: undefined,
+  user: undefined,
+} as authStateType;
+
+export const authSlice = createSlice({
+  name: 'auth',
+  initialState,
+  reducers: {
+    login: (state, action) => {
+      state.accessToken = action.payload.accessToken;
+      state.user = action.payload.user;
+    },
+    logOut: (state) => {
+      localStorage.removeItem('@logged');
+      state.accessToken = undefined;
+      state.user = undefined;
+    },
+  },
+});
+
+export const { login, logOut } = authSlice.actions;
+
+export default authSlice.reducer;

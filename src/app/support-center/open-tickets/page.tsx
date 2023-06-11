@@ -1,20 +1,35 @@
 'use client';
 
+import { useState } from 'react';
+import Loading from '@/components/Loading';
+import { useSingleUserTicketQuery } from '@/redux/api/apiSlice';
+
 const OpenTickets = () => {
-  fetch('https://jsonplaceholder.typicode.com/posts')
-    .then((response) => response.json())
-    .then((json) => console.log(json));
+  const { data, isSuccess, isLoading, error, isError } =
+    useSingleUserTicketQuery();
+
+  const [errors, setError] = useState('');
+
+  if (isLoading) {
+    <Loading />;
+  }
+
+  if (isError) {
+    setError(error?.data.message);
+  }
+
+  if (data?.length === 0) {
+    setError('No Ticket Found');
+  }
 
   return (
     <div className="">
       <p className="">All Open Tickets _______</p>
+      {errors}
 
-      <button
-        onClick={() => {
-          console.log('Click by ');
-        }}>
-        Click me
-      </button>
+      {data?.map((each) => (
+        <li>{each.title}</li>
+      ))}
     </div>
   );
 };

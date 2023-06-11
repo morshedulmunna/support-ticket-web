@@ -5,6 +5,12 @@ import React from 'react';
 import { type SubmitHandler, useForm } from 'react-hook-form';
 import Logo from '@/components/Logo';
 import { LoginUser } from '@/types/custome-type';
+import { useDispatch } from 'react-redux';
+import { login } from '@/redux/features/authSlice';
+import { useUserLoginMutation } from '@/redux/api/apiSlice';
+import { useRouter } from 'next/navigation';
+import { toast } from 'react-toastify';
+import Loading from '@/components/Loading';
 
 type Inputs = {
   email: string;
@@ -17,8 +23,26 @@ const Login: React.FC = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>();
+  const router = useRouter();
+  const dispatch = useDispatch();
+  const [userLogin, { data, isSuccess, isLoading, isError, error }] =
+    useUserLoginMutation();
 
-  const onSubmit: SubmitHandler<Inputs> = (data: LoginUser) => {};
+  const onSubmit: SubmitHandler<Inputs> = (data: LoginUser) => {
+    userLogin(data);
+  };
+
+  if (isError) {
+    toast.error(error?.data.message);
+  }
+
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  if (isSuccess) {
+    router.push('support-center');
+  }
 
   return (
     <React.Fragment>

@@ -8,3 +8,14 @@ export type LoginUser = {
   email: string;
   password: string;
 };
+
+export type singleTicket = {
+  createDate: string;
+  description: string;
+  status: string;
+  subject: string;
+  tiket_id: string;
+  title: string;
+  updatedDate: string;
+  userId: string;
+}[];

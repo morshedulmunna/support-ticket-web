@@ -4,8 +4,10 @@ import Link from 'next/link';
 import React, { type FC } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import Logo from '@/components/Logo';
-import { useDispatch } from 'react-redux';
-import { AppDispatch } from '@/redux/store';
+import { useUserRegisterMutation } from '@/redux/api/apiSlice';
+import Loading from '@/components/Loading';
+import { toast } from 'react-toastify';
+import { useRouter } from 'next/navigation';
 
 interface RegisterProps {}
 
@@ -21,8 +23,22 @@ const Register: FC<RegisterProps> = ({}) => {
     reset,
     formState: { errors },
   } = useForm<Inputs>();
+  const router = useRouter();
 
-  const dispatch = useDispatch<AppDispatch>();
+  const [userRegister, { isLoading, isSuccess, isError, error }] =
+    useUserRegisterMutation();
+
+  if (isError) {
+    console.log(error);
+  }
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  if (isSuccess) {
+    router.push('/login');
+    toast.success('Registration Successful');
+  }
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     const getData = {
@@ -30,7 +46,9 @@ const Register: FC<RegisterProps> = ({}) => {
       email: data.email,
       password: data.password,
     };
+    console.log(getData);
 
+    userRegister(getData);
     reset();
   };
 
@@ -61,18 +79,12 @@ const Register: FC<RegisterProps> = ({}) => {
               </label>
               <div className="mt-2">
                 <input
-                  {...register('name', {
-                    required: {
-                      value: true,
-                      message: 'Name is Required',
-                    },
-                  })}
+                  {...register('name')}
                   id="name"
                   name="name"
                   type="name"
                   autoComplete="name"
                   placeholder="Enter your Name"
-                  required
                   className="block w-full rounded-md border-0 py-1.5 text-black shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 px-2 outline-none sm:text-sm sm:leading-6 bg-white "
                 />
               </div>

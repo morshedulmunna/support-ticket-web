@@ -1,16 +1,21 @@
 'use client';
 
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import router from 'next/router';
 import React, { useState } from 'react';
 import { FaBars, FaTimes } from 'react-icons/fa';
-import { toast } from 'react-toastify';
 import Logo from './Logo';
+import { useDispatch, useSelector } from 'react-redux';
+import type { RootState } from '@/redux/store';
+import { logOut } from '@/redux/features/authSlice';
+import { useRouter } from 'next/navigation';
+import Loading from './Loading';
 
 const Navbar = () => {
   const [toggle, setToggle] = useState<Boolean>(false);
-  let user = false;
+  const token = useSelector((state: RootState) => state.auth.accessToken);
+  const dispatch = useDispatch();
+  const router = useRouter();
+
   return (
     <div className="bg-white shadow-sm z-30  sticky top-0 ">
       <div className=" containers mx-auto relative  duration-300 ease-in-out flex items-center justify-between">
@@ -51,7 +56,7 @@ const Navbar = () => {
             </ul>
           )}
 
-          {user ? (
+          {token ? (
             <>
               <Link
                 href={'/support-center'}
@@ -63,12 +68,17 @@ const Navbar = () => {
                   Settings
                 </p>
 
-                <div className="  h-20 absolute top-0 w-full hidden group-hover:block">
-                  <div className="top-12 bg-white  mt-12 flex flex-col shadow p-2 py-4 ">
-                    <span>Profile</span>
-                    <Link className="" href={'/login'}>
+                <div className="  h-20 absolute top-0 w-full hidden group-hover:block items-start">
+                  <div className="top-12 bg-white  mt-12 flex flex-col shadow p-2 py-4 space-y-3 ">
+                    <button>Profile</button>
+                    <button
+                      onClick={() => {
+                        dispatch(logOut());
+                        router.push('/login');
+                      }}
+                      className=" bg-red-500 py-1 rounded-md font-semibold text-white">
                       Logout
-                    </Link>
+                    </button>
                   </div>
                 </div>
               </div>
