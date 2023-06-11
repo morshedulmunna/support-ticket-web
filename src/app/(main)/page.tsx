@@ -13,7 +13,7 @@ export default function Home() {
         {/* Hero */}
         <div
           id="home"
-          className="flex  flex-col my-8 justify-center items-center">
+          className="flex   flex-col my-8 justify-center items-center">
           <h1 className=" text-center font-semibold text-black text-2xl lg:text-4xl  md:w-[80%] w-full mx-auto xl:leading-[60px]">
             Get The World Most Popular Customer Support Software
           </h1>
