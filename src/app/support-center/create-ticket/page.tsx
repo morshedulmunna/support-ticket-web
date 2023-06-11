@@ -1,7 +1,7 @@
 'use client';
 
 import Loading from '@/components/Loading';
-import { useTicketCreateMutation } from '@/redux/api/apiSlice';
+import { useTicketCreateMutation } from '@/redux/features/tickets/ticketApi';
 import React, { useEffect, useState } from 'react';
 import { type SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';

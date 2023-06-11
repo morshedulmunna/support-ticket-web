@@ -6,7 +6,7 @@ import { FaBars, FaTimes } from 'react-icons/fa';
 import Logo from './Logo';
 import { useDispatch, useSelector } from 'react-redux';
 import type { RootState } from '@/redux/store';
-import { logOut } from '@/redux/features/authSlice';
+import { logOut } from '@/redux/features/auth/authSlice';
 import { useRouter } from 'next/navigation';
 import Loading from './Loading';
 

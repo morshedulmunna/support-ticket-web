@@ -1,4 +1,4 @@
-import { login } from '@/redux/features/authSlice';
+import { login } from '@/redux/features/auth/authSlice';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 

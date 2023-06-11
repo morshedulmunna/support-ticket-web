@@ -6,11 +6,10 @@ import { type SubmitHandler, useForm } from 'react-hook-form';
 import Logo from '@/components/Logo';
 import { LoginUser } from '@/types/custome-type';
 import { useDispatch } from 'react-redux';
-import { login } from '@/redux/features/authSlice';
-import { useUserLoginMutation } from '@/redux/api/apiSlice';
 import { useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';
 import Loading from '@/components/Loading';
+import { useUserLoginMutation } from '@/redux/features/auth/authApi';
 
 type Inputs = {
   email: string;

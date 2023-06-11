@@ -1,7 +1,7 @@
 import { userLogin } from '@/api';
 import { singleTicket } from '@/types/custome-type';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { login } from '../features/authSlice';
+import { login } from '../features/auth/authSlice';
 
 export const apiSlice = createApi({
   reducerPath: 'api',
@@ -15,63 +15,13 @@ export const apiSlice = createApi({
           headers.set('Authorization', `Bearer ${accessToken}`);
         }
       }
-
       return headers;
     },
   }),
+  refetchOnReconnect: true,
+  tagTypes: ['single_tickets'],
 
-  endpoints: (builder) => ({
-    userRegister: builder.mutation({
-      query: (data) => ({
-        url: '/auth/signup',
-        method: 'POST',
-        body: data,
-      }),
-    }),
-    userLogin: builder.mutation({
-      query: (data) => ({
-        url: '/auth/signin',
-        method: 'POST',
-        body: data,
-      }),
-      async onQueryStarted(arg, api) {
-        try {
-          const result = await api.queryFulfilled;
-
-          localStorage.setItem(
-            '@logged',
-            JSON.stringify({
-              accessToken: result.data.accessToken,
-              user: result.data.user,
-            })
-          );
-          console.log(result);
-
-          api.dispatch(
-            login({
-              accessToken: result.data.accessToken,
-              user: result.data.user,
-            })
-          );
-        } catch (error) {}
-      },
-    }),
-    ticketCreate: builder.mutation({
-      query: (data) => ({
-        url: '/tickets',
-        method: 'POST',
-        body: data,
-      }),
-    }),
-    singleUserTicket: builder.query<singleTicket, void>({
-      query: () => '/tickets/single_user_ticket',
-    }),
-  }),
+  endpoints: (builder) => ({}),
 });
 
-export const {
-  useUserRegisterMutation,
-  useUserLoginMutation,
-  useTicketCreateMutation,
-  useSingleUserTicketQuery,
-} = apiSlice;
+export const {} = apiSlice;

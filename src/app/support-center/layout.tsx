@@ -3,7 +3,7 @@
 import Loading from '@/components/Loading';
 import Sidebar from '@/components/Sidebar';
 import { useCheckAuth } from '@/hooks/useAuthCheck';
-import { login } from '@/redux/features/authSlice';
+import { login } from '@/redux/features/auth/authSlice';
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 

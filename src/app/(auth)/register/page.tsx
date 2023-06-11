@@ -29,7 +29,7 @@ const Register: FC<RegisterProps> = ({}) => {
     useUserRegisterMutation();
 
   if (isError) {
-    console.log(error);
+    toast.error(error?.data.message);
   }
   if (isLoading) {
     return <Loading />;
