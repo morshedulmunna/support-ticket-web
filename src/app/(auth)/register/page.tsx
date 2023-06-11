@@ -4,10 +4,11 @@ import Link from 'next/link';
 import React, { type FC } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import Logo from '@/components/Logo';
-import { useUserRegisterMutation } from '@/redux/api/apiSlice';
+
 import Loading from '@/components/Loading';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/navigation';
+import { useUserRegisterMutation } from '@/redux/features/auth/authApi';
 
 interface RegisterProps {}
 

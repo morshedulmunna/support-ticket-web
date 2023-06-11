@@ -12,7 +12,7 @@ type Inputs = {
   details: string;
 };
 
-const page = () => {
+const CreateTicket = () => {
   const {
     register,
     handleSubmit,
@@ -102,7 +102,7 @@ const page = () => {
   );
 };
 
-export default page;
+export default CreateTicket;
 
 const subjects = [
   {
