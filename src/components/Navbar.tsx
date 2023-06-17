@@ -86,7 +86,7 @@ const Navbar = () => {
                     Settings
                   </p>
 
-                  <div className="  h-20 absolute top-0 w-full hidden group-hover:block items-start">
+                  <div className=" z-40 h-20 absolute top-0 w-full hidden group-hover:block items-start">
                     <div className="top-12 bg-white  mt-12 flex flex-col shadow p-2 py-4 space-y-3 ">
                       <button>Profile</button>
                       <button

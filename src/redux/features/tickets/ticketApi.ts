@@ -1,25 +1,45 @@
 import { apiSlice } from '@/redux/api/apiSlice';
-import { singleTicket } from '@/types/custome-type';
+import { Error, singleTicket } from '@/types/custome-type';
 
 export const ticketsApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
+    // Create Tickets
     ticketCreate: builder.mutation({
       query: (data) => ({
         url: '/tickets',
         method: 'POST',
         body: data,
       }),
-      invalidatesTags: ['single_tickets'],
+      invalidatesTags: ['open_tickets'],
+      transformErrorResponse(error: Error) {
+        return error;
+      },
     }),
 
-    //Single All Tickets
-    singleUserTicket: builder.query<singleTicket, void>({
-      query: () => '/tickets/single_user_ticket',
-      // 600 sec dhore r ai data fetch hoboe na. cash theka nibe
+    //Single All Open Tickets
+    singleUserOpenTicket: builder.query<singleTicket, void>({
+      query: () => '/tickets/open-ticket',
+      transformErrorResponse(error: Error) {
+        return error;
+      },
       keepUnusedDataFor: 600,
-      providesTags: ['single_tickets'],
+      providesTags: ['open_tickets'],
+    }),
+
+    //Single All Close Tickets
+    singleUserCloseTicket: builder.query<singleTicket, void>({
+      query: () => '/tickets/close-ticket',
+      transformErrorResponse(error: Error) {
+        return error;
+      },
+      keepUnusedDataFor: 600,
+      providesTags: [],
     }),
   }),
 });
 
-export const { useTicketCreateMutation, useSingleUserTicketQuery } = ticketsApi;
+export const {
+  useTicketCreateMutation,
+  useSingleUserOpenTicketQuery,
+  useSingleUserCloseTicketQuery,
+} = ticketsApi;

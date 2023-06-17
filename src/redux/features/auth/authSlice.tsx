@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { useUserLoginMutation } from '../../api/apiSlice';
 
 export type authStateType = {
   accessToken: undefined | string;

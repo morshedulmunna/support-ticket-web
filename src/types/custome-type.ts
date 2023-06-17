@@ -19,3 +19,12 @@ export type singleTicket = {
   updatedDate: string;
   userId: string;
 }[];
+
+export type ErrorData = {
+  error: string;
+};
+
+export type Error = {
+  status: number;
+  data: ErrorData;
+};

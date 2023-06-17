@@ -3,16 +3,16 @@
 import { useEffect, useState } from 'react';
 import Loading from '@/components/Loading';
 import Table from '@/components/Table';
-import { useSingleUserTicketQuery } from '@/redux/features/tickets/ticketApi';
+import { useSingleUserOpenTicketQuery } from '@/redux/features/tickets/ticketApi';
 import Search from '@/components/Search';
 
 const OpenTickets = () => {
   const { data, isSuccess, isLoading, error, isError } =
-    useSingleUserTicketQuery(undefined, { refetchOnFocus: true });
+    useSingleUserOpenTicketQuery(undefined, { refetchOnFocus: true });
 
   const [errors, setError] = useState('');
 
-  if (isError) {
+  if (error) {
     setError(error?.data.message);
   }
 

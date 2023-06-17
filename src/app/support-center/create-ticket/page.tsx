@@ -22,7 +22,7 @@ const CreateTicket = () => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const [selectedOption, setSelectedOption] = useState<any>('');
 
-  const [ticketCreate, { isLoading, isError, isSuccess, error, data }] =
+  const [ticketCreate, { isLoading, isError, isSuccess, error, data: ticket }] =
     useTicketCreateMutation();
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
@@ -46,7 +46,7 @@ const CreateTicket = () => {
   }
 
   if (isSuccess) {
-    toast.success(`Ticket Create id is ${data.tiket_id}`);
+    toast.success(`Ticket Create id is ${ticket.tiket_id}`);
   }
 
   return (

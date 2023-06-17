@@ -23,6 +23,9 @@ const Table: FC<TableProps> = ({ data }) => {
                       Subject
                     </th>
                     <th scope="col" className="px-2 py-4">
+                      Status
+                    </th>
+                    <th scope="col" className="px-2 py-4">
                       Tittle
                     </th>
                     <th scope="col" className="px-2 py-4">

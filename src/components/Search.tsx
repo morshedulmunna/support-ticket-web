@@ -21,7 +21,7 @@ const Search: FC<SearchProps> = ({ level }) => {
             onChange={(e) => setSearch(e.target.value)}
             type="search"
             name="search"
-            className="border py-1 outline-none focus:border-orange-500 rounded-md w-full px-2 pl-8 "
+            className="border   py-1 outline-none focus:border-orange-500 rounded-md w-full px-2 pl-8 "
             placeholder="Search..."
           />
           <BsSearch className="absolute top-[9px] left-2" color="gray" />
