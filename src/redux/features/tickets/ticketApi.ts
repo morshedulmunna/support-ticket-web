@@ -1,16 +1,16 @@
-import { apiSlice } from '@/redux/api/apiSlice';
-import { Error, singleTicket } from '@/types/custome-type';
+import { apiSlice } from "@/redux/api/apiSlice";
+import { Error, singleTicket } from "@/types/custome-type";
 
 export const ticketsApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     // Create Tickets
     ticketCreate: builder.mutation({
       query: (data) => ({
-        url: '/tickets',
-        method: 'POST',
+        url: "/tickets",
+        method: "POST",
         body: data,
       }),
-      invalidatesTags: ['open_tickets'],
+      invalidatesTags: ["open_tickets"],
       transformErrorResponse(error: Error) {
         return error;
       },
@@ -18,22 +18,31 @@ export const ticketsApi = apiSlice.injectEndpoints({
 
     //Single All Open Tickets
     singleUserOpenTicket: builder.query<singleTicket, void>({
-      query: () => '/tickets/open-ticket',
+      query: () => "/tickets/open-ticket",
       transformErrorResponse(error: Error) {
         return error;
       },
       keepUnusedDataFor: 600,
-      providesTags: ['open_tickets'],
+      providesTags: ["open_tickets"],
     }),
 
     //Single All Close Tickets
     singleUserCloseTicket: builder.query<singleTicket, void>({
-      query: () => '/tickets/close-ticket',
+      query: () => "/tickets/close-ticket",
       transformErrorResponse(error: Error) {
         return error;
       },
       keepUnusedDataFor: 600,
       providesTags: [],
+    }),
+
+    //Single All Close Tickets
+    ticketDetailsById: builder.mutation<any, void>({
+      query: (id) => `/tickets/${id}`,
+      transformErrorResponse(error: Error) {
+        return error;
+      },
+      // providesTags: [],
     }),
   }),
 });
@@ -42,4 +51,5 @@ export const {
   useTicketCreateMutation,
   useSingleUserOpenTicketQuery,
   useSingleUserCloseTicketQuery,
+  useTicketDetailsByIdMutation,
 } = ticketsApi;

@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
 export type authStateType = {
   accessToken: undefined | string;
@@ -11,7 +11,7 @@ const initialState = {
 } as authStateType;
 
 export const authSlice = createSlice({
-  name: 'auth',
+  name: "auth",
   initialState,
   reducers: {
     login: (state, action) => {
@@ -19,7 +19,7 @@ export const authSlice = createSlice({
       state.user = action.payload.user;
     },
     logOut: (state) => {
-      localStorage.removeItem('@logged');
+      localStorage.removeItem("@logged");
       state.accessToken = undefined;
       state.user = undefined;
     },

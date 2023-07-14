@@ -1,11 +1,9 @@
-'use client';
+"use client";
 
-import Loading from '@/components/Loading';
-import Sidebar from '@/components/Sidebar';
-import { useCheckAuth } from '@/hooks/useAuthCheck';
-import { login } from '@/redux/features/auth/authSlice';
-import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import Loading from "@/components/Loading";
+import Sidebar from "@/components/Sidebar";
+import { useCheckAuth } from "@/hooks/useAuthCheck";
+import React from "react";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   const authCheck = useCheckAuth();
