@@ -1,8 +1,8 @@
-"use client";
-
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
-import GlobalLayout from "@/layouts/GlobalLayout";
+import StoreProvider from "@/redux/StoreProvider";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./globals.css";
 
 export default function RootLayout({
@@ -12,13 +12,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>
-        <GlobalLayout>
+      <StoreProvider>
+        <body>
           <Navbar />
           <main className="">{children}</main>
           <Footer />
-        </GlobalLayout>
-      </body>
+          <ToastContainer />
+        </body>
+      </StoreProvider>
     </html>
   );
 }

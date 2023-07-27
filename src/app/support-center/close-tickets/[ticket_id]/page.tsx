@@ -6,7 +6,7 @@ interface SingleOpenTicketProps {}
 const SingleOpenTicket: FC<SingleOpenTicketProps> = ({}) => {
   return (
     <React.Fragment>
-      <TicketDetails />
+      <TicketDetails id={""} />
     </React.Fragment>
   );
 };

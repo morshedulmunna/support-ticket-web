@@ -1,10 +1,10 @@
-import { global, hero } from '@/assets';
-import Image from 'next/image';
-import Link from 'next/link';
-import { FcDataConfiguration } from 'react-icons/fc';
-import { GrServices } from 'react-icons/gr';
-import { MdDashboard, MdOutlineSupportAgent } from 'react-icons/md';
-import { BiSpreadsheet } from 'react-icons/bi';
+import { global, hero } from "@/assets";
+import Image from "next/image";
+import Link from "next/link";
+import { BiSpreadsheet } from "react-icons/bi";
+import { FcDataConfiguration } from "react-icons/fc";
+import { GrServices } from "react-icons/gr";
+import { MdDashboard, MdOutlineSupportAgent } from "react-icons/md";
 
 export default function Home() {
   return (
@@ -13,7 +13,8 @@ export default function Home() {
         {/* Hero */}
         <div
           id="home"
-          className="flex   flex-col my-8 justify-center items-center">
+          className="flex   flex-col my-8 justify-center items-center"
+        >
           <h1 className=" text-center font-semibold text-black text-2xl lg:text-4xl  md:w-[80%] w-full mx-auto xl:leading-[60px]">
             Get The World Most Popular Customer Support Software
           </h1>
@@ -28,7 +29,8 @@ export default function Home() {
 
           <Link
             className="bg-orange-500 px-6 py-2 rounded-full text-white font-semibold my-6"
-            href={'/login'}>
+            href={"/login"}
+          >
             Get Started
           </Link>
           <Image src={hero} alt="hero"></Image>
@@ -46,7 +48,8 @@ export default function Home() {
             {data.map((each) => (
               <div
                 className=" flex flex-col  items-center p-2 space-y-2 h-44 w-60 mx-auto"
-                key={each.id}>
+                key={each.id}
+              >
                 {each.icon}
                 <h3 className="text-black text-xl whitespace-nowrap font-semibold">
                   {each.level}
@@ -70,12 +73,12 @@ export default function Home() {
 
           <ul className="list-disc ml-6 mb-6">
             {[
-              '5+ million spTalk users worldwide',
-              '15,000+ businesses use spTalk worldwide',
-              ' spTalk seamlessly routes inquiries created via email, web-forms and API.',
-              'Simple and easy-to-use web-based customer support platform.',
-              ' spTalk comes packed with more features and tools than most of the expensive (and complex) support ticket systems on the market.',
-              'The best part is that spTalk is completely free.',
+              "5+ million spTalk users worldwide",
+              "15,000+ businesses use spTalk worldwide",
+              " spTalk seamlessly routes inquiries created via email, web-forms and API.",
+              "Simple and easy-to-use web-based customer support platform.",
+              " spTalk comes packed with more features and tools than most of the expensive (and complex) support ticket systems on the market.",
+              "The best part is that spTalk is completely free.",
             ].map((each, index) => (
               <li className="py-1" key={index}>
                 {each}
@@ -85,7 +88,8 @@ export default function Home() {
 
           <Link
             className="bg-orange-500 px-12 mb-12 py-2 rounded-full text-white font-semibold my-6"
-            href={'/login'}>
+            href={"/login"}
+          >
             Get Started
           </Link>
         </div>
@@ -112,7 +116,8 @@ export default function Home() {
                 <div className="relative">
                   <label
                     htmlFor="name"
-                    className="leading-7 text-sm text-gray-600">
+                    className="leading-7 text-sm text-gray-600"
+                  >
                     Name
                   </label>
                   <input
@@ -127,7 +132,8 @@ export default function Home() {
                 <div className="relative">
                   <label
                     htmlFor="email"
-                    className="leading-7 text-sm text-gray-600">
+                    className="leading-7 text-sm text-gray-600"
+                  >
                     Email
                   </label>
                   <input
@@ -142,13 +148,15 @@ export default function Home() {
                 <div className="relative">
                   <label
                     htmlFor="message"
-                    className="leading-7 text-sm text-gray-600">
+                    className="leading-7 text-sm text-gray-600"
+                  >
                     Message
                   </label>
                   <textarea
                     id="message"
                     name="message"
-                    className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-orange-500 focus:bg-white focus:ring-2 focus:ring-orange-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"></textarea>
+                    className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-orange-500 focus:bg-white focus:ring-2 focus:ring-orange-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"
+                  ></textarea>
                 </div>
               </div>
               <div className="p-2 w-full">
@@ -171,7 +179,8 @@ export default function Home() {
                       strokeLinejoin="round"
                       strokeWidth="2"
                       className="w-5 h-5"
-                      viewBox="0 0 24 24">
+                      viewBox="0 0 24 24"
+                    >
                       <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
                     </svg>
                   </a>
@@ -182,7 +191,8 @@ export default function Home() {
                       strokeLinejoin="round"
                       strokeWidth="2"
                       className="w-5 h-5"
-                      viewBox="0 0 24 24">
+                      viewBox="0 0 24 24"
+                    >
                       <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"></path>
                     </svg>
                   </a>
@@ -194,14 +204,16 @@ export default function Home() {
                       strokeLinejoin="round"
                       strokeWidth="2"
                       className="w-5 h-5"
-                      viewBox="0 0 24 24">
+                      viewBox="0 0 24 24"
+                    >
                       <rect
                         width="20"
                         height="20"
                         x="2"
                         y="2"
                         rx="5"
-                        ry="5"></rect>
+                        ry="5"
+                      ></rect>
                       <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"></path>
                     </svg>
                   </a>
@@ -212,7 +224,8 @@ export default function Home() {
                       strokeLinejoin="round"
                       strokeWidth="2"
                       className="w-5 h-5"
-                      viewBox="0 0 24 24">
+                      viewBox="0 0 24 24"
+                    >
                       <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"></path>
                     </svg>
                   </a>
@@ -229,44 +242,44 @@ export default function Home() {
 const data = [
   {
     id: 1,
-    level: 'Dashboard Report',
+    level: "Dashboard Report",
     description:
-      'Our rich and simple dashboard keeps you up-to-date on your help desk statistics',
+      "Our rich and simple dashboard keeps you up-to-date on your help desk statistics",
     icon: <MdDashboard size={45} color="orange" />,
   },
   {
     id: 2,
-    level: 'Configurable Help Topic',
+    level: "Configurable Help Topic",
     description:
-      'Add, edit, and delete your help desk topics that suit your preference',
+      "Add, edit, and delete your help desk topics that suit your preference",
     icon: <FcDataConfiguration size={45} color="orange" />,
   },
   {
     id: 3,
-    level: 'Service Level Agreementss',
+    level: "Service Level Agreementss",
     description:
-      'Simply set your business hours and our system will handle the rest leaving you worry-free',
+      "Simply set your business hours and our system will handle the rest leaving you worry-free",
     icon: <GrServices size={45} color="orange" />,
   },
   {
     id: 4,
-    level: 'Ticket Filters',
+    level: "Ticket Filters",
     description:
-      'Our powerful ticket filtering system makes sure the right tickets goes to the right department leaving you with a clutter-free environment',
+      "Our powerful ticket filtering system makes sure the right tickets goes to the right department leaving you with a clutter-free environment",
     icon: <BiSpreadsheet size={45} color="orange" />,
   },
   {
     id: 5,
-    level: 'Customer Support Portal',
+    level: "Customer Support Portal",
     description:
-      'Robust customer support portal system to help your business maintain happy customer relationships',
+      "Robust customer support portal system to help your business maintain happy customer relationships",
     icon: <MdOutlineSupportAgent size={45} color="orange" />,
   },
   {
     id: 6,
-    level: 'And Much More!',
+    level: "And Much More!",
     description:
-      'spTalk comes pack with tons of awesome features you have to try out yourself',
+      "spTalk comes pack with tons of awesome features you have to try out yourself",
     icon: <MdOutlineSupportAgent size={45} color="orange" />,
   },
 ];

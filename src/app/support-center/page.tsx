@@ -1,12 +1,8 @@
-import React, { type FC } from 'react';
+import { type FC } from "react";
 
 interface SupportCenterProps {}
 
 const SupportCenter: FC<SupportCenterProps> = ({}) => {
-  return (
-    <React.Fragment>
-      <h1 className="font-semibold ">Analytics</h1>
-    </React.Fragment>
-  );
+  return <p>Analytics Dashboard</p>;
 };
 export default SupportCenter;

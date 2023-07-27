@@ -1,29 +1,17 @@
-"use client";
-
-import Loading from "@/components/Loading";
 import Sidebar from "@/components/Sidebar";
-import { useCheckAuth } from "@/hooks/useAuthCheck";
-import React from "react";
 
-const Layout = ({ children }: { children: React.ReactNode }) => {
-  const authCheck = useCheckAuth();
-
-  if (!authCheck) {
-    return <Loading />;
-  }
-
-  return (
-    <>
-      <section className="containers  grid grid-cols-12">
-        <aside className="col-span-12  md:col-span-3">
-          <Sidebar />
-        </aside>
-        <main className="col-span-12 md:col-span-9 h-screen md:mt-12  ml-6">
-          {children}
-        </main>
-      </section>
-    </>
-  );
+type Props = {
+  children: any;
 };
 
-export default Layout;
+export default function DashboardLayout({ children }: Props) {
+  return (
+    <section className="containers grid grid-cols-12 ">
+      <aside className="col-span-3">
+        <Sidebar />
+      </aside>
+
+      <main className="col-span-9 mt-12 mx-4 h-screen">{children}</main>
+    </section>
+  );
+}

@@ -1,6 +1,6 @@
-import Link from 'next/link';
-import React, { type FC } from 'react';
-import { MdClose } from 'react-icons/md';
+import Link from "next/link";
+import React, { type FC } from "react";
+import { MdClose } from "react-icons/md";
 
 interface TableBodyProps {
   each: {
@@ -27,9 +27,10 @@ const TableBody: FC<TableBodyProps> = ({ each }) => {
         <td className="whitespace-nowrap px-2 py-4">{each.title}</td>
         <td className="whitespace-nowrap py-4 space-x-3 flex items-center">
           <Link
-            href={`support-center/${
-              each.status === 'open' ? 'open-tickets' : 'close-tickets'
-            }/${each.tiket_id}`}>
+            href={`/support-center/${
+              each.status === "open" ? "open-tickets" : "close-tickets"
+            }/${each.tiket_id}`}
+          >
             <button className="bg-orange-500 h-6 w-12 flex justify-center items-center rounded text-white font-medium hover:bg-orange-400  duration-200 ease-linear">
               view
             </button>

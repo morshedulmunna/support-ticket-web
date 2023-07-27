@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import Search from '@/components/Search';
-import Table from '@/components/Table';
-import { useSingleUserCloseTicketQuery } from '@/redux/features/tickets/ticketApi';
-import React, { useEffect, type FC, useState } from 'react';
+import Search from "@/components/Search";
+import Table from "@/components/Table";
+import { useSingleUserCloseTicketQuery } from "@/redux/features/tickets/ticketApi";
+import React, { useEffect, useState, type FC } from "react";
 
 interface CloseTicketsProps {}
 
@@ -11,7 +11,7 @@ const CloseTickets: FC<CloseTicketsProps> = ({}) => {
   const { data, isSuccess, isLoading, error, isError } =
     useSingleUserCloseTicketQuery(undefined, { refetchOnFocus: true });
 
-  const [errors, setError] = useState('');
+  const [errors, setError] = useState("");
 
   if (error) {
     setError(error?.data.message);
@@ -19,7 +19,7 @@ const CloseTickets: FC<CloseTicketsProps> = ({}) => {
 
   useEffect(() => {
     if (data?.length === 0) {
-      setError('No Ticket Found.....');
+      setError("No Ticket Found.....");
     }
   }, []);
 
