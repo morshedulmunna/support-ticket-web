@@ -1,19 +1,28 @@
 "use client";
 
 import TicketDetails from "@/components/TicketDetails";
-import { useSingleUserOpenTicketQuery } from "@/redux/features/tickets/ticketApi";
+import { useTicketDetailsByIdQuery } from "@/redux/features/tickets/ticketApi";
+import { useParams } from "next/navigation";
+
 import React, { type FC } from "react";
+import Loading from "../loading";
 
 interface SingleOpenTicketProps {}
 
 const SingleOpenTicket: FC<SingleOpenTicketProps> = ({}) => {
-  const { data } = useSingleUserOpenTicketQuery();
-
+  const param = useParams();
+  const { data, isError, isLoading } = useTicketDetailsByIdQuery(
+    param.ticket_id as any
+  );
   console.log(data);
+
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
     <React.Fragment>
-      <TicketDetails id={""} />
+      <TicketDetails data={data} />
     </React.Fragment>
   );
 };

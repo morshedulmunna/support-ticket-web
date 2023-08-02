@@ -22,7 +22,7 @@ const CreateTicket = () => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const [selectedOption, setSelectedOption] = useState<any>("");
 
-  const [ticketCreate, { isLoading, isError, isSuccess, error, data: ticket }] =
+  const [ticketCreate, { isLoading, isSuccess, data: ticket }] =
     useTicketCreateMutation();
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
@@ -31,20 +31,12 @@ const CreateTicket = () => {
       subject: selectedOption,
       description: data.details,
     };
-
     ticketCreate(validData);
-
     reset();
   };
-
-  if (isError) {
-    toast.error(error?.data.message);
-  }
-
   if (isLoading) {
     return <Loading />;
   }
-
   if (isSuccess) {
     toast.success(`Ticket Create id is ${ticket.tiket_id}`);
   }
@@ -106,18 +98,3 @@ const CreateTicket = () => {
 };
 
 export default CreateTicket;
-
-const subjects = [
-  {
-    id: 0,
-    type: "tech",
-  },
-  {
-    id: 1,
-    type: "code",
-  },
-  {
-    id: 2,
-    type: "dev",
-  },
-];

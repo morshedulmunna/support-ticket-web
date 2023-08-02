@@ -33,16 +33,25 @@ export const ticketsApi = apiSlice.injectEndpoints({
         return error;
       },
       keepUnusedDataFor: 600,
-      providesTags: [],
+      providesTags: ["ticket_details"],
     }),
 
     //Single All Close Tickets
-    ticketDetailsById: builder.mutation<any, void>({
+    ticketDetailsById: builder.query<any, void>({
       query: (id) => `/tickets/${id}`,
       transformErrorResponse(error: Error) {
         return error;
       },
-      // providesTags: [],
+      providesTags: [],
+    }),
+
+    //Single All Close Tickets
+    ticketResolveUpdate: builder.query<any, void>({
+      query: (id) => `/close-ticket/${id}`,
+      transformErrorResponse(error: Error) {
+        return error;
+      },
+      providesTags: ["ticket_details"],
     }),
   }),
 });
@@ -51,5 +60,6 @@ export const {
   useTicketCreateMutation,
   useSingleUserOpenTicketQuery,
   useSingleUserCloseTicketQuery,
-  useTicketDetailsByIdMutation,
+  useTicketDetailsByIdQuery,
+  useTicketResolveUpdateQuery,
 } = ticketsApi;

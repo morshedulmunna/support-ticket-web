@@ -8,7 +8,7 @@ const Sidebar = () => {
 
   return (
     <>
-      <div className="mt-12 rounded bg-orange-50 px-3 py-6">
+      <div className="rounded bg-orange-50 px-3 py-6">
         <Link
           className="block w-full rounded-md py-2 px-4 hover:bg-orange-100"
           href={"/support-center"}

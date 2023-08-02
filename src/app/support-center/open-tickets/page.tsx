@@ -6,13 +6,14 @@ import { useSingleUserOpenTicketQuery } from "@/redux/features/tickets/ticketApi
 import { useEffect, useState } from "react";
 
 const OpenTickets = () => {
-  const { data, isSuccess, isLoading, error, isError } =
-    useSingleUserOpenTicketQuery(undefined, { refetchOnFocus: true });
+  const { data, isLoading, error } = useSingleUserOpenTicketQuery(undefined, {
+    refetchOnFocus: true,
+  });
 
   const [errors, setError] = useState("");
 
   if (error) {
-    setError(error?.data.message);
+    setError("Something Wrong");
   }
 
   useEffect(() => {
