@@ -66,7 +66,7 @@ const CreateTicket = () => {
             onChange={(e) => setSelectedOption(e.target.value)}
           >
             <option>Select Category</option>
-            {subjects?.map((sub: any) => (
+            {[]?.map((sub: any) => (
               <option key={sub.id}>{sub.type}</option>
             ))}
           </select>

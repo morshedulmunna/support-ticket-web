@@ -13,10 +13,6 @@ const CloseTickets: FC<CloseTicketsProps> = ({}) => {
 
   const [errors, setError] = useState("");
 
-  if (error) {
-    setError(error?.data.message);
-  }
-
   useEffect(() => {
     if (data?.length === 0) {
       setError("No Ticket Found.....");

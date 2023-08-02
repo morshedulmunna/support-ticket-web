@@ -1,4 +1,3 @@
-import { useTicketResolveUpdateQuery } from "@/redux/features/tickets/ticketApi";
 import { formatDate } from "@/utils";
 import { useDispatch } from "react-redux";
 import Feedback from "./Feedback";
@@ -20,7 +19,7 @@ type Props = {
 export default function TicketDetails({
   data: { title, createDate, description, status, subject, tiket_id },
 }: Props) {
-  const {} = useTicketResolveUpdateQuery(tiket_id);
+  // const {} = useTicketResolveUpdateQuery(tiket_id);
 
   const dispatch = useDispatch();
 

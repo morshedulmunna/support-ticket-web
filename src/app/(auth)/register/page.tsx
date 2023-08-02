@@ -1,14 +1,14 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import React, { type FC } from 'react';
-import { SubmitHandler, useForm } from 'react-hook-form';
-import Logo from '@/components/Logo';
+import Logo from "@/components/Logo";
+import Link from "next/link";
+import React, { type FC } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
 
-import Loading from '@/components/Loading';
-import { toast } from 'react-toastify';
-import { useRouter } from 'next/navigation';
-import { useUserRegisterMutation } from '@/redux/features/auth/authApi';
+import Loading from "@/components/Loading";
+import { useUserRegisterMutation } from "@/redux/features/auth/authApi";
+import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 
 interface RegisterProps {}
 
@@ -29,19 +29,20 @@ const Register: FC<RegisterProps> = ({}) => {
   const [userRegister, { isLoading, isSuccess, isError, error }] =
     useUserRegisterMutation();
 
-  if (isError) {
-    toast.error(error?.data.message);
-  }
   if (isLoading) {
     return <Loading />;
   }
 
   if (isSuccess) {
-    router.push('/login');
-    toast.success('Registration Successful');
+    router.push("/login");
+    toast.success("Registration Successful");
   }
 
-  const onSubmit: SubmitHandler<Inputs> = (data) => {
+  const onSubmit: SubmitHandler<Inputs> = (data: {
+    name: string;
+    email: string;
+    password: string;
+  }) => {
     const getData = {
       name: data.name,
       email: data.email,
@@ -71,16 +72,18 @@ const Register: FC<RegisterProps> = ({}) => {
             onSubmit={handleSubmit(onSubmit)}
             className="space-y-6"
             action="#"
-            method="POST">
+            method="POST"
+          >
             <div>
               <label
                 htmlFor="name"
-                className="block text-sm font-medium leading-6 text-black">
+                className="block text-sm font-medium leading-6 text-black"
+              >
                 Your Name
               </label>
               <div className="mt-2">
                 <input
-                  {...register('name')}
+                  {...register("name")}
                   id="name"
                   name="name"
                   type="name"
@@ -94,19 +97,20 @@ const Register: FC<RegisterProps> = ({}) => {
             <div>
               <label
                 htmlFor="email"
-                className="block text-sm font-medium leading-6 text-black">
+                className="block text-sm font-medium leading-6 text-black"
+              >
                 Email address
               </label>
               <div className="mt-2">
                 <input
-                  {...register('email', {
+                  {...register("email", {
                     required: {
                       value: true,
-                      message: 'Email is Required',
+                      message: "Email is Required",
                     },
                     pattern: {
                       value: /[a-z0-9]+@[a-z]+\.[a-z]{2,3}/,
-                      message: 'Provide a valid Email',
+                      message: "Provide a valid Email",
                     },
                   })}
                   id="email"
@@ -118,12 +122,12 @@ const Register: FC<RegisterProps> = ({}) => {
                   className="block w-full rounded-md border-0 py-1.5 text-black shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 px-2 outline-none sm:text-sm sm:leading-6 bg-white"
                 />
                 <>
-                  {errors.email?.type === 'required' && (
+                  {errors.email?.type === "required" && (
                     <span className="label-text-alt text-sm text-red-500">
                       {errors.email.message as string}
                     </span>
                   )}
-                  {errors.email?.type === 'pattern' && (
+                  {errors.email?.type === "pattern" && (
                     <span className="label-text-alt text-sm text-red-500">
                       {errors.email.message as string}
                     </span>
@@ -136,27 +140,29 @@ const Register: FC<RegisterProps> = ({}) => {
               <div className="flex items-center justify-between">
                 <label
                   htmlFor="password"
-                  className="block text-sm font-medium leading-6 text-black">
+                  className="block text-sm font-medium leading-6 text-black"
+                >
                   Password
                 </label>
                 <div className="text-sm">
                   <a
                     href="#"
-                    className="font-semibold text-indigo-600 hover:text-indigo-500">
+                    className="font-semibold text-indigo-600 hover:text-indigo-500"
+                  >
                     Forgot password?
                   </a>
                 </div>
               </div>
               <div className="mt-2">
                 <input
-                  {...register('password', {
+                  {...register("password", {
                     required: {
                       value: true,
-                      message: 'Password is Required',
+                      message: "Password is Required",
                     },
                     minLength: {
                       value: 6,
-                      message: 'Must be 6 characters or longer',
+                      message: "Must be 6 characters or longer",
                     },
                   })}
                   id="password"
@@ -168,12 +174,12 @@ const Register: FC<RegisterProps> = ({}) => {
                   className="block w-full rounded-md border-0 py-1.5 outline-none text-black shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 px-2 sm:text-sm sm:leading-6 bg-white "
                 />
                 <>
-                  {errors.password?.type === 'required' && (
+                  {errors.password?.type === "required" && (
                     <span className="label-text-alt text-sm text-red-500">
                       {errors.password.message as string}
                     </span>
                   )}
-                  {errors.password?.type === 'minLength' && (
+                  {errors.password?.type === "minLength" && (
                     <span className="label-text-alt text-sm text-red-500">
                       {errors.password.message as string}
                     </span>
@@ -185,7 +191,8 @@ const Register: FC<RegisterProps> = ({}) => {
             <div>
               <button
                 type="submit"
-                className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              >
                 Register Now
               </button>
             </div>
@@ -196,15 +203,17 @@ const Register: FC<RegisterProps> = ({}) => {
             Not a member?
             <a
               href="#"
-              className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
+              className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
+            >
               Start a 14 day free trial
             </a>
           </p>
           <div className=" mt-2 text-center text-sm text-gray-500">
             <span className="mr-2">if you already register?</span>
             <Link
-              href={'/login'}
-              className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
+              href={"/login"}
+              className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
+            >
               Sign in
             </Link>
           </div>

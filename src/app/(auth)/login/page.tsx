@@ -31,9 +31,6 @@ const Login: React.FC = () => {
     userLogin(data);
   };
 
-  if (isError) {
-    toast.error(error?.data.message);
-  }
 
   if (isLoading) {
     return <Loading />;
