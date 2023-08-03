@@ -45,6 +45,15 @@ export const ticketsApi = apiSlice.injectEndpoints({
       providesTags: [],
     }),
 
+    //admin get all Tickets
+    adminGetAllTickets: builder.query<any, void>({
+      query: () => `/tickets`,
+      transformErrorResponse(error: Error) {
+        return error;
+      },
+      providesTags: ["open_tickets"],
+    }),
+
     //Single All Close Tickets
     ticketResolveUpdate: builder.query<any, void>({
       query: (id) => `/close-ticket/${id}`,
@@ -62,4 +71,5 @@ export const {
   useSingleUserCloseTicketQuery,
   useTicketDetailsByIdQuery,
   useTicketResolveUpdateQuery,
+  useAdminGetAllTicketsQuery,
 } = ticketsApi;

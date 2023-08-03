@@ -162,16 +162,6 @@ const Login: React.FC = () => {
             </div>
           </form>
 
-          <p className="mt-10 text-center text-sm text-gray-500">
-            Not a member?
-            <a
-              href="#"
-              className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
-            >
-              Start a 14 day free trial
-            </a>
-          </p>
-
           <div className=" mt-2 text-center text-sm text-gray-500">
             <span className="mr-2">if you not register?</span>
             <Link

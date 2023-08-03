@@ -1,10 +1,11 @@
 "use client";
 
+import { RootState } from "@/redux/store";
 import Link from "next/link";
-import { useState } from "react";
+import { useSelector } from "react-redux";
 
 const Sidebar = () => {
-  const [user, setUser] = useState<any>({});
+  const user = useSelector((state: RootState) => state.auth.user);
 
   return (
     <>
@@ -13,7 +14,7 @@ const Sidebar = () => {
           className="block w-full rounded-md py-2 px-4 hover:bg-orange-100"
           href={"/support-center"}
         >
-          {user?.foundUser?.roll === "admin" ? "Dashboard" : "Ticket History"}
+          {user?.roll === "admin" ? "Dashboard" : "Ticket History"}
         </Link>
         <Link
           className="block w-full rounded-md py-2 px-4 hover:bg-orange-100"
@@ -28,7 +29,7 @@ const Sidebar = () => {
           Close Tickets
         </Link>
 
-        {user?.foundUser?.roll === "admin" && (
+        {user?.roll === "admin" && (
           <Link
             className="block w-full rounded-md py-2 px-4 hover:bg-orange-100"
             href={"/support-center/customer"}
@@ -44,7 +45,7 @@ const Sidebar = () => {
           Settings
         </Link>
 
-        {user?.foundUser?.roll !== "admin" && (
+        {user?.roll !== "admin" && (
           <Link href={"/support-center/create-ticket"}>
             <button className=" mt-6 w-full rounded-md bg-orange-500 py-2  text-white hover:bg-orange-400 ">
               Create an Ticket
