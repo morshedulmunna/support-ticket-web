@@ -1,10 +1,11 @@
 "use client";
 
+import Loading from "@/components/Loading";
 import Sidebar from "@/components/Sidebar";
 import { RootState } from "@/redux/store";
 import { useRouter } from "next/navigation";
-import { useDispatch, useSelector } from "react-redux";
-import Loading from "./open-tickets/loading";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
 
 type Props = {
   children: any;
@@ -12,12 +13,13 @@ type Props = {
 
 export default function DashboardLayout({ children }: Props) {
   const route = useRouter();
-  const dispatch = useDispatch();
   const user = useSelector((state: RootState) => state.auth);
 
-  if (!user.accessToken) {
-    route.push("/login");
-  }
+  useEffect(() => {
+    if (!user.accessToken) {
+      route.push("/login");
+    }
+  }, [user.accessToken, route]);
 
   if (!user.accessToken) {
     return <Loading />;
