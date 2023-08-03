@@ -1,5 +1,6 @@
+import { RootState } from "@/redux/store";
 import { formatDate } from "@/utils";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Feedback from "./Feedback";
 
 type Props = {
@@ -20,11 +21,12 @@ export default function TicketDetails({
   data: { title, createDate, description, status, subject, tiket_id },
 }: Props) {
   // const {} = useTicketResolveUpdateQuery(tiket_id);
+  const user = useSelector((state: RootState) => state.auth);
 
   const dispatch = useDispatch();
 
   return (
-    <div className="bg-orange-100/40">
+    <div className="">
       {/*  */}
       <div className="grid grid-cols-12  gap-1 mb-12 ">
         <div className="col-span-9 p-2 rounded  ">
@@ -35,9 +37,12 @@ export default function TicketDetails({
           <p className="text-sm py-2">{description}</p>
         </div>
         <div className="col-span-3 mt-4 rounded ">
-          <button className="w-full bg-orange-500 py-1 text-white rounded hover:bg-orange-400 duration-150 ease-linear">
-            Resolve
-          </button>
+          {user.user?.roll !== "customer" ? (
+            <button className="w-full bg-orange-500 py-1 text-white rounded hover:bg-orange-400 duration-150 ease-linear">
+              Resolve
+            </button>
+          ) : null}
+
           <div className="p-2 text-orange-500/80">
             <p className="capitalize">
               <span className="font-medium">Status : </span>

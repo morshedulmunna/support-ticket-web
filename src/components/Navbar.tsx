@@ -1,7 +1,7 @@
 "use client";
 
 import { logOut } from "@/redux/features/auth/authSlice";
-import type { RootState } from "@/redux/store";
+import { RootState } from "@/redux/store";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -11,9 +11,10 @@ import Logo from "./Logo";
 
 const Navbar = () => {
   const [toggle, setToggle] = useState<Boolean>(false);
-  const token = useSelector((state: RootState) => state.auth.accessToken);
   const dispatch = useDispatch();
   const router = useRouter();
+
+  const user = useSelector((state: RootState) => state.auth);
 
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [visible, setVisible] = useState(true);
@@ -76,7 +77,7 @@ const Navbar = () => {
               </ul>
             )}
 
-            {token ? (
+            {user.accessToken ? (
               <>
                 <Link
                   href={"/support-center"}

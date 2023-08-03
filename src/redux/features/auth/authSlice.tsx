@@ -2,7 +2,14 @@ import { createSlice } from "@reduxjs/toolkit";
 
 export type authStateType = {
   accessToken: undefined | string;
-  user: undefined | object;
+  user:
+    | {
+        email: string;
+        name: string;
+        roll: string;
+        subject: string;
+      }
+    | undefined;
 };
 
 const initialState = {
