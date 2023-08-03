@@ -7,10 +7,10 @@ const SupportCenter: FC<SupportCenterProps> = ({}) => {
     <>
       <div className="grid grid-cols-5">
         {/* Gretings */}
-        <div className="col-span-4">
+        <div className="col-span-5">
           <div className=" p-3 rounded-md shadow-sm border border-orange-200">
             <p className="text-xl mb-1 font-semibold text-orange-500">
-              Congratulations Jon
+              Congratulations! Welcome to Dashboard
             </p>
             <p className="text-sm">
               We believe in helping youMake. Happy. Customers.Easily scale and
@@ -23,7 +23,7 @@ const SupportCenter: FC<SupportCenterProps> = ({}) => {
             </button> */}
           </div>
         </div>
-        <div className="col-span-1">card</div>
+        {/* <div className="col-span-1">card</div> */}
       </div>
     </>
   );
