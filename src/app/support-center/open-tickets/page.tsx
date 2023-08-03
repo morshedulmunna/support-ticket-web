@@ -21,6 +21,7 @@ const OpenTickets = () => {
   } = useSingleUserOpenTicketQuery(undefined, {
     refetchOnFocus: true,
   });
+
   const {
     data: adminOpenTickets,
     isLoading: _aIsLoading,
@@ -36,14 +37,17 @@ const OpenTickets = () => {
   const roll = useSelector((state: RootState) => state.auth.user?.roll);
 
   useEffect(() => {
-    if (roll === "admin") {
-      setTicketData(adminOpenTickets);
-    } else if (roll === "customer") {
-      setTicketData(customerOpenTickets);
-    } else {
-      setError("No Ticket Found.....");
+    switch (roll) {
+      case "customer":
+        setTicketData(customerOpenTickets);
+        break;
+      case "admin":
+        setTicketData(adminOpenTickets);
+        break;
+      default:
+        setError("No Ticket Found.....");
     }
-  }, []);
+  }, [setTicketData, setError]);
 
   return (
     <>

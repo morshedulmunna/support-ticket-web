@@ -21,17 +21,21 @@ const CloseTickets: FC<CloseTicketsProps> = ({}) => {
   const roll = useSelector((state: RootState) => state.auth.user?.roll);
 
   useEffect(() => {
-    if (ticketData?.length === 0) {
-      setError("No Ticket Found.....");
-    }
-
     switch (roll) {
       case "customer":
         setTicketData(customerTicket);
-      default:
+        break;
+      case "admin":
         setTicketData([]);
+        break;
+      default:
+        setError("No Ticket Found.....");
     }
-  }, []);
+
+    if (ticketData?.length === 0) {
+      setError("No Ticket Found.....");
+    }
+  }, [setTicketData, setError]);
 
   return (
     <React.Fragment>
