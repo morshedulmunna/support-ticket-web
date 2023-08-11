@@ -26,7 +26,6 @@ export const authApi = apiSlice.injectEndpoints({
               user: result.data.user,
             })
           );
-          console.log(result);
 
           api.dispatch(
             login({

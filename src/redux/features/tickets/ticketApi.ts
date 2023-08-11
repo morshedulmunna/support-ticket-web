@@ -10,7 +10,7 @@ export const ticketsApi = apiSlice.injectEndpoints({
         method: "POST",
         body: data,
       }),
-      invalidatesTags: ["open_tickets"],
+      invalidatesTags: ["create_Tickets"],
       transformErrorResponse(error: Error) {
         return error;
       },
@@ -23,7 +23,7 @@ export const ticketsApi = apiSlice.injectEndpoints({
         return error;
       },
       keepUnusedDataFor: 600,
-      providesTags: ["open_tickets"],
+      providesTags: ["create_Tickets"],
     }),
 
     //Single All Close Tickets
@@ -33,7 +33,7 @@ export const ticketsApi = apiSlice.injectEndpoints({
         return error;
       },
       keepUnusedDataFor: 600,
-      providesTags: ["ticket_details"],
+      providesTags: ["open_tickets"],
     }),
 
     //Single All Close Tickets
@@ -51,7 +51,7 @@ export const ticketsApi = apiSlice.injectEndpoints({
       transformErrorResponse(error: Error) {
         return error;
       },
-      providesTags: ["open_tickets"],
+      providesTags: ["create_Tickets"],
     }),
 
     //Single All Close Tickets
@@ -61,6 +61,17 @@ export const ticketsApi = apiSlice.injectEndpoints({
         return error;
       },
       providesTags: ["ticket_details"],
+    }),
+
+    ticketDeleteByID: builder.mutation({
+      query: (id) => ({
+        url: `/tickets/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["create_Tickets", "open_tickets", "create_Tickets"],
+      transformErrorResponse(error: Error) {
+        return error;
+      },
     }),
   }),
 });
@@ -72,4 +83,5 @@ export const {
   useTicketDetailsByIdQuery,
   useTicketResolveUpdateQuery,
   useAdminGetAllTicketsQuery,
+  useTicketDeleteByIDMutation,
 } = ticketsApi;

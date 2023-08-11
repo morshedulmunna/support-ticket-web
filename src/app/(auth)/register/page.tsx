@@ -29,6 +29,9 @@ const Register: FC<RegisterProps> = ({}) => {
   const [userRegister, { isLoading, isSuccess, isError, error }] =
     useUserRegisterMutation();
 
+  if (error) {
+    toast.error("Something wrong!");
+  }
   if (isLoading) {
     return <Loading />;
   }

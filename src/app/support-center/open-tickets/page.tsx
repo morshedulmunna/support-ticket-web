@@ -6,13 +6,10 @@ import {
   useAdminGetAllTicketsQuery,
   useSingleUserOpenTicketQuery,
 } from "@/redux/features/tickets/ticketApi";
-import { RootState } from "@/redux/store";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 
 const OpenTickets = () => {
   const [errors, setError] = useState("");
-  const [ticketData, setTicketData] = useState<any>([]);
 
   const {
     data: customerOpenTickets,
@@ -34,30 +31,23 @@ const OpenTickets = () => {
     setError("Something Wrong");
   }
 
-  const roll = useSelector((state: RootState) => state.auth.user?.roll);
-
   useEffect(() => {
-    switch (roll) {
-      case "customer":
-        setTicketData(customerOpenTickets);
-        break;
-      case "admin":
-        setTicketData(adminOpenTickets);
-        break;
-      default:
-        setError("No Ticket Found.....");
+    if (adminOpenTickets?.length === 0 || customerOpenTickets?.length === 0) {
+      setError("No Ticket Found.....");
     }
-  }, [setTicketData, setError]);
+  }, []);
 
   return (
     <>
-      <Search level="    All Open Tickets _______" />
-      {isLoading || _aIsLoading ? (
-        <p>Loading..........</p>
-      ) : (
-        <Table data={ticketData} />
-      )}
-      <p className="text-red-500 font-semibold mt-2">{errors}</p>
+      <div>
+        <Search level="    All Close Tickets _______" />
+        {isLoading ? (
+          <p>Loading..........</p>
+        ) : (
+          <Table data={adminOpenTickets || customerOpenTickets} />
+        )}
+        <p className="text-red-500 font-semibold mt-2">{errors}</p>
+      </div>
     </>
   );
 };

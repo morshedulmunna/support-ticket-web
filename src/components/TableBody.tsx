@@ -1,3 +1,4 @@
+import { useTicketDeleteByIDMutation } from "@/redux/features/tickets/ticketApi";
 import Link from "next/link";
 import React, { type FC } from "react";
 import { MdClose } from "react-icons/md";
@@ -16,6 +17,9 @@ interface TableBodyProps {
 }
 
 const TableBody: FC<TableBodyProps> = ({ each }) => {
+  const [ticketDeleteByID, { error, isLoading }] =
+    useTicketDeleteByIDMutation();
+
   return (
     <React.Fragment>
       <tr className="border-b dark:border-neutral-200">
@@ -35,7 +39,10 @@ const TableBody: FC<TableBodyProps> = ({ each }) => {
               view
             </button>
           </Link>
-          <button className="bg-red-400 h-5 w-5 flex justify-center items-center rounded text-white font-medium hover:bg-red-600  duration-200 ease-linear">
+          <button
+            onClick={() => ticketDeleteByID(each.tiket_id)}
+            className="bg-red-400 h-5 w-5 flex justify-center items-center rounded text-white font-medium hover:bg-red-600  duration-200 ease-linear"
+          >
             <MdClose size={20} />
           </button>
         </td>
