@@ -24,7 +24,7 @@ export default function Category({}: Props) {
         />
         {!isOpen ? (
           <>
-            {isLoading ? <p>Loading..........</p> : <CategoryList />}
+            {isLoading ? <p>Loading..........</p> : <CategoryList user={[]} />}
             <p className="text-red-500 font-semibold mt-2">{errors}</p>
           </>
         ) : (
