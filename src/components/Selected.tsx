@@ -47,7 +47,7 @@ export default function Selected({}: Props) {
           <div className="bg-white border w-full px-2 pt-1 rounded">
             {searchResults.map((item) => (
               <li
-                // key={item.id}
+                key={12}
                 onClick={() => handleItemClick(item)}
                 className="py-1 list-none"
               >

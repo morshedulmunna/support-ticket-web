@@ -49,7 +49,7 @@ export default function CategoryList({ customer, user }: Props) {
                           </td>
                         </>
                       ) : (
-                        <td className="whitespace-nowrap  ">"Sdasdf asdas"</td>
+                        <td className="whitespace-nowrap  ">Umme Sathi</td>
                       )}
 
                       <td className="whitespace-nowrap py-4 space-x-3 flex items-center">
