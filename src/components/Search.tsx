@@ -1,19 +1,22 @@
 "use client";
 
+import { openCategoryForm } from "@/redux/features/category/categorySlice";
 import React, { useState, type FC } from "react";
 import { BiListPlus } from "react-icons/bi";
 import { BsSearch } from "react-icons/bs";
+import { useDispatch } from "react-redux";
 
 interface SearchProps {
   level: string;
   category?: boolean;
-  setIsOpen?: any;
+
   isOpen?: boolean;
 }
 
-const Search: FC<SearchProps> = ({ level, category, setIsOpen, isOpen }) => {
+const Search: FC<SearchProps> = ({ level, category, isOpen }) => {
   const [search, setSearch] = useState<string>("");
   console.log(search);
+  const dispatch = useDispatch();
 
   return (
     <React.Fragment>
@@ -33,7 +36,7 @@ const Search: FC<SearchProps> = ({ level, category, setIsOpen, isOpen }) => {
           </div>
           {category ? (
             <button
-              onClick={() => setIsOpen(!isOpen)}
+              onClick={() => dispatch(openCategoryForm(true))}
               className="bg-orange-500 px-2 flex justify-center items-center text-white font-medium rounded text-xs"
             >
               <BiListPlus color="white" size={20} />

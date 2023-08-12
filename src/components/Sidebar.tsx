@@ -1,15 +1,16 @@
 "use client";
 
+import { openCategoryForm } from "@/redux/features/category/categorySlice";
 import { RootState } from "@/redux/store";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const Sidebar = () => {
   const user = useSelector((state: RootState) => state.auth.user);
 
   const path = usePathname();
-
+  const dispatch = useDispatch();
   return (
     <>
       <div className="rounded bg-orange-50 px-3 py-6">
@@ -49,6 +50,7 @@ const Sidebar = () => {
               Customers
             </Link>
             <Link
+              onClick={() => dispatch(openCategoryForm(false))}
               className={`block w-full rounded-md py-2 px-4 hover:bg-orange-100 ${
                 path === "/support-center/category" && "bg-orange-100"
               } `}

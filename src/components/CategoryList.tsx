@@ -6,9 +6,15 @@ type Props = {
     roll: string;
     email: string;
   }[];
+  categoryLists?: {
+    categoryID: string;
+    type: string;
+  }[];
 };
 
-export default function CategoryList({ customer, user }: Props) {
+export default function CategoryList({ customer, user, categoryLists }: Props) {
+  console.log(categoryLists);
+
   return (
     <div>
       <div className="flex flex-col">
@@ -40,17 +46,12 @@ export default function CategoryList({ customer, user }: Props) {
                   {user?.map(({ id, name, email, roll }) => (
                     <tr key={id} className="border-b dark:border-neutral-200 ">
                       <td className="whitespace-nowrap   ">{id}</td>
-                      {customer ? (
-                        <>
-                          <tr className="px-2 py-4">{email}</tr>
-                          <th className="px-2 py-4 font-normal">{name}</th>
-                          <td className="whitespace-nowrap font-medium  ">
-                            {roll}
-                          </td>
-                        </>
-                      ) : (
-                        <td className="whitespace-nowrap  ">Umme Sathi</td>
-                      )}
+
+                      <tr className="px-2 py-4">{email}</tr>
+                      <th className="px-2 py-4 font-normal">{name}</th>
+                      <td className="whitespace-nowrap font-medium  ">
+                        {roll}
+                      </td>
 
                       <td className="whitespace-nowrap py-4 space-x-3 flex items-center">
                         {roll === "customer" ? (
@@ -58,6 +59,21 @@ export default function CategoryList({ customer, user }: Props) {
                             Assistant
                           </button>
                         ) : null}
+                      </td>
+                    </tr>
+                  ))}
+
+                  {/* Category List */}
+                  {categoryLists?.map(({ categoryID, type }) => (
+                    <tr
+                      key={categoryID}
+                      className="border-b dark:border-neutral-200 "
+                    >
+                      <td className="whitespace-nowrap   ">{categoryID}</td>
+                      <td className="whitespace-nowrap  "> {type} </td>
+
+                      <td className="whitespace-nowrap py-4 space-x-3 flex items-center">
+                        <button>Delete</button>
                       </td>
                     </tr>
                   ))}

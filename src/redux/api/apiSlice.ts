@@ -23,6 +23,7 @@ export const apiSlice = createApi({
     "update_tickets",
     "create_Tickets",
     "admin_all_tickets",
+    "categoryCreate",
   ],
 
   endpoints: (builder) => ({}),
