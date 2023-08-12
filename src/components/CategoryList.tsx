@@ -1,6 +1,6 @@
 type Props = {
   customer?: boolean;
-  user: {
+  user?: {
     name: string;
     id: string;
     roll: string;
