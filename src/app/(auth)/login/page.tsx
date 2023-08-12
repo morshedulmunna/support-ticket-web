@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 import React from "react";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
 
 type Inputs = {
   email: string;
@@ -36,6 +37,11 @@ const Login: React.FC = () => {
 
   if (isSuccess) {
     router.push("support-center");
+  }
+
+  if (error) {
+    toast.error("Something Wrong!");
+    // toast.error("Something Wrong!", error?.data.message);
   }
 
   return (

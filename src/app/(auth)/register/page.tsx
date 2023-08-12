@@ -30,8 +30,10 @@ const Register: FC<RegisterProps> = ({}) => {
     useUserRegisterMutation();
 
   if (error) {
-    toast.error("Something wrong!");
+    toast.error("Something Wrong!");
+    // toast.error("Something Wrong!", error?.data.message);
   }
+
   if (isLoading) {
     return <Loading />;
   }
