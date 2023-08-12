@@ -11,12 +11,17 @@ export default function Category({}: Props) {
   let isLoading = false;
   let errors = "No Category Found";
 
-  const [isOpen, setIsOpen] = useState<boolean>(true);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   return (
     <>
       <div>
-        <Search level="List of Category _______" category />
+        <Search
+          level="List of Category _______"
+          category
+          setIsOpen={setIsOpen}
+          isOpen={isOpen}
+        />
         {!isOpen ? (
           <>
             {isLoading ? <p>Loading..........</p> : <CategoryList />}

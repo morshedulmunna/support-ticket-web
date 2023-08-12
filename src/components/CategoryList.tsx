@@ -1,10 +1,14 @@
-import { MdClose } from "react-icons/md";
-
 type Props = {
   customer?: boolean;
+  user: {
+    name: string;
+    id: string;
+    roll: string;
+    email: string;
+  }[];
 };
 
-export default function CategoryList({ customer }: Props) {
+export default function CategoryList({ customer, user }: Props) {
   return (
     <div>
       <div className="flex flex-col">
@@ -15,8 +19,15 @@ export default function CategoryList({ customer }: Props) {
                 <thead className="border-b font-medium dark:border-neutral-500">
                   <tr>
                     <th className="px-2 py-4">#</th>
-                    {customer && <th className="px-2 py-4">Email</th>}
-                    <th className="px-2 py-4">Name</th>
+                    {customer ? (
+                      <>
+                        <th className="px-2 py-4">Email</th>
+                        <th className="px-2 py-4">Name</th>
+                        <th className="px-2 py-4">Roll</th>
+                      </>
+                    ) : (
+                      <th className="px-2 py-4">Name</th>
+                    )}
 
                     <th className="px-2 py-4">Action</th>
                   </tr>
@@ -25,20 +36,32 @@ export default function CategoryList({ customer }: Props) {
                   {/* {data?.map((each) => (
                     <TableBody key={each.tiket_id} each={each} />
                   ))} */}
-                  <tr className="border-b dark:border-neutral-200 font-[400]">
-                    <td className="whitespace-nowrap   ">#d2347fskjdfho</td>
-                    {customer && <tr className="px-2 py-4">munna@gmail.com</tr>}
-                    <td className="whitespace-nowrap  ">"Sdasdf asdas"</td>
 
-                    <td className="whitespace-nowrap py-4 space-x-3 flex items-center">
-                      <button
-                        // onClick={() => ticketDeleteByID(each.tiket_id)}
-                        className="bg-red-400 h-4 w-4 flex justify-center items-center rounded text-white font-medium hover:bg-red-600  duration-200 ease-linear"
-                      >
-                        <MdClose size={18} />
-                      </button>
-                    </td>
-                  </tr>
+                  {user?.map(({ id, name, email, roll }) => (
+                    <tr key={id} className="border-b dark:border-neutral-200 ">
+                      <td className="whitespace-nowrap   ">{id}</td>
+                      {customer ? (
+                        <>
+                          <tr className="px-2 py-4">{email}</tr>
+                          <th className="px-2 py-4 font-normal">{name}</th>
+                          <td className="whitespace-nowrap font-medium  ">
+                            {roll}
+                          </td>
+                        </>
+                      ) : (
+                        <td className="whitespace-nowrap  ">"Sdasdf asdas"</td>
+                      )}
+
+                      <td className="whitespace-nowrap py-4 space-x-3 flex items-center">
+                        {roll === "customer" ? (
+                          <button className="bg-gray-400 px-2 py-1 flex justify-center items-center rounded text-white font-medium hover:bg-orange-400  duration-200 ease-linear">
+                            Assistant
+                          </button>
+                        ) : null}
+                      </td>
+                    </tr>
+                  ))}
+
                   {/* End */}
                 </tbody>
               </table>

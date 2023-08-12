@@ -7,9 +7,11 @@ import { BsSearch } from "react-icons/bs";
 interface SearchProps {
   level: string;
   category?: boolean;
+  setIsOpen?: any;
+  isOpen?: boolean;
 }
 
-const Search: FC<SearchProps> = ({ level, category }) => {
+const Search: FC<SearchProps> = ({ level, category, setIsOpen, isOpen }) => {
   const [search, setSearch] = useState<string>("");
   console.log(search);
 
@@ -30,7 +32,10 @@ const Search: FC<SearchProps> = ({ level, category }) => {
             <BsSearch className="absolute top-[9px] left-2" color="gray" />
           </div>
           {category ? (
-            <button className="bg-orange-500 px-2 flex justify-center items-center text-white font-medium rounded text-xs">
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="bg-orange-500 px-2 flex justify-center items-center text-white font-medium rounded text-xs"
+            >
               <BiListPlus color="white" size={20} />
               <span>Create</span>
             </button>
