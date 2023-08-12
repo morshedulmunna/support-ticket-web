@@ -40,7 +40,7 @@ const OpenTickets = () => {
   return (
     <>
       <div>
-        <Search level="    All Close Tickets _______" />
+        <Search level="    All Open Tickets _______" />
         {isLoading ? (
           <p>Loading..........</p>
         ) : (
