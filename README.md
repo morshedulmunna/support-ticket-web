@@ -1,34 +1,40 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Project Requirement 
 
-## Getting Started
+[Live Website](https://support-ticket-system-asf.vercel.app/)
 
-First, run the development server:
+### **Customer Portal**
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+- Customers can create an account or log in to the system.
+    - Register
+    - Sign in!
+    - Email validation after register.
+    - forget password.
+    - google login.
+    - Facebook login
+- Customers can submit problems, providing a description and selecting a problem type from a predefined list or choosing “Other” for unspecified issues.
+- Customer can view a dashboard displaying a list of problems / unresolved / resolved.
+- Customer can filter and sort problems based on different parameters such as status, priority.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### **Admin Portal**
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Admins can log in using their credentials.
+- Admins can view a dashboard displaying a list of unresolved problems, categorized by type.
+- Admins can filter and sort problems based on different parameters such as status, priority.
+- Admins can assign problems to specific admins based on their expertise (admin specialization).
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### **Assistant Specialization**
 
-## Learn More
+- Each a**ssistant** has a specialized problem type they are responsible for.
+- An a**ssistant** can only receive problems that match their specialization.
 
-To learn more about Next.js, take a look at the following resources:
+### **Problem Handling**
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- a**ssistant and admin** can open a problem to view its details and history.
+- a**ssistant and admin** can send replies to customers’ problem reports, providing updates or solutions.
+- Customers receive reply to notifications when a**ssistant and admin** reply to their problems.
+- Customers can reply to admin messages to provide feedback or ask further questions.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### **Feedback Loop**
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- After the problem is resolved, customers can provide feedback on the overall support experience.
+- Admins can view and respond to customer feedback.
