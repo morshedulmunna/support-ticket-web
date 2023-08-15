@@ -10,7 +10,7 @@ export const ticketsApi = apiSlice.injectEndpoints({
         method: "POST",
         body: data,
       }),
-      invalidatesTags: ["create_Tickets"],
+      invalidatesTags: ["open_tickets"],
       transformErrorResponse(error: Error) {
         return error;
       },
