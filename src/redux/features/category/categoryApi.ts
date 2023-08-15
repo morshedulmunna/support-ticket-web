@@ -15,6 +15,7 @@ export const categoryApi = apiSlice.injectEndpoints({
       query: () => ({
         url: "/category",
       }),
+
       providesTags: ["categoryCreate"],
     }),
 

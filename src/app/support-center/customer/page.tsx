@@ -4,13 +4,14 @@ import CategoryList from "@/components/CategoryList";
 import Search from "@/components/Search";
 import { useGettingUserQuery } from "@/redux/features/user/userApi";
 import { useEffect } from "react";
+import { toast } from "react-toastify";
 
 type Props = {};
 
 export default function Customer({}: Props) {
   let errors = "";
 
-  const { data, isLoading, error } = useGettingUserQuery(undefined, {
+  const { data, isLoading, error } = useGettingUserQuery<any>(undefined, {
     refetchOnMountOrArgChange: true,
   });
 
@@ -19,6 +20,10 @@ export default function Customer({}: Props) {
       errors = "No Customer Found";
     }
   }, []);
+
+  if (error) {
+    toast.error(error?.data?.message);
+  }
 
   return (
     <div>

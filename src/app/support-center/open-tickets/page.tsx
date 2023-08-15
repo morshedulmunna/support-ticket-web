@@ -35,7 +35,7 @@ const OpenTickets = () => {
     if (adminOpenTickets?.length === 0 || customerOpenTickets?.length === 0) {
       setError("No Ticket Found.....");
     }
-  }, []);
+  }, [adminOpenTickets]);
 
   return (
     <>

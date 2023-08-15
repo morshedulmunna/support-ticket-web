@@ -1,8 +1,15 @@
-import { useCategoryDeleteByIDMutation } from "@/redux/features/category/categoryApi";
-import { useEffect } from "react";
+import {
+  useCategoryDeleteByIDMutation,
+  useGetAllCategoryQuery,
+} from "@/redux/features/category/categoryApi";
+import { useUserDeleteMutation } from "@/redux/features/user/userApi";
+import { useEffect, useState } from "react";
 import { BsXSquare } from "react-icons/bs";
+import { TiDeleteOutline } from "react-icons/ti";
 import { toast } from "react-toastify";
+import ChangeCustomerRoll from "./ChangeCustomerRoll";
 import Loading from "./Loading";
+import ModalState from "./Modal";
 
 type Props = {
   customer?: boolean;
@@ -22,6 +29,11 @@ export default function CategoryList({ customer, user, categoryLists }: Props) {
   const [categoryDeleteByID, { error, isLoading, isSuccess }] =
     useCategoryDeleteByIDMutation<any>();
 
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [selectedUser, setSelectedUser] = useState<string>("");
+
+  console.log(selectedUser);
+
   if (isLoading) {
     <Loading />;
   }
@@ -34,6 +46,24 @@ export default function CategoryList({ customer, user, categoryLists }: Props) {
       toast.success("Delete Successfully!");
     }
   }, [isSuccess]);
+
+  const {
+    data,
+    isLoading: categoryLoading,
+    error: categoryError,
+  } = useGetAllCategoryQuery<any>(undefined, {
+    refetchOnMountOrArgChange: true,
+  });
+
+  if (categoryError) {
+    toast.error(categoryError?.data?.message);
+  }
+
+  const [userDelete, { data: deleteUser, error: deleteError }] =
+    useUserDeleteMutation<any>();
+
+  console.log(deleteUser);
+  console.log(deleteError);
 
   return (
     <div>
@@ -62,7 +92,6 @@ export default function CategoryList({ customer, user, categoryLists }: Props) {
                   {/* {data?.map((each) => (
                     <TableBody key={each.tiket_id} each={each} />
                   ))} */}
-
                   {user?.map(({ id, name, email, roll }) => (
                     <tr key={id} className="border-b  dark:border-neutral-200 ">
                       <td className="whitespace-nowrap   ">{id}</td>
@@ -75,14 +104,23 @@ export default function CategoryList({ customer, user, categoryLists }: Props) {
 
                       <td className="whitespace-nowrap py-4 space-x-3 flex items-center">
                         {roll === "customer" ? (
-                          <button className="bg-gray-400 px-2 py-1 flex justify-center items-center rounded text-white font-medium hover:bg-orange-400  duration-200 ease-linear">
-                            Assistant
+                          <button
+                            onClick={() => {
+                              setIsOpen(true);
+                              setSelectedUser(id);
+                            }}
+                            className="bg-gray-400 px-2 py-1 flex justify-center items-center rounded text-white font-medium hover:bg-orange-400  duration-200 ease-linear"
+                          >
+                            Change Roll
+                          </button>
+                        ) : roll === "assistance" ? (
+                          <button onClick={() => userDelete(id)}>
+                            <TiDeleteOutline size={20} color="red" />
                           </button>
                         ) : null}
                       </td>
                     </tr>
                   ))}
-
                   {/* Category List */}
                   {categoryLists?.map(({ categoryID, type }) => (
                     <tr
@@ -99,8 +137,14 @@ export default function CategoryList({ customer, user, categoryLists }: Props) {
                       </td>
                     </tr>
                   ))}
-
                   {/* End */}
+                  <ModalState isOpen={isOpen} onClose={setIsOpen}>
+                    <ChangeCustomerRoll
+                      selectedUser={selectedUser}
+                      data={data}
+                      setIsOpen={setIsOpen}
+                    />
+                  </ModalState>
                 </tbody>
               </table>
             </div>
