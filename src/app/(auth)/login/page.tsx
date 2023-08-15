@@ -31,6 +31,19 @@ const Login: React.FC = () => {
     userLogin(data);
   };
 
+  const supperLogin = () => {
+    userLogin({
+      email: "superadmin@gmail.com",
+      password: "superadmin",
+    });
+  };
+  const assistantLogin = () => {
+    userLogin({
+      email: "admin@gmail.com",
+      password: "admin123",
+    });
+  };
+
   if (isLoading) {
     return <Loading />;
   }
@@ -168,6 +181,24 @@ const Login: React.FC = () => {
               </button>
             </div>
           </form>
+
+          <button
+            onClick={() => {
+              supperLogin();
+            }}
+            className="my-2 block hover:underline"
+          >
+            🚀 Super Admin Login{" "}
+          </button>
+
+          <button
+            onClick={() => {
+              assistantLogin();
+            }}
+            className=" hover:underline"
+          >
+            🏎Assistant Login{" "}
+          </button>
 
           <div className=" mt-2 text-center text-sm text-gray-500">
             <span className="mr-2">if you not register?</span>
