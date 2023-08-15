@@ -1,6 +1,7 @@
 "use client";
 
 import Loading from "@/components/Loading";
+import { useGetAllCategoryQuery } from "@/redux/features/category/categoryApi";
 import { useTicketCreateMutation } from "@/redux/features/tickets/ticketApi";
 import { useState } from "react";
 import { useForm, type SubmitHandler } from "react-hook-form";
@@ -19,26 +20,40 @@ const CreateTicket = () => {
     reset,
     formState: { errors },
   } = useForm<Inputs>();
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   const [selectedOption, setSelectedOption] = useState<any>("");
 
-  const [ticketCreate, { isLoading, isSuccess, data: ticket }] =
-    useTicketCreateMutation();
+  const [
+    ticketCreate,
+    { isLoading, isSuccess, data: ticket, error: ticketError },
+  ] = useTicketCreateMutation<any>();
+
+  const { data, error } = useGetAllCategoryQuery<any>(undefined, {
+    refetchOnMountOrArgChange: true,
+  });
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     const validData = {
       title: data.title,
-      subject: selectedOption,
+      categoryID: selectedOption,
       description: data.details,
     };
     ticketCreate(validData);
     reset();
   };
+
   if (isLoading) {
     return <Loading />;
   }
   if (isSuccess) {
     toast.success(`Ticket Create id is ${ticket.tiket_id}`);
+  }
+
+  if (ticketError) {
+    toast.error(ticketError?.data?.message);
+  }
+
+  if (error) {
+    toast.error(error?.data?.message);
   }
 
   return (
@@ -62,12 +77,13 @@ const CreateTicket = () => {
 
           <select
             className=" bg-white border py-2 rounded-md focus:outline-none focus:border-orange-500 select-primary w-full"
-            value={selectedOption}
             onChange={(e) => setSelectedOption(e.target.value)}
           >
             <option>Select Category</option>
-            {[]?.map((sub: any) => (
-              <option key={sub.id}>{sub.type}</option>
+            {data?.map((sub: any) => (
+              <option key={sub.categoryID} value={sub.categoryID}>
+                {sub.type}
+              </option>
             ))}
           </select>
           {errors.subject && (
