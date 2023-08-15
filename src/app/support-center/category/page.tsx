@@ -8,7 +8,6 @@ import { RootState } from "@/redux/store";
 import { useEffect } from "react";
 import { Dots } from "react-activity";
 import { useSelector } from "react-redux";
-import { toast } from "react-toastify";
 type Props = {};
 
 export default function Category({}: Props) {
@@ -17,21 +16,24 @@ export default function Category({}: Props) {
   // const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const isOpen = useSelector((state: RootState) => state.category.isOpen);
-  const { data, error, isLoading, refetch } = useGetAllCategoryQuery(
+  const { data, error, isLoading, refetch } = useGetAllCategoryQuery<any>(
     undefined,
     {
       refetchOnMountOrArgChange: true,
     }
   );
 
+  console.log(data);
+
   useEffect(() => {
     if (data?.length === 0) {
       content = "No Data Found";
+
+      console.log(content);
     }
 
     if (error) {
-      toast.error("Something Wrong!");
-      console.log(error);
+      console.log(error?.data?.message);
     }
 
     if (isLoading) {

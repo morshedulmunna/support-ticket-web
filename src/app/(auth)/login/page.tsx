@@ -25,7 +25,7 @@ const Login: React.FC = () => {
   const router = useRouter();
   const dispatch = useDispatch();
   const [userLogin, { data, isSuccess, isLoading, isError, error }] =
-    useUserLoginMutation();
+    useUserLoginMutation<any>();
 
   const onSubmit: SubmitHandler<Inputs> = (data: LoginUser) => {
     userLogin(data);
@@ -40,8 +40,9 @@ const Login: React.FC = () => {
   }
 
   if (error) {
-    toast.error("Something Wrong!");
-    // toast.error("Something Wrong!", error?.data.message);
+    console.log(error);
+
+    toast.error(error?.data?.message);
   }
 
   return (

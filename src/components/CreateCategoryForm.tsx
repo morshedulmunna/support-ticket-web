@@ -12,7 +12,7 @@ type Props = {
 export default function CreateCategoryForm({ refetch }: Props) {
   const [categoryType, setCategoryType] = useState<string>("");
   const [categoryCrate, { error, isLoading, isSuccess }] =
-    useCategoryCrateMutation();
+    useCategoryCrateMutation<any>();
 
   let content;
 
@@ -25,8 +25,7 @@ export default function CreateCategoryForm({ refetch }: Props) {
 
   useEffect(() => {
     if (error) {
-      toast.error("Something Wrong!");
-      console.log(error);
+      toast.error(error?.data?.message);
     }
 
     if (isLoading) {
@@ -36,7 +35,7 @@ export default function CreateCategoryForm({ refetch }: Props) {
     if (isSuccess) {
       toast.success(` ${categoryType} Create Successfully! `);
     }
-  }, [isSuccess]);
+  }, [isSuccess, error, isLoading]);
 
   return (
     <>
@@ -56,12 +55,7 @@ export default function CreateCategoryForm({ refetch }: Props) {
             />
           </div>
 
-          {/* Select user List */}
           <div className="">
-            {/* <div className="w-full">
-              <Selected />
-            </div> */}
-
             <button
               onClick={handleCreateType}
               className="mt-4 flex bg-orange-500 px-4 py-1 rounded text-white font-serif hover:bg-orange-500/80 duration-150 ease-linear"

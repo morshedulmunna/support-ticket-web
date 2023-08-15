@@ -1,3 +1,9 @@
+import { useCategoryDeleteByIDMutation } from "@/redux/features/category/categoryApi";
+import { useEffect } from "react";
+import { BsXSquare } from "react-icons/bs";
+import { toast } from "react-toastify";
+import Loading from "./Loading";
+
 type Props = {
   customer?: boolean;
   user?: {
@@ -13,7 +19,21 @@ type Props = {
 };
 
 export default function CategoryList({ customer, user, categoryLists }: Props) {
-  console.log(categoryLists);
+  const [categoryDeleteByID, { error, isLoading, isSuccess }] =
+    useCategoryDeleteByIDMutation<any>();
+
+  if (isLoading) {
+    <Loading />;
+  }
+
+  useEffect(() => {
+    if (error) {
+      toast.error(error?.data?.message);
+    }
+    if (isSuccess) {
+      toast.success("Delete Successfully!");
+    }
+  }, [isSuccess]);
 
   return (
     <div>
@@ -44,10 +64,10 @@ export default function CategoryList({ customer, user, categoryLists }: Props) {
                   ))} */}
 
                   {user?.map(({ id, name, email, roll }) => (
-                    <tr key={id} className="border-b dark:border-neutral-200 ">
+                    <tr key={id} className="border-b  dark:border-neutral-200 ">
                       <td className="whitespace-nowrap   ">{id}</td>
 
-                      <tr className="px-2 py-4">{email}</tr>
+                      <tr className="px-2 py-4 ">{email}</tr>
                       <th className="px-2 py-4 font-normal">{name}</th>
                       <td className="whitespace-nowrap font-medium  ">
                         {roll}
@@ -69,11 +89,13 @@ export default function CategoryList({ customer, user, categoryLists }: Props) {
                       key={categoryID}
                       className="border-b dark:border-neutral-200 "
                     >
-                      <td className="whitespace-nowrap   ">{categoryID}</td>
-                      <td className="whitespace-nowrap  "> {type} </td>
+                      <td className="whitespace-nowrap pl-2  ">{categoryID}</td>
+                      <td className="whitespace-nowrap pl-2 "> {type} </td>
 
-                      <td className="whitespace-nowrap py-4 space-x-3 flex items-center">
-                        <button>Delete</button>
+                      <td className="whitespace-nowrap py-4 pl-4 space-x-3 flex items-center">
+                        <button onClick={() => categoryDeleteByID(categoryID)}>
+                          <BsXSquare color="red" />
+                        </button>
                       </td>
                     </tr>
                   ))}
