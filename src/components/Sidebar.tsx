@@ -76,14 +76,14 @@ const Sidebar = () => {
           </>
         )}
 
-        <Link
+        {/* <Link
           className={`block w-full rounded-md py-2 px-4 hover:bg-orange-100 ${
             path === "/support-center/settings" && "bg-orange-100"
           } `}
           href={"/support-center/settings"}
         >
           Settings
-        </Link>
+        </Link> */}
 
         {user?.roll === "customer" && (
           <Link href={"/support-center/create-ticket"}>
