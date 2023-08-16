@@ -5,6 +5,9 @@ import { MdClose } from "react-icons/md";
 
 interface TableBodyProps {
   each: {
+    category: {
+      type: string;
+    };
     createDate: string;
     description: string;
     status: string;
@@ -26,7 +29,10 @@ const TableBody: FC<TableBodyProps> = ({ each }) => {
         <td className="whitespace-nowrap px-6 py-4 font-medium">
           {each.tiket_id.slice(0, 8)}
         </td>
-        <td className="whitespace-nowrap px-2 py-4"> {each.subject} </td>
+        <td className="whitespace-nowrap px-2 py-4">
+          {" "}
+          {each?.category?.type}{" "}
+        </td>
         <td className="whitespace-nowrap px-2 py-4"> {each.status} </td>
         <td className="whitespace-nowrap px-2 py-4">{each.title}</td>
         <td className="whitespace-nowrap py-4 space-x-3 flex items-center">

@@ -48,10 +48,12 @@ export const ticketsApi = apiSlice.injectEndpoints({
     //admin get all Tickets
     adminGetAllTickets: builder.query<any, void>({
       query: () => `/tickets`,
-      transformErrorResponse(error: Error) {
-        return error;
-      },
       providesTags: ["admin_all_tickets"],
+    }),
+    //admin get all Tickets
+    assistanceOpenTicket: builder.query<any, void>({
+      query: () => `/tickets/ticketsByRoll`,
+      providesTags: ["assistance_Open_Ticket_tickets"],
     }),
 
     ticketDeleteByID: builder.mutation({
@@ -79,4 +81,5 @@ export const {
   useTicketDetailsByIdQuery,
   useAdminGetAllTicketsQuery,
   useTicketDeleteByIDMutation,
+  useAssistanceOpenTicketQuery,
 } = ticketsApi;

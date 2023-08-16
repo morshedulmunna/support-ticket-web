@@ -31,7 +31,6 @@ export default function ChangeCustomerRoll({
       roll: selectedRoll,
       assign_to: selectedCategory,
     };
-    console.log(obj);
 
     if (obj.assign_to === "" || obj.roll === "") {
       window.alert("Select Roll and Category");

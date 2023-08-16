@@ -25,6 +25,7 @@ export const apiSlice = createApi({
     "admin_all_tickets",
     "categoryCreate",
     "gettingUser",
+    "assistance_Open_Ticket_tickets",
   ],
 
   endpoints: (builder) => ({}),

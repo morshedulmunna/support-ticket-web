@@ -8,9 +8,6 @@ export default function Selected({}: Props) {
   const [searchResults, setSearchResults] = useState([" Love", "COde"]);
   const [selectedItem, setSelectedItem] = useState("");
 
-  console.log("Search Result:", searchResults);
-  console.log("Select Item:", selectedItem);
-
   const handleInputChange = (e: any) => {
     const value = e.target.value;
     // Call API with the input value and update searchResults

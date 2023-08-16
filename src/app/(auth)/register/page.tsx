@@ -53,7 +53,6 @@ const Register: FC<RegisterProps> = ({}) => {
       email: data.email,
       password: data.password,
     };
-    console.log(getData);
 
     userRegister(getData);
     reset();

@@ -14,7 +14,6 @@ const SingleOpenTicket: FC<SingleOpenTicketProps> = ({}) => {
   const { data, isError, isLoading } = useTicketDetailsByIdQuery(
     param.ticket_id as any
   );
-  console.log(data);
 
   if (isLoading) {
     return <Loading />;

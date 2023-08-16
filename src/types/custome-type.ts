@@ -10,6 +10,9 @@ export type LoginUser = {
 };
 
 export type singleTicket = {
+  category: {
+    type: string;
+  };
   createDate: string;
   description: string;
   status: string;

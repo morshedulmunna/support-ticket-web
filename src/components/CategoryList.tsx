@@ -32,8 +32,6 @@ export default function CategoryList({ customer, user, categoryLists }: Props) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [selectedUser, setSelectedUser] = useState<string>("");
 
-  console.log(selectedUser);
-
   if (isLoading) {
     <Loading />;
   }
@@ -61,9 +59,6 @@ export default function CategoryList({ customer, user, categoryLists }: Props) {
 
   const [userDelete, { data: deleteUser, error: deleteError }] =
     useUserDeleteMutation<any>();
-
-  console.log(deleteUser);
-  console.log(deleteError);
 
   return (
     <div>

@@ -53,8 +53,6 @@ const Login: React.FC = () => {
   }
 
   if (error) {
-    console.log(error);
-
     toast.error(error?.data?.message);
   }
 
