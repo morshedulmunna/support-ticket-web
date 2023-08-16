@@ -46,7 +46,7 @@ User Mind Map: <Link>
 
 **PostgreSQL:** A powerful open-source relational database.
 
-[Schema Model & DB Design](https://www.notion.so/Schema-Model-DB-Design-a03a232945e146c7b3abd79ef9f05966?pvs=21)
+
 
 # Project Features 
 
