@@ -3,7 +3,7 @@
 import Loading from "@/components/Loading";
 import { useGetAllCategoryQuery } from "@/redux/features/category/categoryApi";
 import { useTicketCreateMutation } from "@/redux/features/tickets/ticketApi";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { toast } from "react-toastify";
 
@@ -31,7 +31,7 @@ const CreateTicket = () => {
     refetchOnMountOrArgChange: true,
   });
 
-  const onSubmit: SubmitHandler<Inputs> = async (data) => {
+  const onSubmit: SubmitHandler<Inputs> = useCallback(async (data) => {
     const validData = {
       title: data.title,
       categoryID: selectedOption,
@@ -39,7 +39,7 @@ const CreateTicket = () => {
     };
     ticketCreate(validData);
     reset();
-  };
+  }, []);
 
   if (isLoading) {
     return <Loading />;
