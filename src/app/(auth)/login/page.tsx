@@ -3,13 +3,11 @@
 import Loading from "@/components/Loading";
 import Logo from "@/components/Logo";
 import { useUserLoginMutation } from "@/redux/features/auth/authApi";
-import { RootState } from "@/redux/store";
 import { LoginUser } from "@/types/custome-type";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React from "react";
 import { useForm, type SubmitHandler } from "react-hook-form";
-import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
 type Inputs = {
@@ -24,7 +22,7 @@ const Login: React.FC = () => {
     formState: { errors },
   } = useForm<Inputs>();
   const router = useRouter();
-  const dispatch = useDispatch();
+
   const [userLogin, { isSuccess, isLoading, isError, error }] =
     useUserLoginMutation<any>();
 
@@ -48,9 +46,8 @@ const Login: React.FC = () => {
   if (isLoading) {
     return <Loading />;
   }
-  const user = useSelector((state: RootState) => state.auth);
 
-  if (user.accessToken) {
+  if (isSuccess) {
     router.push("/support-center");
   }
 
