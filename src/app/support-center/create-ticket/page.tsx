@@ -3,13 +3,14 @@
 import Loading from "@/components/Loading";
 import { useGetAllCategoryQuery } from "@/redux/features/category/categoryApi";
 import { useTicketCreateMutation } from "@/redux/features/tickets/ticketApi";
-import { useCallback, useState } from "react";
+import { useCallback } from "react";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { toast } from "react-toastify";
 
 type Inputs = {
   title: string;
-  subject: string;
+
+  categoryID: string;
   details: string;
 };
 
@@ -20,7 +21,6 @@ const CreateTicket = () => {
     reset,
     formState: { errors },
   } = useForm<Inputs>();
-  const [selectedOption, setSelectedOption] = useState<any>("");
 
   const [
     ticketCreate,
@@ -34,16 +34,22 @@ const CreateTicket = () => {
   const onSubmit: SubmitHandler<Inputs> = useCallback(async (data) => {
     const validData = {
       title: data.title,
-      categoryID: selectedOption,
+      categoryID: data.categoryID,
       description: data.details,
     };
-    ticketCreate(validData);
+
+    if (validData.categoryID === "") {
+      return toast("Please select a Category");
+    }
+
+    await ticketCreate(validData);
     reset();
   }, []);
 
   if (isLoading) {
     return <Loading />;
   }
+
   if (isSuccess) {
     toast.success(`Ticket Create id is ${ticket.tiket_id}`);
   }
@@ -76,17 +82,17 @@ const CreateTicket = () => {
           )}
 
           <select
+            {...register("categoryID")}
             className=" bg-white border py-2 rounded-md focus:outline-none focus:border-orange-500 select-primary w-full"
-            onChange={(e) => setSelectedOption(e.target.value)}
           >
-            <option>Select Category</option>
+            <option value="">Select Category</option>
             {data?.map((sub: any) => (
               <option key={sub.categoryID} value={sub.categoryID}>
                 {sub.type}
               </option>
             ))}
           </select>
-          {errors.subject && (
+          {errors.categoryID && (
             <span className="text-xs text-red-500">Required*</span>
           )}
 
