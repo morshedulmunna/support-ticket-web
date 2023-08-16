@@ -14,6 +14,9 @@ import ModalState from "./Modal";
 type Props = {
   customer?: boolean;
   user?: {
+    assign_to: {
+      type: string;
+    };
     name: string;
     id: string;
     roll: string;
@@ -69,32 +72,33 @@ export default function CategoryList({ customer, user, categoryLists }: Props) {
               <table className="min-w-full text-left text-sm font-light">
                 <thead className="border-b font-medium dark:border-neutral-500">
                   <tr>
-                    <th className="px-2 py-4">#</th>
                     {customer ? (
                       <>
                         <th className="px-2 py-4">Email</th>
                         <th className="px-2 py-4">Name</th>
                         <th className="px-2 py-4">Roll</th>
+                        <th className="px-2 py-4">Assign Type</th>
+                        <th className="px-2 py-4">Action</th>
                       </>
                     ) : (
-                      <th className="px-2 py-4">Name</th>
+                      <>
+                        <th className="px-2 py-4">ID</th>
+                        <th className="px-2 py-4">Category Name</th>
+                      </>
                     )}
-
-                    <th className="px-2 py-4">Action</th>
                   </tr>
                 </thead>
                 <tbody>
                   {/* {data?.map((each) => (
                     <TableBody key={each.tiket_id} each={each} />
                   ))} */}
-                  {user?.map(({ id, name, email, roll }) => (
+                  {user?.map(({ id, name, email, roll, assign_to }) => (
                     <tr key={id} className="border-b  dark:border-neutral-200 ">
-                      <td className="whitespace-nowrap   ">{id}</td>
-
                       <tr className="px-2 py-4 ">{email}</tr>
                       <th className="px-2 py-4 font-normal">{name}</th>
-                      <td className="whitespace-nowrap font-medium  ">
-                        {roll}
+                      <td className="whitespace-nowrap">{roll}</td>
+                      <td className="whitespace-nowrap  capitalize ">
+                        {assign_to?.type}
                       </td>
 
                       <td className="whitespace-nowrap py-4 space-x-3 flex items-center">

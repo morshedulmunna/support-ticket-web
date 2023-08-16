@@ -25,6 +25,8 @@ export default function Customer({}: Props) {
     toast.error(error?.data?.message);
   }
 
+  console.log(data);
+
   return (
     <div>
       <Search level="List of Customer _______" />
