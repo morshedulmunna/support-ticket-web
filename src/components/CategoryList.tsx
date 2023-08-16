@@ -109,7 +109,12 @@ export default function CategoryList({ customer, user, categoryLists }: Props) {
                             Change Roll
                           </button>
                         ) : roll === "assistance" ? (
-                          <button onClick={() => userDelete(id)}>
+                          <button
+                            onClick={() => {
+                              window.alert("are you sure !");
+                              userDelete(id);
+                            }}
+                          >
                             <TiDeleteOutline size={20} color="red" />
                           </button>
                         ) : null}
