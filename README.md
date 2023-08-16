@@ -1,6 +1,6 @@
 [Live Website](https://support-ticket-system-asf.vercel.app/)
 
-# Customer Support Management System
+# Customer Support Management Systems
 
 Version: 0.1
 
