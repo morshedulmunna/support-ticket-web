@@ -23,6 +23,8 @@ export default function Customer({}: Props) {
 
   if (error) {
     toast.error(error?.data?.message);
+
+    console.log(error);
   }
 
   return (
