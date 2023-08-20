@@ -91,35 +91,35 @@ User Mind Map: <Link>
 
 - First Landing Page: 
 
-![laptop](https://github.com/morshedulmunna/support-ticket-web/assets/44342051/0108ea35-e2de-431d-9e0b-8e6bcf3a9430)
+    ![laptop](https://github.com/morshedulmunna/support-ticket-web/assets/44342051/0108ea35-e2de-431d-9e0b-8e6bcf3a9430)
 --
 
 - After Customer or Clinet Login -- Dashboard
   
-![dashboard](https://github.com/morshedulmunna/support-ticket-web/assets/44342051/8a370285-dfb4-4b10-a458-5a9aaae42333)
+    ![dashboard](https://github.com/morshedulmunna/support-ticket-web/assets/44342051/8a370285-dfb4-4b10-a458-5a9aaae42333)
 --
 
 - User Can Create or Open a support tickets
   
-![create ticket](https://github.com/morshedulmunna/support-ticket-web/assets/44342051/097b1cfe-d037-4be2-a527-e662e3c45275)
+    ![create ticket](https://github.com/morshedulmunna/support-ticket-web/assets/44342051/097b1cfe-d037-4be2-a527-e662e3c45275)
 --
 
 - User can see ticket details info and can reply to admin or assistant.
 
-![ticket-details](https://github.com/morshedulmunna/support-ticket-web/assets/44342051/910261c0-733c-471e-a46a-c301252fbfa3)
+   ![ticket-details](https://github.com/morshedulmunna/support-ticket-web/assets/44342051/910261c0-733c-471e-a46a-c301252fbfa3)
 --
 
 - Admin Can see all customer or client tickets.
   
-![admin-see-all-tickets](https://github.com/morshedulmunna/support-ticket-web/assets/44342051/d63da2c3-c994-4a1c-8df9-717bcaa903de)
+   ![admin-see-all-tickets](https://github.com/morshedulmunna/support-ticket-web/assets/44342051/d63da2c3-c994-4a1c-8df9-717bcaa903de)
 --
 
 - Admin can create new assistant roll and setup category.
   
-![admin-can set assistant](https://github.com/morshedulmunna/support-ticket-web/assets/44342051/ff2d9e71-62f6-4126-afbc-e2bd62d85793)
+   ![admin-can set assistant](https://github.com/morshedulmunna/support-ticket-web/assets/44342051/ff2d9e71-62f6-4126-afbc-e2bd62d85793)
 --
 
-- assistant can see their own category customer tickets. and can reply and resolve it.
+- Assistant can see their own category customer tickets. and can reply and resolve it.
 
   ![assistant](https://github.com/morshedulmunna/support-ticket-web/assets/44342051/688828f5-aa93-4ded-94e6-e7086e3be308)
 --
