@@ -4,7 +4,7 @@ import { logOut } from "@/redux/features/auth/authSlice";
 import { RootState } from "@/redux/store";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { FaBars } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import Logo from "./Logo";
@@ -19,16 +19,16 @@ const Navbar = () => {
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [visible, setVisible] = useState(true);
 
-  const handleScroll = () => {
-    const currentScrollPos = window.pageYOffset;
-    setVisible(prevScrollPos > currentScrollPos);
-    setPrevScrollPos(currentScrollPos);
-  };
+  // const handleScroll = () => {
+  //   const currentScrollPos = window.pageYOffset;
+  //   setVisible(prevScrollPos > currentScrollPos);
+  //   setPrevScrollPos(currentScrollPos);
+  // };
 
-  useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [prevScrollPos, visible]);
+  // useEffect(() => {
+  //   window.addEventListener("scroll", handleScroll);
+  //   return () => window.removeEventListener("scroll", handleScroll);
+  // }, [prevScrollPos, visible]);
 
   return (
     <nav
