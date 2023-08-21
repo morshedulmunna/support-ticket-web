@@ -2,6 +2,8 @@ import { useTicketDeleteByIDMutation } from "@/redux/features/tickets/ticketApi"
 import Link from "next/link";
 import React, { type FC } from "react";
 import { MdClose } from "react-icons/md";
+import { toast } from "react-toastify";
+import Loading from "./Loading";
 
 interface TableBodyProps {
   each: {
@@ -20,8 +22,19 @@ interface TableBodyProps {
 }
 
 const TableBody: FC<TableBodyProps> = ({ each }) => {
-  const [ticketDeleteByID, { error, isLoading }] =
-    useTicketDeleteByIDMutation();
+  const [ticketDeleteByID, { error, isLoading, isSuccess }] =
+    useTicketDeleteByIDMutation<any>();
+
+  if (error) {
+    toast.error(error?.data?.message);
+  }
+
+  if (isLoading) {
+    return <Loading />;
+  }
+  if (isSuccess) {
+    toast.warning("Ticket Delete");
+  }
 
   return (
     <React.Fragment>

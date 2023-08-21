@@ -1,9 +1,11 @@
+import { useTicketUpdateByIDMutation } from "@/redux/features/tickets/ticketApi";
 import { RootState } from "@/redux/store";
 import { formatDate } from "@/utils";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import Feedback from "./Feedback";
 
 type Props = {
+  param: any;
   data: {
     createDate: string;
     description: string;
@@ -19,11 +21,12 @@ type Props = {
 
 export default function TicketDetails({
   data: { title, createDate, description, status, subject, tiket_id },
+  param,
 }: Props) {
-  // const {} = useTicketResolveUpdateQuery(tiket_id);
-  const user = useSelector((state: RootState) => state.auth);
+  console.log(param);
 
-  const dispatch = useDispatch();
+  const [ticketUpdateByID, {}] = useTicketUpdateByIDMutation();
+  const user = useSelector((state: RootState) => state.auth);
 
   return (
     <div className="">
@@ -38,7 +41,15 @@ export default function TicketDetails({
         </div>
         <div className="col-span-3 mt-4 rounded ">
           {user.user?.roll !== "customer" ? (
-            <button className="w-full bg-orange-500 py-1 text-white rounded hover:bg-orange-400 duration-150 ease-linear">
+            <button
+              disabled={status === "close"}
+              onClick={() => ticketUpdateByID(param?.ticket_id)}
+              className={`w-full py-1 text-white rounded duration-150 ease-linear ${
+                status === "close"
+                  ? "bg-gray-400"
+                  : "bg-orange-500  hover:bg-orange-400"
+              } `}
+            >
               Resolve
             </button>
           ) : null}
@@ -60,7 +71,7 @@ export default function TicketDetails({
       </div>
 
       {/* Feedback Item */}
-      <Feedback />
+      <Feedback status={status} />
     </div>
   );
 }

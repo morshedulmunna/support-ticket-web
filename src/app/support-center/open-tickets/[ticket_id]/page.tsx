@@ -5,13 +5,14 @@ import { useTicketDetailsByIdQuery } from "@/redux/features/tickets/ticketApi";
 import { useParams } from "next/navigation";
 
 import React, { type FC } from "react";
+import { toast } from "react-toastify";
 import Loading from "../loading";
 
 interface SingleOpenTicketProps {}
 
 const SingleOpenTicket: FC<SingleOpenTicketProps> = ({}) => {
   const param = useParams();
-  const { data, isError, isLoading } = useTicketDetailsByIdQuery(
+  const { data, error, isLoading } = useTicketDetailsByIdQuery<any>(
     param.ticket_id as any
   );
 
@@ -19,9 +20,12 @@ const SingleOpenTicket: FC<SingleOpenTicketProps> = ({}) => {
     return <Loading />;
   }
 
+  if (error) {
+    toast.error(error?.data?.message);
+  }
   return (
     <React.Fragment>
-      <TicketDetails data={data} />
+      <TicketDetails param={param} data={data} />
     </React.Fragment>
   );
 };

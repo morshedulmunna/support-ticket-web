@@ -1,9 +1,11 @@
 import FeedbackForm from "./FeedbackForm";
 import SupportReply from "./SupportReply";
 
-type Props = {};
+type Props = {
+  status: string;
+};
 
-export default function Feedback({}: Props) {
+export default function Feedback({ status }: Props) {
   return (
     <div className=" border border-orange-500 rounded-md p-2 h-[60vh] flex justify-between flex-col">
       <div className="w-full overflow-y-scroll  ">
@@ -15,7 +17,7 @@ export default function Feedback({}: Props) {
         <SupportReply />
       </div>
 
-      <FeedbackForm />
+      <FeedbackForm status={status} />
     </div>
   );
 }

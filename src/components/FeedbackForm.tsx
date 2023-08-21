@@ -1,9 +1,12 @@
-type Props = {};
+type Props = {
+  status: string;
+};
 
-export default function FeedbackForm({}: Props) {
+export default function FeedbackForm({ status }: Props) {
   return (
     <form action="">
       <textarea
+        disabled={status === "close"}
         name=""
         id=""
         cols={30}
@@ -12,7 +15,14 @@ export default function FeedbackForm({}: Props) {
         placeholder="Reply here...."
       ></textarea>
       <div className="flex justify-end items-center">
-        <button className=" bg-orange-500 hover:bg-orange-500/80 duration-200 ease-linear px-6 py-1 rounded text-white">
+        <button
+          disabled={status === "close"}
+          className={`py-1 px-12 text-white rounded duration-150 ease-linear ${
+            status === "close"
+              ? "bg-gray-400"
+              : "bg-orange-500  hover:bg-orange-400"
+          } `}
+        >
           Message
         </button>
       </div>

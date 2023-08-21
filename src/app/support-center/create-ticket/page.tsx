@@ -22,10 +22,8 @@ const CreateTicket = () => {
     formState: { errors },
   } = useForm<Inputs>();
 
-  const [
-    ticketCreate,
-    { isLoading, isSuccess, data: ticket, error: ticketError },
-  ] = useTicketCreateMutation<any>();
+  const [ticketCreate, { isLoading, isSuccess, error: ticketError }] =
+    useTicketCreateMutation<any>();
 
   const { data, error } = useGetAllCategoryQuery<any>(undefined, {
     refetchOnMountOrArgChange: true,
@@ -43,15 +41,14 @@ const CreateTicket = () => {
     }
 
     await ticketCreate(validData);
+
+    toast.success(`Ticket Create Successfully!`);
+
     reset();
   }, []);
 
   if (isLoading) {
     return <Loading />;
-  }
-
-  if (isSuccess) {
-    toast.success(`Ticket Create id is ${ticket.tiket_id}`);
   }
 
   if (ticketError) {

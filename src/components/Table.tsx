@@ -1,9 +1,8 @@
-import { singleTicket } from "@/types/custome-type";
 import React, { type FC } from "react";
 import TableBody from "./TableBody";
 
 interface TableProps {
-  data: singleTicket;
+  data: any[];
 }
 
 const Table: FC<TableProps> = ({ data }) => {

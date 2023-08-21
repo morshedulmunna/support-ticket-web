@@ -10,33 +10,22 @@ export const ticketsApi = apiSlice.injectEndpoints({
         method: "POST",
         body: data,
       }),
-      invalidatesTags: ["open_tickets"],
-      transformErrorResponse(error: Error) {
-        return error;
-      },
+      invalidatesTags: ["open-tiket"],
     }),
 
-    //Single All Open Tickets
-    singleUserOpenTicket: builder.query<singleTicket, void>({
-      query: () => "/tickets/open-ticket",
-      transformErrorResponse(error: Error) {
-        return error;
-      },
-      keepUnusedDataFor: 600,
-      providesTags: ["open_tickets"],
+    // Open Ticket
+    getOpenTickets: builder.query<singleTicket, void>({
+      query: () => "/tickets/open",
+      providesTags: ["open-tiket"],
     }),
 
     //Single All Close Tickets
-    singleUserCloseTicket: builder.query<singleTicket, void>({
-      query: () => "/tickets/close-ticket",
-      transformErrorResponse(error: Error) {
-        return error;
-      },
-      keepUnusedDataFor: 600,
+    getCloseTickets: builder.query<singleTicket, void>({
+      query: () => "/tickets/close",
       providesTags: ["close_tickets"],
     }),
 
-    //Single All Close Tickets
+    // Tickets Details by Ud
     ticketDetailsById: builder.query<any, void>({
       query: (id) => `/tickets/${id}`,
       transformErrorResponse(error: Error) {
@@ -45,41 +34,31 @@ export const ticketsApi = apiSlice.injectEndpoints({
       providesTags: ["ticket_details"],
     }),
 
-    //admin get all Tickets
-    adminGetAllTickets: builder.query<any, void>({
-      query: () => `/tickets`,
-      providesTags: ["admin_all_tickets"],
-    }),
-    //admin get all Tickets
-    assistanceOpenTicket: builder.query<any, void>({
-      query: () => `/tickets/ticketsByRoll`,
-      providesTags: ["assistance_Open_Ticket_tickets"],
-    }),
-
+    // Delete Tickets By Id
     ticketDeleteByID: builder.mutation({
       query: (id) => ({
         url: `/tickets/${id}`,
         method: "DELETE",
       }),
-      invalidatesTags: [
-        "close_tickets",
-        "open_tickets",
-        "ticket_details",
-        "admin_all_tickets",
-      ],
-      transformErrorResponse(error: Error) {
-        return error;
-      },
+      invalidatesTags: ["open-tiket", "close_tickets"],
+    }),
+
+    // Update Tickets by Id
+    ticketUpdateByID: builder.mutation({
+      query: (id) => ({
+        url: `/tickets/${id}`,
+        method: "PATCH",
+      }),
+      invalidatesTags: ["open-tiket", "ticket_details", "close_tickets"],
     }),
   }),
 });
 
 export const {
   useTicketCreateMutation,
-  useSingleUserOpenTicketQuery,
-  useSingleUserCloseTicketQuery,
+  useGetOpenTicketsQuery,
+  useGetCloseTicketsQuery,
   useTicketDetailsByIdQuery,
-  useAdminGetAllTicketsQuery,
   useTicketDeleteByIDMutation,
-  useAssistanceOpenTicketQuery,
+  useTicketUpdateByIDMutation,
 } = ticketsApi;
