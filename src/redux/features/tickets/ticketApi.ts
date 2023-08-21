@@ -1,5 +1,5 @@
 import { apiSlice } from "@/redux/api/apiSlice";
-import { Error, singleTicket } from "@/types/custome-type";
+import { singleTicket } from "@/types/custome-type";
 
 export const ticketsApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -28,9 +28,6 @@ export const ticketsApi = apiSlice.injectEndpoints({
     // Tickets Details by Ud
     ticketDetailsById: builder.query<any, void>({
       query: (id) => `/tickets/${id}`,
-      transformErrorResponse(error: Error) {
-        return error;
-      },
       providesTags: ["ticket_details"],
     }),
 

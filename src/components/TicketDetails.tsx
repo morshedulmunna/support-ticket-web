@@ -69,7 +69,7 @@ export default function TicketDetails({
       </div>
 
       {/* Feedback Item */}
-      <Feedback status={status} />
+      <Feedback status={status} tiket_id={tiket_id} />
     </div>
   );
 }

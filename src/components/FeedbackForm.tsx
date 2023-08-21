@@ -1,22 +1,44 @@
+"use client";
+import { useFeedBackPostMutation } from "@/redux/features/feedback/feedbackApi";
+import { useState } from "react";
 type Props = {
   status: string;
+  tiket_id: string;
 };
 
-export default function FeedbackForm({ status }: Props) {
+export default function FeedbackForm({ status, tiket_id }: Props) {
+  const [feedback, setFeedback] = useState("");
+  const [feedBackPost, { error, data, isLoading }] = useFeedBackPostMutation();
+
+  console.log(data);
+
+  const handleFeedbackForm = async (e: any) => {
+    e.preventDefault();
+
+    console.log({ tiket_id, feedback });
+    //TODO=> do now pass id and feedback
+
+    await feedBackPost({ tiket_id, feedback });
+
+    setFeedback("");
+  };
+
   return (
     <form action="">
       <textarea
         disabled={status === "close"}
-        name=""
-        id=""
+        value={feedback}
+        name="feedback"
+        onChange={(e) => setFeedback(e.target.value)}
         cols={30}
-        rows={4}
+        rows={8}
         className="border resize-none rounded outline-none text-sm p-2 w-full"
         placeholder="Reply here...."
       ></textarea>
       <div className="flex justify-end items-center">
         <button
           disabled={status === "close"}
+          onClick={handleFeedbackForm}
           className={`py-1 px-12 text-white rounded duration-150 ease-linear ${
             status === "close"
               ? "bg-gray-400"
