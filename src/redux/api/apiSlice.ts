@@ -16,7 +16,13 @@ export const apiSlice = createApi({
     },
   }),
   refetchOnReconnect: true,
-  tagTypes: ["open-tiket", "close_tickets", "ticket_details"],
+  tagTypes: [
+    "open-tiket",
+    "close_tickets",
+    "ticket_details",
+    "categoryCreate",
+    "gettingUser",
+  ],
 
   endpoints: (builder) => ({}),
 });
