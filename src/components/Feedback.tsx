@@ -1,7 +1,6 @@
 import { useGetFeedbackQuery } from "@/redux/features/feedback/feedbackApi";
 import { toast } from "react-toastify";
 import FeedbackForm from "./FeedbackForm";
-import Loading from "./Loading";
 import SupportReply from "./SupportReply";
 
 type Props = {
@@ -16,10 +15,6 @@ export default function Feedback({ status, tiket_id }: Props) {
 
   if (error) {
     toast.error(error?.data?.message);
-  }
-
-  if (isLoading) {
-    <Loading />;
   }
 
   return (
