@@ -1,7 +1,8 @@
 "use client";
 
 import { openCategoryForm } from "@/redux/features/category/categorySlice";
-import React, { useState, type FC } from "react";
+import { searchQuery } from "@/redux/features/search/searchSlice";
+import React, { type FC } from "react";
 import { BiListPlus } from "react-icons/bi";
 import { BsSearch } from "react-icons/bs";
 import { useDispatch } from "react-redux";
@@ -14,8 +15,6 @@ interface SearchProps {
 }
 
 const Search: FC<SearchProps> = ({ level, category, isOpen }) => {
-  const [search, setSearch] = useState<string>("");
-  console.log(search);
   const dispatch = useDispatch();
 
   return (
@@ -26,7 +25,7 @@ const Search: FC<SearchProps> = ({ level, category, isOpen }) => {
           <div className=" relative ">
             {/* search */}
             <input
-              onChange={(e) => setSearch(e.target.value)}
+              onChange={(e) => dispatch(searchQuery(e.target.value))}
               type="search"
               name="search"
               className="border   py-1 outline-none focus:border-orange-500 rounded-md w-full px-2 pl-8 "

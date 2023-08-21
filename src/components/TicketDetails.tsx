@@ -23,8 +23,6 @@ export default function TicketDetails({
   data: { title, createDate, description, status, subject, tiket_id },
   param,
 }: Props) {
-  console.log(param);
-
   const [ticketUpdateByID, {}] = useTicketUpdateByIDMutation();
   const user = useSelector((state: RootState) => state.auth);
 
