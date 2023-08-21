@@ -4,8 +4,6 @@ import {
 } from "@/redux/features/category/categoryApi";
 import { useUserDeleteMutation } from "@/redux/features/user/userApi";
 import { useEffect, useState } from "react";
-import { BsXSquare } from "react-icons/bs";
-import { TiDeleteOutline } from "react-icons/ti";
 import { toast } from "react-toastify";
 import ChangeCustomerRoll from "./ChangeCustomerRoll";
 import Loading from "./Loading";
@@ -113,14 +111,15 @@ export default function CategoryList({ customer, user, categoryLists }: Props) {
                             Change Roll
                           </button>
                         ) : roll === "assistance" ? (
-                          <button
-                            onClick={() => {
-                              window.alert("are you sure !");
-                              userDelete(id);
-                            }}
-                          >
-                            <TiDeleteOutline size={20} color="red" />
-                          </button>
+                          // <button
+                          //   onClick={() => {
+                          //     window.alert("are you sure !");
+                          //     userDelete(id);
+                          //   }}
+                          // >
+                          //   <TiDeleteOutline size={20} color="red" />
+                          // </button>
+                          <></>
                         ) : null}
                       </td>
                     </tr>
@@ -135,9 +134,9 @@ export default function CategoryList({ customer, user, categoryLists }: Props) {
                       <td className="whitespace-nowrap pl-2 "> {type} </td>
 
                       <td className="whitespace-nowrap py-4 pl-4 space-x-3 flex items-center">
-                        <button onClick={() => categoryDeleteByID(categoryID)}>
+                        {/* <button onClick={() => categoryDeleteByID(categoryID)}>
                           <BsXSquare color="red" />
-                        </button>
+                        </button> */}
                       </td>
                     </tr>
                   ))}
