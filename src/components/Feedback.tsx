@@ -10,7 +10,9 @@ type Props = {
 };
 
 export default function Feedback({ status, tiket_id }: Props) {
-  const { data, error, isLoading } = useGetFeedbackQuery<any>(tiket_id);
+  const { data, error, isLoading } = useGetFeedbackQuery<any>(tiket_id, {
+    pollingInterval: 50,
+  });
 
   if (error) {
     toast.error(error?.data?.message);

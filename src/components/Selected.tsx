@@ -42,9 +42,9 @@ export default function Selected({}: Props) {
       {isOpen && (
         <div className="absolute w-full z-10">
           <div className="bg-white border w-full px-2 pt-1 rounded">
-            {searchResults.map((item) => (
+            {searchResults.map((item, index) => (
               <li
-                key={12}
+                key={index}
                 onClick={() => handleItemClick(item)}
                 className="py-1 list-none"
               >

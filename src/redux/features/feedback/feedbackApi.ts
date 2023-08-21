@@ -4,11 +4,11 @@ export const feedbackApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     // Post feedback by ticket id
     feedBackPost: builder.mutation({
-      query: ({ tiket_id, feedback }) => ({
+      query: (data) => ({
         //TODO=> Can't get id and feedback from feedPost
-        url: `/feedback/${tiket_id}`,
+        url: `/feedback/${data.tiket_id}`,
         method: "POST",
-        body: feedback,
+        body: data.body,
       }),
       invalidatesTags: ["feedback"],
     }),

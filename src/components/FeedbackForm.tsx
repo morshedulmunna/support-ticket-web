@@ -1,6 +1,7 @@
 "use client";
 import { useFeedBackPostMutation } from "@/redux/features/feedback/feedbackApi";
 import { useState } from "react";
+import Loading from "./Loading";
 type Props = {
   status: string;
   tiket_id: string;
@@ -10,18 +11,23 @@ export default function FeedbackForm({ status, tiket_id }: Props) {
   const [feedback, setFeedback] = useState("");
   const [feedBackPost, { error, data, isLoading }] = useFeedBackPostMutation();
 
-  console.log(data);
-
   const handleFeedbackForm = async (e: any) => {
     e.preventDefault();
 
-    console.log({ tiket_id, feedback });
     //TODO=> do now pass id and feedback
 
-    await feedBackPost({ tiket_id, feedback });
-
+    await feedBackPost({
+      tiket_id,
+      body: {
+        feedback,
+      },
+    });
     setFeedback("");
   };
+
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
     <form action="">
